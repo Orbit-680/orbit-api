@@ -1,4 +1,4 @@
-package com.csc680.orbittest;
+package com.csc680.orbit;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
