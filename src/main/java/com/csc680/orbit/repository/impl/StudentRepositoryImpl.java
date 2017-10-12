@@ -60,7 +60,7 @@ public class StudentRepositoryImpl implements StudentRepository
 	student.setId("1");
 	students.add(student);
 		
-	Student student2 = new Student("Sylvia K");
+	Student student2 = new Student("Ambder K");
 	student2.setId("2");
 	students.add(student2);
 
