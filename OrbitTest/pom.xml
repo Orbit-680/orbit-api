@@ -7,9 +7,9 @@
     <modelVersion>4.0.0</modelVersion>
     
     <groupId>com.CSC680</groupId>
-    <artifactId>OrbitTest</artifactId>
+    <artifactId>OrbitApi</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     
     <name>OrbitAPI</name>
     <description>Sample API For Final Project</description>
