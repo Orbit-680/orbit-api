@@ -56,12 +56,12 @@ public class StudentRepositoryImpl implements StudentRepository
     public Iterable<Student> findAll() 
     {
 	List<Student> students = new ArrayList<Student>();
-	Student student = new Student("Bobby New Name");
-	student.setId("1");
+	Student student = new Student("Jack Daniels");
+	student.setId("195");
 	students.add(student);
 		
-	Student student2 = new Student("Jim Johns");
-	student2.setId("2");
+	Student student2 = new Student("Jon Jon");
+	student2.setId("267");
 	students.add(student2);
 
 	return students;
