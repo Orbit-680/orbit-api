@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 import com.csc680.orbit.controller.StudentController;
 
 @SpringBootApplication
-public class OrbitTestApplication extends SpringBootServletInitializer
+public class OrbitApiApplication extends SpringBootServletInitializer
 {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application)
     {
-        return application.sources(OrbitTestApplication.class);
+        return application.sources(OrbitApiApplication.class);
     }
     public static void main(String[] args) 
     {
-        SpringApplication.run(OrbitTestApplication.class, args);
+        SpringApplication.run(OrbitApiApplication.class, args);
     }    
 }
