@@ -38,10 +38,13 @@
 
     <target>
       <!-- The destination package of your generated classes (within the destination directory) -->
-      <packageName>database</packageName>
+      <packageName>com.csc680.orbit.database</packageName>
 
       <!-- The destination directory of your generated classes. Using Maven directory layout here -->
-      <directory>C:\Users\David\Desktop\New folder\src\main\java\com\csc680\orbit</directory>
+      <!-- PUT YOUR LOCAL DIRECTORY STRUCTURE HERE  -->
+      <!-- <directory>C:\Users\David\Desktop\New folder\src\main\java\com\csc680\orbit</directory> -->
+      <!-- <directory>/Users/brocktubre/Desktop/Things/orbit-api/src/main/java</directory> -->
+      <!-- <directory>/Users/brocktubre/Desktop/Things/orbit-api/src/main/java</directory> -->
     </target>
   </generator>
 </configuration>
