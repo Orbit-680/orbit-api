@@ -112,6 +112,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>1.5.7.RELEASE</version>
             </plugin>
             
             
@@ -128,7 +129,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<skip>true</skip>
+							<skip>false</skip>
 							<configurationFile>orbit.xml</configurationFile>
 						</configuration>
 					</execution>

@@ -10,25 +10,31 @@ import lombok.Data;
 public @Data class Student 
 {
     @Id
-    private String id;
-    private String name;
+    private int id;
+    private String firstName, lastName;
     private String imageURL;
  
     public Student() {}
  
-    public Student(String name) 
+    public Student(String firstName, String lastName, int id) 
     {
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = id;
         this.imageURL = "http://via.placeholder.com/400x400";
     }
     
-    public String getId() {  return id;   }
+    public int getId() {  return id;   }
  
-    public void setId(String id) {  this.id = id;   }
+    public void setId(int id) {  this.id = id;   }
     
-    public String getName() {  return name;  }
+    public String getfirstName() {  return firstName;  }
  
-    public void setName(String name) {this.name = name;}
+    public void setfirstName(String firstName) {this.firstName = firstName;}
+    
+    public String getlastName() {  return lastName;  }
+ 
+    public void setlastName(String firstName) {this.lastName = lastName;}
 
     public String getImageURL() {return imageURL;}
 
@@ -37,7 +43,7 @@ public @Data class Student
     @Override
     public String toString() 
     {
-    	return "Pose [id=" + id + ", name=" + name + 
+        return "Pose [id=" + id + ", name=" + firstName+lastName + 
                ", imageURL=" + imageURL + "]";
     }
 }

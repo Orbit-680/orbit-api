@@ -7,7 +7,6 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
-import com.csc680.orbit.controller.StudentController;
 
 @SpringBootApplication
 public class OrbitApiApplication extends SpringBootServletInitializer
@@ -18,6 +17,6 @@ public class OrbitApiApplication extends SpringBootServletInitializer
     }
     public static void main(String[] args) 
     {
-        SpringApplication.run(OrbitApiApplication.class, args);
+        SpringApplication.run(OrbitApiApplication.class, args);              
     }    
 }
