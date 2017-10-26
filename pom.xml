@@ -129,7 +129,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<skip>false</skip>
+							<skip>true</skip>
 							<configurationFile>orbit.xml</configurationFile>
 						</configuration>
 					</execution>
