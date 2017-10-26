@@ -1,4 +1,4 @@
-package com.csc680.orbit.RecordMapper;
+package com.csc680.orbit.recordmapper;
 
 import static com.csc680.orbit.database.tables.Student.STUDENT;
 import com.csc680.orbit.model.Student;

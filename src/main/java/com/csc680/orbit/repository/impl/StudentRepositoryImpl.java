@@ -2,21 +2,17 @@ package com.csc680.orbit.repository.impl;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
+// import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+// import java.util.Map;
 
-import static com.csc680.orbit.database.Tables.*;
-import static org.jooq.impl.DSL.*;
-import java.sql.*;
-import org.jooq.*;
-import org.jooq.impl.*;
+import static com.csc680.orbit.database.Tables.STUDENT;
 
-
+import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
-import com.csc680.orbit.RecordMapper.StudentRecordMapper;
 import com.csc680.orbit.model.Student;
+import com.csc680.orbit.recordmapper.StudentRecordMapper;
 import com.csc680.orbit.service.DBConnection;
 import com.csc680.orbit.repository.StudentRepository;
 
