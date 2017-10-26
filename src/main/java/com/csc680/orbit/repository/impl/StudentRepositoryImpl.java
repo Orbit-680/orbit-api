@@ -64,26 +64,12 @@ public class StudentRepositoryImpl implements StudentRepository
         DSLContext dslContext = DBConnection.getConnection();
         List<Student> students = new ArrayList<Student>();
         
-        //DSLContext dslContext = DSL.using(conn, SQLDialect.MYSQL);
         students = dslContext.select(STUDENT.FIRST_NAME,
                                         STUDENT.LAST_NAME,
                                         STUDENT.ID)
                                         .from(STUDENT)
                                         .fetch()
                                         .map(new StudentRecordMapper());
-        
-        /**
-	List<Student> students = new ArrayList<Student>();
-	Student student = new Student("Jack Daniels");
-	student.setId("195");
-	students.add(student);
-		
-	Student student2 = new Student("Jon Jon");
-	student2.setId("267");
-	students.add(student2);
-
-	return students;
-        **/
         return students;
 
     }
