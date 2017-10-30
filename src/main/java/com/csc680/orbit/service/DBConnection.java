@@ -27,7 +27,7 @@ public class DBConnection
     {
         try
         {
-        	Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             dslContext = DSL.using(conn, SQLDialect.MYSQL);
         }catch(Exception e)

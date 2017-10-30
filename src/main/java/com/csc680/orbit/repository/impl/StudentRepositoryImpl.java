@@ -65,11 +65,41 @@ public class StudentRepositoryImpl implements StudentRepository
         List<Student> students = new ArrayList<Student>();
         
         students = dslContext.select(STUDENT.FIRST_NAME,
-                                        STUDENT.LAST_NAME,
-                                        STUDENT.ID)
-                                        .from(STUDENT)
-                                        .fetch()
-                                        .map(new StudentRecordMapper());
+                                     STUDENT.LAST_NAME,
+                                     STUDENT.ID,
+                                     STUDENT.DATE_OF_BIRTH,
+                                     STUDENT.SSN,
+                                     STUDENT.ADDRESS_1,
+                                     STUDENT.ADDRESS_2,
+                                     STUDENT.CITY,
+                                     STUDENT.STATE,
+                                     STUDENT.ZIP_CODE,
+                                     STUDENT.GRADE,
+                                     STUDENT.MOTHER_FIRST_NAME,
+                                     STUDENT.MOTHER_LAST_NAME,
+                                     STUDENT.MOTHER_SSN,
+                                     STUDENT.MOTHER_ADDRESS_1,
+                                     STUDENT.MOTHER_ADDRESS_2,
+                                     STUDENT.MOTHER_CITY, 
+                                     STUDENT.MOTHER_STATE,
+                                     STUDENT.MOTHER_ZIP_CODE,
+                                     STUDENT.MOTHER_HOME_PHONE,
+                                     STUDENT.MOTHER_CELL_PHONE,
+                                     STUDENT.MOTHER_EMAIL,
+                                     STUDENT.FATHER_FIRST_NAME,
+                                     STUDENT.FATHER_LAST_NAME,
+                                     STUDENT.FATHER_SSN,
+                                     STUDENT.FATHER_ADDRESS_1,
+                                     STUDENT.FATHER_ADDRESS_2,
+                                     STUDENT.FATHER_CITY, 
+                                     STUDENT.FATHER_STATE,
+                                     STUDENT.FATHER_ZIP_CODE,
+                                     STUDENT.FATHER_HOME_PHONE,
+                                     STUDENT.FATHER_CELL_PHONE,
+                                     STUDENT.FATHER_EMAIL)
+                             .from(STUDENT)
+                             .fetch()
+                             .map(new StudentRecordMapper());
         return students;
 
     }
