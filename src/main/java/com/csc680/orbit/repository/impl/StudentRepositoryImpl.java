@@ -22,8 +22,12 @@ public class StudentRepositoryImpl implements StudentRepository
     @Override
     public long count() 
     {
-	// TODO Auto-generated method stub
-	return 0;
+        DSLContext dslContext = DBConnection.getConnection();
+        int studentCount;  
+        studentCount = dslContext.selectCount()
+                             .from(STUDENT)
+                             .fetchOne(0, int.class);
+        return studentCount;
     }
 
     @Override
@@ -54,8 +58,16 @@ public class StudentRepositoryImpl implements StudentRepository
     @Override
     public boolean exists(String arg0) 
     {
-	// TODO Auto-generated method stub
-	return false;
+        DSLContext dslContext = DBConnection.getConnection();
+        int studentCount = studentCount = dslContext
+                                   .selectCount()
+                                   .from(STUDENT)
+                                   .where(STUDENT.ID.eq(Integer.parseInt(arg0)))
+                                   .fetchOne(0, int.class);
+        boolean studentExists = false;
+        if(studentCount != 0)
+            studentExists = true;
+        return studentExists;
     }
 
     @Override
@@ -113,8 +125,46 @@ public class StudentRepositoryImpl implements StudentRepository
     @Override
     public Student findOne(String arg0) 
     {
-	Student student = new Student();
-	return student;
+        List<Student> students = new ArrayList<Student>();
+        DSLContext dslContext = DBConnection.getConnection();
+        students = dslContext.select(STUDENT.FIRST_NAME,
+                                     STUDENT.LAST_NAME,
+                                     STUDENT.ID,
+                                     STUDENT.DATE_OF_BIRTH,
+                                     STUDENT.SSN,
+                                     STUDENT.ADDRESS_1,
+                                     STUDENT.ADDRESS_2,
+                                     STUDENT.CITY,
+                                     STUDENT.STATE,
+                                     STUDENT.ZIP_CODE,
+                                     STUDENT.GRADE,
+                                     STUDENT.MOTHER_FIRST_NAME,
+                                     STUDENT.MOTHER_LAST_NAME,
+                                     STUDENT.MOTHER_SSN,
+                                     STUDENT.MOTHER_ADDRESS_1,
+                                     STUDENT.MOTHER_ADDRESS_2,
+                                     STUDENT.MOTHER_CITY, 
+                                     STUDENT.MOTHER_STATE,
+                                     STUDENT.MOTHER_ZIP_CODE,
+                                     STUDENT.MOTHER_HOME_PHONE,
+                                     STUDENT.MOTHER_CELL_PHONE,
+                                     STUDENT.MOTHER_EMAIL,
+                                     STUDENT.FATHER_FIRST_NAME,
+                                     STUDENT.FATHER_LAST_NAME,
+                                     STUDENT.FATHER_SSN,
+                                     STUDENT.FATHER_ADDRESS_1,
+                                     STUDENT.FATHER_ADDRESS_2,
+                                     STUDENT.FATHER_CITY, 
+                                     STUDENT.FATHER_STATE,
+                                     STUDENT.FATHER_ZIP_CODE,
+                                     STUDENT.FATHER_HOME_PHONE,
+                                     STUDENT.FATHER_CELL_PHONE,
+                                     STUDENT.FATHER_EMAIL)
+                             .from(STUDENT)
+                             .where(STUDENT.ID.eq(Integer.parseInt(arg0)))
+                             .fetch()
+                             .map(new StudentRecordMapper());
+	return students.get(0);
     }
 
     @Override
