@@ -19,12 +19,14 @@ import com.csc680.orbit.repository.StudentRepository;
 @Repository ("studentRepository")
 public class StudentRepositoryImpl implements StudentRepository
 {
+	DSLContext dslContext = DBConnection.getConnection();
+	
     @Override
     public long count() 
     {
-        DSLContext dslContext = DBConnection.getConnection();
-        int studentCount;  
-        studentCount = dslContext.selectCount()
+        
+        int studentCount = 0;  
+        studentCount = this.dslContext.selectCount()
                              .from(STUDENT)
                              .fetchOne(0, int.class);
         return studentCount;
@@ -58,25 +60,25 @@ public class StudentRepositoryImpl implements StudentRepository
     @Override
     public boolean exists(String arg0) 
     {
-        DSLContext dslContext = DBConnection.getConnection();
-        int studentCount = studentCount = dslContext
+        int studentCount = studentCount = this.dslContext
                                    .selectCount()
                                    .from(STUDENT)
                                    .where(STUDENT.ID.eq(Integer.parseInt(arg0)))
                                    .fetchOne(0, int.class);
         boolean studentExists = false;
-        if(studentCount != 0)
-            studentExists = true;
+        
+        if(studentCount != 0){
+        	studentExists = true;
+        }
+        
         return studentExists;
     }
 
     @Override
     public Iterable<Student> findAll() 
     {
-        DSLContext dslContext = DBConnection.getConnection();
         List<Student> students = new ArrayList<Student>();
-        
-        students = dslContext.select(STUDENT.FIRST_NAME,
+        students = this.dslContext.select(STUDENT.FIRST_NAME,
                                      STUDENT.LAST_NAME,
                                      STUDENT.ID,
                                      STUDENT.DATE_OF_BIRTH,
@@ -126,8 +128,8 @@ public class StudentRepositoryImpl implements StudentRepository
     public Student findOne(String arg0) 
     {
         List<Student> students = new ArrayList<Student>();
-        DSLContext dslContext = DBConnection.getConnection();
-        students = dslContext.select(STUDENT.FIRST_NAME,
+        int studentId = Integer.parseInt(arg0);
+        students = this.dslContext.select(STUDENT.FIRST_NAME,
                                      STUDENT.LAST_NAME,
                                      STUDENT.ID,
                                      STUDENT.DATE_OF_BIRTH,
@@ -161,10 +163,10 @@ public class StudentRepositoryImpl implements StudentRepository
                                      STUDENT.FATHER_CELL_PHONE,
                                      STUDENT.FATHER_EMAIL)
                              .from(STUDENT)
-                             .where(STUDENT.ID.eq(Integer.parseInt(arg0)))
+                             .where(STUDENT.ID.eq(studentId))
                              .fetch()
                              .map(new StudentRecordMapper());
-	return students.get(0);
+        return students.get(0);
     }
 
     @Override
