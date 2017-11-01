@@ -59,13 +59,15 @@ public class StudentRepositoryImpl implements StudentRepository
 
     @Override
     public boolean exists(String arg0) 
-    {
-        int studentCount = studentCount = this.dslContext
+    {	
+    	boolean studentExists = false;
+    	int studentId = Integer.parseInt(arg0);
+        int studentCount = this.dslContext
                                    .selectCount()
                                    .from(STUDENT)
-                                   .where(STUDENT.ID.eq(Integer.parseInt(arg0)))
+                                   .where(STUDENT.ID.eq(studentId))
                                    .fetchOne(0, int.class);
-        boolean studentExists = false;
+       
         
         if(studentCount != 0){
         	studentExists = true;
