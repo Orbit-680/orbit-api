@@ -30,7 +30,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserRecord extends UpdatableRecordImpl<UserRecord> implements Record6<Integer, String, String, Date, Integer, String> {
 
-    private static final long serialVersionUID = 752201500;
+    private static final long serialVersionUID = 152311942;
 
     /**
      * Setter for <code>orbit.user.ID</code>.
@@ -61,16 +61,16 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements Recor
     }
 
     /**
-     * Setter for <code>orbit.user.Password</code>.
+     * Setter for <code>orbit.user.UID</code>.
      */
-    public void setPassword(String value) {
+    public void setUid(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>orbit.user.Password</code>.
+     * Getter for <code>orbit.user.UID</code>.
      */
-    public String getPassword() {
+    public String getUid() {
         return (String) get(2);
     }
 
@@ -169,7 +169,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements Recor
      */
     @Override
     public Field<String> field3() {
-        return User.USER.PASSWORD;
+        return User.USER.UID;
     }
 
     /**
@@ -217,7 +217,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements Recor
      */
     @Override
     public String component3() {
-        return getPassword();
+        return getUid();
     }
 
     /**
@@ -265,7 +265,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements Recor
      */
     @Override
     public String value3() {
-        return getPassword();
+        return getUid();
     }
 
     /**
@@ -315,7 +315,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements Recor
      */
     @Override
     public UserRecord value3(String value) {
-        setPassword(value);
+        setUid(value);
         return this;
     }
 
@@ -374,12 +374,12 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements Recor
     /**
      * Create a detached, initialised UserRecord
      */
-    public UserRecord(Integer id, String username, String password, Date lastLogin, Integer invalidAttempts, String active) {
+    public UserRecord(Integer id, String username, String uid, Date lastLogin, Integer invalidAttempts, String active) {
         super(User.USER);
 
         set(0, id);
         set(1, username);
-        set(2, password);
+        set(2, uid);
         set(3, lastLogin);
         set(4, invalidAttempts);
         set(5, active);

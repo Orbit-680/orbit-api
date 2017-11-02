@@ -11,6 +11,8 @@ import com.csc680.orbit.database.tables.Grade;
 import com.csc680.orbit.database.tables.Message;
 import com.csc680.orbit.database.tables.Picture;
 import com.csc680.orbit.database.tables.Schedule;
+import com.csc680.orbit.database.tables.School;
+import com.csc680.orbit.database.tables.SchoolStudent;
 import com.csc680.orbit.database.tables.Student;
 import com.csc680.orbit.database.tables.Teacher;
 import com.csc680.orbit.database.tables.User;
@@ -65,6 +67,16 @@ public class Tables {
      * The table <code>orbit.schedule</code>.
      */
     public static final Schedule SCHEDULE = com.csc680.orbit.database.tables.Schedule.SCHEDULE;
+
+    /**
+     * The table <code>orbit.school</code>.
+     */
+    public static final School SCHOOL = com.csc680.orbit.database.tables.School.SCHOOL;
+
+    /**
+     * The table <code>orbit.school_student</code>.
+     */
+    public static final SchoolStudent SCHOOL_STUDENT = com.csc680.orbit.database.tables.SchoolStudent.SCHOOL_STUDENT;
 
     /**
      * The table <code>orbit.student</code>.

@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends TableImpl<UserRecord> {
 
-    private static final long serialVersionUID = -1367255565;
+    private static final long serialVersionUID = -1053876610;
 
     /**
      * The reference instance of <code>orbit.user</code>
@@ -66,9 +66,9 @@ public class User extends TableImpl<UserRecord> {
     public final TableField<UserRecord, String> USERNAME = createField("Username", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
 
     /**
-     * The column <code>orbit.user.Password</code>.
+     * The column <code>orbit.user.UID</code>.
      */
-    public final TableField<UserRecord, String> PASSWORD = createField("Password", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
+    public final TableField<UserRecord, String> UID = createField("UID", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
 
     /**
      * The column <code>orbit.user.Last_Login</code>.
