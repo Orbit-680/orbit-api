@@ -33,6 +33,10 @@ public class Teacher {
 		this.zip = zip;
 	}
 	
+	public Teacher(int teacherID) {
+		this.teacherID = teacherID;
+	}
+	
 	public int getTeacherID() {
 		return teacherID;
 	}
