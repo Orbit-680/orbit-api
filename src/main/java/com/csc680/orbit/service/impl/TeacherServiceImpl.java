@@ -34,4 +34,21 @@ public class TeacherServiceImpl implements TeacherService{
 		return teacher;
 	}   
 
+    @Override
+    public void addTeacher(String firstName, String lastName, String dateOfBirth, 
+                           String SSN, String address1, String address2, 
+                           String city, String state, String zip) 
+    {
+        Teacher teacher = new Teacher();
+        teacher.setFirstName(firstName);
+        teacher.setLastName(lastName);
+        teacher.setDateOfBirth(dateOfBirth);
+        teacher.setSsn(SSN);
+        teacher.setAddress1(address1);
+        teacher.setAddress2(address2);
+        teacher.setCity(city);
+        teacher.setState(state);
+        teacher.setZip(zip);
+    }
+
 }

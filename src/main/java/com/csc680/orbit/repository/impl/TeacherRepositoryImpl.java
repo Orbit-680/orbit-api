@@ -74,7 +74,7 @@ public class TeacherRepositoryImpl implements TeacherRepository{
 	public Iterable<Teacher> findAll() {
 		List<Teacher> teachers = new ArrayList<Teacher>();
 		teachers = this.dslContext.select(TEACHER.ID,
-									 TEACHER.FIRST_NAME,
+				     TEACHER.FIRST_NAME,
                                      TEACHER.LAST_NAME,
                                      TEACHER.DATE_OF_BIRTH,
                                      TEACHER.SSN,
@@ -100,7 +100,7 @@ public class TeacherRepositoryImpl implements TeacherRepository{
 		List<Teacher> teachers = new ArrayList<Teacher>();
 		int teacherId = Integer.parseInt(arg0);
 		teachers = this.dslContext.select(TEACHER.ID,
-									 TEACHER.FIRST_NAME,
+				     TEACHER.FIRST_NAME,
                                      TEACHER.LAST_NAME,
                                      TEACHER.DATE_OF_BIRTH,
                                      TEACHER.SSN,
@@ -109,22 +109,46 @@ public class TeacherRepositoryImpl implements TeacherRepository{
                                      TEACHER.CITY,
                                      TEACHER.STATE,
                                      TEACHER.ZIP_CODE)
-								.from(TEACHER)
-								.where(TEACHER.ID.eq(teacherId))
-								.fetch()
-								.map(new TeacherRecordMapper());
+					.from(TEACHER)
+					.where(TEACHER.ID.eq(teacherId))
+					.fetch()
+					.map(new TeacherRecordMapper());
 		return teachers.get(0);
 	}
 
 	@Override
 	public <S extends Teacher> Iterable<S> save(Iterable<S> arg0) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub            
 		return null;
 	}
 
 	@Override
-	public <S extends Teacher> S save(S arg0) {
+	public <S extends Teacher> S save(S arg0)
+        {
 		// TODO Auto-generated method stub
+            String firstName = arg0.getFirstName();
+            String lastName = arg0.getLastName();
+            String dateOfBirth = arg0.getDateOfBirth();
+            String ssn = arg0.getSsn();
+            String address1 = arg0.getAddress1();
+            String address2 = arg0.getAddress2();
+            String city = arg0.getCity();
+            String state = arg0.getState();
+            String zip = arg0.getZip();
+                        
+            this.dslContext.insertInto(TEACHER,
+                                     TEACHER.FIRST_NAME,
+                                     TEACHER.LAST_NAME,
+                                     TEACHER.DATE_OF_BIRTH,
+                                     TEACHER.SSN,
+                                     TEACHER.ADDRESS_1,
+                                     TEACHER.ADDRESS_2,
+                                     TEACHER.CITY,
+                                     TEACHER.STATE,
+                                     TEACHER.ZIP_CODE)
+                    .values(firstName, lastName, dateOfBirth, ssn, address1,
+                            address2, city, state, zip)
+                    .execute();
 		return null;
 	}
 
