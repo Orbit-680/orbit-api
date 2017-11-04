@@ -3,11 +3,16 @@ package com.csc680.orbit.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import java.util.List;
 import java.util.logging.Logger;
+
+import javax.validation.Valid;
 
 import com.csc680.orbit.model.Teacher;
 import com.csc680.orbit.service.TeacherService;
@@ -28,25 +33,27 @@ public class TeacherController {
     private static final Logger LOGGER = 
                                     Logger.getLogger(ClassName.class.getName());
     
-    @GetMapping("/all-teachers")
+    @RequestMapping(value = "/all-teachers", method = RequestMethod.GET)
     public List<Teacher> allTeachers()
     {
         LOGGER.info("allTeachers endpoint hit");
         List<Teacher> teachers = teacherService.getAllTeachers();
         return teachers;
     }
-    
-    @GetMapping(value = "/get-teacher/{id}")
+
+    @RequestMapping(value = "/get-teacher/{id}", method = RequestMethod.GET)
     public Teacher getTeacher(@PathVariable("id") String id)
     {
-        LOGGER.info("getTeacher endpoint hit find id" + id);
+        LOGGER.info("getTeacher endpoint hit find id " + id);
         Teacher teacher = teacherService.getTeacherById(id);
         return teacher;
     }
     
-    public Teacher addTeacher()
+    @RequestMapping(value = "/add-teacher", method = RequestMethod.POST)
+    public Teacher addTeacher(@RequestBody @Valid Teacher teacher)
     {
-        
-        return null;    
+    	LOGGER.info("Added a new teacher: " + teacher);
+        Teacher newTeacher = teacherService.addTeacher(teacher);
+        return newTeacher;
     }
 }

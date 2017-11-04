@@ -33,7 +33,7 @@ public class StudentController
     private static final Logger LOGGER = 
                                     Logger.getLogger(ClassName.class.getName());
     
-    @GetMapping("/all-students")
+    @RequestMapping(value = "/all-students", method = RequestMethod.GET)
     public List<Student> allStudents()
     {
         LOGGER.info("allStudents endpoint hit");
@@ -41,7 +41,7 @@ public class StudentController
         return students;
     }
     
-    @GetMapping(value = "/get-student/{id}")
+    @RequestMapping(value = "/get-student/{id}", method = RequestMethod.GET)
     public Student getStudent(@PathVariable("id") String id)
     {
         LOGGER.info("getStudent endpoint hit find id" + id);

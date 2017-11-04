@@ -125,7 +125,7 @@ public class TeacherRepositoryImpl implements TeacherRepository{
 	@Override
 	public <S extends Teacher> S save(S arg0)
         {
-		// TODO Auto-generated method stub
+			// TODO Auto-generated method stub
             String firstName = arg0.getFirstName();
             String lastName = arg0.getLastName();
             String dateOfBirth = arg0.getDateOfBirth();
@@ -149,7 +149,7 @@ public class TeacherRepositoryImpl implements TeacherRepository{
                     .values(firstName, lastName, dateOfBirth, ssn, address1,
                             address2, city, state, zip)
                     .execute();
-		return null;
+		return arg0;
 	}
 
 	@Override

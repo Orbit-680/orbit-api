@@ -35,20 +35,21 @@ public class TeacherServiceImpl implements TeacherService{
 	}   
 
     @Override
-    public void addTeacher(String firstName, String lastName, String dateOfBirth, 
-                           String SSN, String address1, String address2, 
-                           String city, String state, String zip) 
+    public Teacher addTeacher(Teacher teacher) 
     {
-        Teacher teacher = new Teacher();
-        teacher.setFirstName(firstName);
-        teacher.setLastName(lastName);
-        teacher.setDateOfBirth(dateOfBirth);
-        teacher.setSsn(SSN);
-        teacher.setAddress1(address1);
-        teacher.setAddress2(address2);
-        teacher.setCity(city);
-        teacher.setState(state);
-        teacher.setZip(zip);
+        Teacher newTeacher = new Teacher();
+        newTeacher.setFirstName(teacher.getFirstName());
+        newTeacher.setLastName(teacher.getLastName());
+        newTeacher.setDateOfBirth(teacher.getDateOfBirth());
+        newTeacher.setSsn(teacher.getSsn());
+        newTeacher.setAddress1(teacher.getAddress1());
+        newTeacher.setAddress2(teacher.getAddress2());
+        newTeacher.setCity(teacher.getCity());
+        newTeacher.setState(teacher.getState());
+        newTeacher.setZip(teacher.getZip());
+        
+        newTeacher = teacherRepository.save(newTeacher);
+        return newTeacher;
     }
 
 }
