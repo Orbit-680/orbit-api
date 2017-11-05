@@ -35,7 +35,7 @@ public class TeacherController {
     @GetMapping("/all-teachers")
     public List<Teacher> allTeachers()
     {
-        LOGGER.info("allTeachers endpoint hit");
+        LOGGER.info("allTeachers endpoint hit TeacherController");
         List<Teacher> teachers = teacherService.getAllTeachers();
         return teachers;
     }
