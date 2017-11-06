@@ -97,14 +97,12 @@ public class Teacher {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
-	
+
 	@Override
-    public String toString() 
-    {
-        return "Teacher [id=" + teacherID + ", name=" + firstName+lastName + "]";
-    }
-	
-	
-	
+	public String toString() {
+		return "Teacher [teacherID=" + teacherID + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", dateOfBirth=" + dateOfBirth + ", ssn=" + ssn + ", address1=" + address1 + ", address2=" + address2
+				+ ", city=" + city + ", state=" + state + ", zip=" + zip + "]";
+	}	
 
 }
