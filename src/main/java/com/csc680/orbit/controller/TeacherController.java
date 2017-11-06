@@ -52,9 +52,8 @@ public class TeacherController {
     @RequestMapping(value = "/add-teacher", method = RequestMethod.POST)
     public Teacher addTeacher(@RequestBody Teacher teacher)
     {
-    	
+    	LOGGER.info("Hit the add-teacher end point.");
         Teacher newTeacher = teacherService.addTeacher(teacher);
-        LOGGER.info("Added a new teacher: " + teacher.toString());
         return newTeacher;
     }
 }

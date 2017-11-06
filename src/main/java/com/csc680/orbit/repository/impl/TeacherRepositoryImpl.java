@@ -2,23 +2,26 @@ package com.csc680.orbit.repository.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
-import static com.csc680.orbit.database.Tables.STUDENT;
 import static com.csc680.orbit.database.Tables.TEACHER;
 
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
-import com.csc680.orbit.model.Student;
 import com.csc680.orbit.model.Teacher;
-import com.csc680.orbit.recordmapper.StudentRecordMapper;
 import com.csc680.orbit.recordmapper.TeacherRecordMapper;
 import com.csc680.orbit.service.DBConnection;
+
+import javassist.bytecode.stackmap.TypeData.ClassName;
+
 import com.csc680.orbit.repository.TeacherRepository;
 
 @Repository ("teacherRepository")
 public class TeacherRepositoryImpl implements TeacherRepository{
 	DSLContext dslContext = DBConnection.getConnection();
+    private static final Logger LOGGER = 
+                                    Logger.getLogger(ClassName.class.getName());
 
 	@Override
 	public long count() {
@@ -122,6 +125,7 @@ public class TeacherRepositoryImpl implements TeacherRepository{
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <S extends Teacher> S save(S arg0)
         {
@@ -136,7 +140,7 @@ public class TeacherRepositoryImpl implements TeacherRepository{
             String state = arg0.getState();
             String zip = arg0.getZip();
                         
-            this.dslContext.insertInto(TEACHER,
+            Teacher iTeacher = this.dslContext.insertInto(TEACHER,
                                      TEACHER.FIRST_NAME,
                                      TEACHER.LAST_NAME,
                                      TEACHER.DATE_OF_BIRTH,
@@ -148,8 +152,16 @@ public class TeacherRepositoryImpl implements TeacherRepository{
                                      TEACHER.ZIP_CODE)
                     .values(firstName, lastName, dateOfBirth, ssn, address1,
                             address2, city, state, zip)
-                    .execute();
-		return arg0;
+                    .returning(TEACHER.ID)
+                    .fetchOne()
+					.map(new TeacherRecordMapper());
+        
+            Teacher newTeacher = (Teacher)arg0;
+            newTeacher.setTeacherID(iTeacher.getTeacherID());
+	        if(newTeacher != null){
+	        	   LOGGER.info("Successfully added Teacher to DB: " + newTeacher.toString());
+	        }
+            return (S)newTeacher;
 	}
 
 	@Override
