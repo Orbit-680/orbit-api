@@ -10,6 +10,7 @@ import com.csc680.orbit.database.tables.Course;
 import com.csc680.orbit.database.tables.Grade;
 import com.csc680.orbit.database.tables.Message;
 import com.csc680.orbit.database.tables.Picture;
+import com.csc680.orbit.database.tables.Role;
 import com.csc680.orbit.database.tables.Schedule;
 import com.csc680.orbit.database.tables.School;
 import com.csc680.orbit.database.tables.SchoolStudent;
@@ -41,7 +42,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Orbit extends SchemaImpl {
 
-    private static final long serialVersionUID = 746742383;
+    private static final long serialVersionUID = -1513862824;
 
     /**
      * The reference instance of <code>orbit</code>
@@ -77,6 +78,11 @@ public class Orbit extends SchemaImpl {
      * The table <code>orbit.picture</code>.
      */
     public final Picture PICTURE = com.csc680.orbit.database.tables.Picture.PICTURE;
+
+    /**
+     * The table <code>orbit.role</code>.
+     */
+    public final Role ROLE = com.csc680.orbit.database.tables.Role.ROLE;
 
     /**
      * The table <code>orbit.schedule</code>.
@@ -139,6 +145,7 @@ public class Orbit extends SchemaImpl {
             Grade.GRADE,
             Message.MESSAGE,
             Picture.PICTURE,
+            Role.ROLE,
             Schedule.SCHEDULE,
             School.SCHOOL,
             SchoolStudent.SCHOOL_STUDENT,

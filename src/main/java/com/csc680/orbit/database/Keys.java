@@ -10,6 +10,7 @@ import com.csc680.orbit.database.tables.Course;
 import com.csc680.orbit.database.tables.Grade;
 import com.csc680.orbit.database.tables.Message;
 import com.csc680.orbit.database.tables.Picture;
+import com.csc680.orbit.database.tables.Role;
 import com.csc680.orbit.database.tables.Schedule;
 import com.csc680.orbit.database.tables.School;
 import com.csc680.orbit.database.tables.SchoolStudent;
@@ -22,6 +23,7 @@ import com.csc680.orbit.database.tables.records.CourseRecord;
 import com.csc680.orbit.database.tables.records.GradeRecord;
 import com.csc680.orbit.database.tables.records.MessageRecord;
 import com.csc680.orbit.database.tables.records.PictureRecord;
+import com.csc680.orbit.database.tables.records.RoleRecord;
 import com.csc680.orbit.database.tables.records.ScheduleRecord;
 import com.csc680.orbit.database.tables.records.SchoolRecord;
 import com.csc680.orbit.database.tables.records.SchoolStudentRecord;
@@ -61,6 +63,7 @@ public class Keys {
     public static final Identity<GradeRecord, Integer> IDENTITY_GRADE = Identities0.IDENTITY_GRADE;
     public static final Identity<MessageRecord, Integer> IDENTITY_MESSAGE = Identities0.IDENTITY_MESSAGE;
     public static final Identity<PictureRecord, Integer> IDENTITY_PICTURE = Identities0.IDENTITY_PICTURE;
+    public static final Identity<RoleRecord, Integer> IDENTITY_ROLE = Identities0.IDENTITY_ROLE;
     public static final Identity<ScheduleRecord, Integer> IDENTITY_SCHEDULE = Identities0.IDENTITY_SCHEDULE;
     public static final Identity<SchoolRecord, Integer> IDENTITY_SCHOOL = Identities0.IDENTITY_SCHOOL;
     public static final Identity<SchoolStudentRecord, Integer> IDENTITY_SCHOOL_STUDENT = Identities0.IDENTITY_SCHOOL_STUDENT;
@@ -78,6 +81,7 @@ public class Keys {
     public static final UniqueKey<GradeRecord> KEY_GRADE_PRIMARY = UniqueKeys0.KEY_GRADE_PRIMARY;
     public static final UniqueKey<MessageRecord> KEY_MESSAGE_PRIMARY = UniqueKeys0.KEY_MESSAGE_PRIMARY;
     public static final UniqueKey<PictureRecord> KEY_PICTURE_PRIMARY = UniqueKeys0.KEY_PICTURE_PRIMARY;
+    public static final UniqueKey<RoleRecord> KEY_ROLE_PRIMARY = UniqueKeys0.KEY_ROLE_PRIMARY;
     public static final UniqueKey<ScheduleRecord> KEY_SCHEDULE_PRIMARY = UniqueKeys0.KEY_SCHEDULE_PRIMARY;
     public static final UniqueKey<SchoolRecord> KEY_SCHOOL_PRIMARY = UniqueKeys0.KEY_SCHOOL_PRIMARY;
     public static final UniqueKey<SchoolStudentRecord> KEY_SCHOOL_STUDENT_PRIMARY = UniqueKeys0.KEY_SCHOOL_STUDENT_PRIMARY;
@@ -101,6 +105,7 @@ public class Keys {
     public static final ForeignKey<ScheduleRecord, CourseRecord> SCHEDULE_IBFK_2 = ForeignKeys0.SCHEDULE_IBFK_2;
     public static final ForeignKey<SchoolStudentRecord, SchoolRecord> SCHOOL_STUDENT_IBFK_1 = ForeignKeys0.SCHOOL_STUDENT_IBFK_1;
     public static final ForeignKey<SchoolStudentRecord, StudentRecord> SCHOOL_STUDENT_IBFK_2 = ForeignKeys0.SCHOOL_STUDENT_IBFK_2;
+    public static final ForeignKey<UserRecord, RoleRecord> USER_IBFK_1 = ForeignKeys0.USER_IBFK_1;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -113,6 +118,7 @@ public class Keys {
         public static Identity<GradeRecord, Integer> IDENTITY_GRADE = createIdentity(Grade.GRADE, Grade.GRADE.ID);
         public static Identity<MessageRecord, Integer> IDENTITY_MESSAGE = createIdentity(Message.MESSAGE, Message.MESSAGE.ID);
         public static Identity<PictureRecord, Integer> IDENTITY_PICTURE = createIdentity(Picture.PICTURE, Picture.PICTURE.ID);
+        public static Identity<RoleRecord, Integer> IDENTITY_ROLE = createIdentity(Role.ROLE, Role.ROLE.ID);
         public static Identity<ScheduleRecord, Integer> IDENTITY_SCHEDULE = createIdentity(Schedule.SCHEDULE, Schedule.SCHEDULE.ID);
         public static Identity<SchoolRecord, Integer> IDENTITY_SCHOOL = createIdentity(School.SCHOOL, School.SCHOOL.ID);
         public static Identity<SchoolStudentRecord, Integer> IDENTITY_SCHOOL_STUDENT = createIdentity(SchoolStudent.SCHOOL_STUDENT, SchoolStudent.SCHOOL_STUDENT.ID);
@@ -128,6 +134,7 @@ public class Keys {
         public static final UniqueKey<GradeRecord> KEY_GRADE_PRIMARY = createUniqueKey(Grade.GRADE, "KEY_grade_PRIMARY", Grade.GRADE.ID);
         public static final UniqueKey<MessageRecord> KEY_MESSAGE_PRIMARY = createUniqueKey(Message.MESSAGE, "KEY_message_PRIMARY", Message.MESSAGE.ID);
         public static final UniqueKey<PictureRecord> KEY_PICTURE_PRIMARY = createUniqueKey(Picture.PICTURE, "KEY_picture_PRIMARY", Picture.PICTURE.ID);
+        public static final UniqueKey<RoleRecord> KEY_ROLE_PRIMARY = createUniqueKey(Role.ROLE, "KEY_role_PRIMARY", Role.ROLE.ID);
         public static final UniqueKey<ScheduleRecord> KEY_SCHEDULE_PRIMARY = createUniqueKey(Schedule.SCHEDULE, "KEY_schedule_PRIMARY", Schedule.SCHEDULE.ID);
         public static final UniqueKey<SchoolRecord> KEY_SCHOOL_PRIMARY = createUniqueKey(School.SCHOOL, "KEY_school_PRIMARY", School.SCHOOL.ID);
         public static final UniqueKey<SchoolStudentRecord> KEY_SCHOOL_STUDENT_PRIMARY = createUniqueKey(SchoolStudent.SCHOOL_STUDENT, "KEY_school_student_PRIMARY", SchoolStudent.SCHOOL_STUDENT.ID);
@@ -149,5 +156,6 @@ public class Keys {
         public static final ForeignKey<ScheduleRecord, CourseRecord> SCHEDULE_IBFK_2 = createForeignKey(com.csc680.orbit.database.Keys.KEY_COURSE_PRIMARY, Schedule.SCHEDULE, "schedule_ibfk_2", Schedule.SCHEDULE.COURSE_ID);
         public static final ForeignKey<SchoolStudentRecord, SchoolRecord> SCHOOL_STUDENT_IBFK_1 = createForeignKey(com.csc680.orbit.database.Keys.KEY_SCHOOL_PRIMARY, SchoolStudent.SCHOOL_STUDENT, "school_student_ibfk_1", SchoolStudent.SCHOOL_STUDENT.SCHOOL_ID);
         public static final ForeignKey<SchoolStudentRecord, StudentRecord> SCHOOL_STUDENT_IBFK_2 = createForeignKey(com.csc680.orbit.database.Keys.KEY_STUDENT_PRIMARY, SchoolStudent.SCHOOL_STUDENT, "school_student_ibfk_2", SchoolStudent.SCHOOL_STUDENT.STUDENT_ID);
+        public static final ForeignKey<UserRecord, RoleRecord> USER_IBFK_1 = createForeignKey(com.csc680.orbit.database.Keys.KEY_ROLE_PRIMARY, User.USER, "user_ibfk_1", User.USER.ROLE_ID);
     }
 }

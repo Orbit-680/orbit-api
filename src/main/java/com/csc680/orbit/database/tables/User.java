@@ -16,6 +16,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
@@ -40,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends TableImpl<UserRecord> {
 
-    private static final long serialVersionUID = -1053876610;
+    private static final long serialVersionUID = 526799048;
 
     /**
      * The reference instance of <code>orbit.user</code>
@@ -86,6 +87,11 @@ public class User extends TableImpl<UserRecord> {
     public final TableField<UserRecord, String> ACTIVE = createField("Active", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
 
     /**
+     * The column <code>orbit.user.Role_ID</code>.
+     */
+    public final TableField<UserRecord, Integer> ROLE_ID = createField("Role_ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
      * Create a <code>orbit.user</code> table reference
      */
     public User() {
@@ -127,7 +133,7 @@ public class User extends TableImpl<UserRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.USER_PRIMARY);
+        return Arrays.<Index>asList(Indexes.USER_PRIMARY, Indexes.USER_ROLE_ID);
     }
 
     /**
@@ -152,6 +158,14 @@ public class User extends TableImpl<UserRecord> {
     @Override
     public List<UniqueKey<UserRecord>> getKeys() {
         return Arrays.<UniqueKey<UserRecord>>asList(Keys.KEY_USER_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ForeignKey<UserRecord, ?>> getReferences() {
+        return Arrays.<ForeignKey<UserRecord, ?>>asList(Keys.USER_IBFK_1);
     }
 
     /**

@@ -10,6 +10,7 @@ import com.csc680.orbit.database.tables.Course;
 import com.csc680.orbit.database.tables.Grade;
 import com.csc680.orbit.database.tables.Message;
 import com.csc680.orbit.database.tables.Picture;
+import com.csc680.orbit.database.tables.Role;
 import com.csc680.orbit.database.tables.Schedule;
 import com.csc680.orbit.database.tables.School;
 import com.csc680.orbit.database.tables.SchoolStudent;
@@ -62,6 +63,11 @@ public class Tables {
      * The table <code>orbit.picture</code>.
      */
     public static final Picture PICTURE = com.csc680.orbit.database.tables.Picture.PICTURE;
+
+    /**
+     * The table <code>orbit.role</code>.
+     */
+    public static final Role ROLE = com.csc680.orbit.database.tables.Role.ROLE;
 
     /**
      * The table <code>orbit.schedule</code>.

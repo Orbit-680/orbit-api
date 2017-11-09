@@ -10,6 +10,7 @@ import com.csc680.orbit.database.tables.Course;
 import com.csc680.orbit.database.tables.Grade;
 import com.csc680.orbit.database.tables.Message;
 import com.csc680.orbit.database.tables.Picture;
+import com.csc680.orbit.database.tables.Role;
 import com.csc680.orbit.database.tables.Schedule;
 import com.csc680.orbit.database.tables.School;
 import com.csc680.orbit.database.tables.SchoolStudent;
@@ -55,6 +56,7 @@ public class Indexes {
     public static final Index MESSAGE_USER_ID = Indexes0.MESSAGE_USER_ID;
     public static final Index PICTURE_PRIMARY = Indexes0.PICTURE_PRIMARY;
     public static final Index PICTURE_STUDENT_ID = Indexes0.PICTURE_STUDENT_ID;
+    public static final Index ROLE_PRIMARY = Indexes0.ROLE_PRIMARY;
     public static final Index SCHEDULE_COURSE_ID = Indexes0.SCHEDULE_COURSE_ID;
     public static final Index SCHEDULE_PRIMARY = Indexes0.SCHEDULE_PRIMARY;
     public static final Index SCHEDULE_STUDENT_ID = Indexes0.SCHEDULE_STUDENT_ID;
@@ -65,6 +67,7 @@ public class Indexes {
     public static final Index STUDENT_PRIMARY = Indexes0.STUDENT_PRIMARY;
     public static final Index TEACHER_PRIMARY = Indexes0.TEACHER_PRIMARY;
     public static final Index USER_PRIMARY = Indexes0.USER_PRIMARY;
+    public static final Index USER_ROLE_ID = Indexes0.USER_ROLE_ID;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -85,6 +88,7 @@ public class Indexes {
         public static Index MESSAGE_USER_ID = createIndex("User_ID", Message.MESSAGE, new OrderField[] { Message.MESSAGE.USER_ID }, false);
         public static Index PICTURE_PRIMARY = createIndex("PRIMARY", Picture.PICTURE, new OrderField[] { Picture.PICTURE.ID }, true);
         public static Index PICTURE_STUDENT_ID = createIndex("Student_ID", Picture.PICTURE, new OrderField[] { Picture.PICTURE.STUDENT_ID }, false);
+        public static Index ROLE_PRIMARY = createIndex("PRIMARY", Role.ROLE, new OrderField[] { Role.ROLE.ID }, true);
         public static Index SCHEDULE_COURSE_ID = createIndex("Course_ID", Schedule.SCHEDULE, new OrderField[] { Schedule.SCHEDULE.COURSE_ID }, false);
         public static Index SCHEDULE_PRIMARY = createIndex("PRIMARY", Schedule.SCHEDULE, new OrderField[] { Schedule.SCHEDULE.ID }, true);
         public static Index SCHEDULE_STUDENT_ID = createIndex("Student_ID", Schedule.SCHEDULE, new OrderField[] { Schedule.SCHEDULE.STUDENT_ID }, false);
@@ -95,5 +99,6 @@ public class Indexes {
         public static Index STUDENT_PRIMARY = createIndex("PRIMARY", Student.STUDENT, new OrderField[] { Student.STUDENT.ID }, true);
         public static Index TEACHER_PRIMARY = createIndex("PRIMARY", Teacher.TEACHER, new OrderField[] { Teacher.TEACHER.ID }, true);
         public static Index USER_PRIMARY = createIndex("PRIMARY", User.USER, new OrderField[] { User.USER.ID }, true);
+        public static Index USER_ROLE_ID = createIndex("Role_ID", User.USER, new OrderField[] { User.USER.ROLE_ID }, false);
     }
 }

@@ -6,6 +6,7 @@ package com.csc680.orbit.database;
 
 import com.csc680.orbit.database.routines.DefaultDataLoad;
 import com.csc680.orbit.database.routines.LoadCourses;
+import com.csc680.orbit.database.routines.LoadRoles;
 import com.csc680.orbit.database.routines.LoadSchools;
 import com.csc680.orbit.database.routines.LoadStudents;
 import com.csc680.orbit.database.routines.LoadTeachers;
@@ -42,6 +43,15 @@ public class Routines {
      */
     public static void loadCourses(Configuration configuration) {
         LoadCourses p = new LoadCourses();
+
+        p.execute(configuration);
+    }
+
+    /**
+     * Call <code>orbit.load_roles</code>
+     */
+    public static void loadRoles(Configuration configuration) {
+        LoadRoles p = new LoadRoles();
 
         p.execute(configuration);
     }
