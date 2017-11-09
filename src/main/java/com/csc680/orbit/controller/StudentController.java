@@ -17,6 +17,7 @@ import com.csc680.orbit.model.Student;
 import com.csc680.orbit.service.StudentService;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
+import org.springframework.web.bind.annotation.RequestBody;
 
 //@CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -47,5 +48,12 @@ public class StudentController
         LOGGER.info("getStudent endpoint hit find id" + id);
         Student student = studentService.getStudentById(id);
         return student;
+    }
+    @RequestMapping(value = "/create-student", method = RequestMethod.POST)
+    public Student addStudent(@RequestBody Student student)
+    {
+    	LOGGER.info("Hit the add-student end point.");
+        Student newStudent = studentService.addStudent(student);
+        return newStudent;
     }
 }

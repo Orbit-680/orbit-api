@@ -29,7 +29,7 @@ public @Data class Student
  
     public Student(String studentFirstName, String studentLastName, int studentID,
             String dateOfBirth, String studentSSN, String studentAddress_1, String studentAddress_2,
-            String studentCity, String studentState, String studentZipeCode, String studentGrade, 
+            String studentCity, String studentState, String studentZipCode, String studentGrade, 
             String motherFirstName, String motherLastName, String motherSSN, 
             String motherAddress_1, String motherAddress_2, String motherCity, 
             String motherState, String motherZipCode, String motherHomePhone,
@@ -48,7 +48,7 @@ public @Data class Student
         this.studentAddress_2 = studentAddress_2;
         this.studentCity = studentCity;
         this.studentState = studentState;
-        this.studentZipCode = studentZipeCode;
+        this.studentZipCode = studentZipCode;
         this.studentGrade = studentGrade;
         
         this.motherFirstName = motherFirstName;
@@ -203,13 +203,37 @@ public @Data class Student
     public void setFatherCellPhone(String fatherCellPhone)
         {this.fatherCellPhone = fatherCellPhone;}
     
-    public String getfatherEmail() {return fatherEmail;}
-    public void setfatherEmail(String fatherEmail)
+    public String getFatherEmail() {return fatherEmail;}
+    public void setFatherEmail(String fatherEmail)
         {this.fatherEmail = fatherEmail;}
     
     @Override
     public String toString() 
     {
-        return "Student [id=" + studentID + ", name=" + studentFirstName+studentLastName + "]";
+        return "Student [id = " + studentID + ", firstName = " + studentFirstName+
+                ",lastName = " + studentLastName + ",DOB = "+studentDateOfBirth+
+                ", SSN = " + studentSSN + ", address1 = " + studentAddress_1+
+                ", address2 = " + studentAddress_2 + 
+                ", City = " + studentCity+ ", State = " +studentState+
+                ", ZipCode = "+ studentZipCode+ ", grade = "+ studentGrade+
+                
+                ", motherFirstName = " + motherFirstName+
+                ", motherLastName = " + motherLastName+", motherSSN = "+motherSSN+
+                ", motherAddress_1 = "+ motherAddress_1+
+                ", motherAddress_2 = "+ motherAddress_2+
+                ", motherCity = "+motherCity+", motherState = "+motherState+
+                ", motherZip = "+motherZipCode+", motherHomePhone ="+motherHomePhone+
+                ", motherCellPhone = "+motherCellPhone+ 
+                ", motherEmail = " + motherEmail+
+                
+                ", fatherFirstName = " + fatherFirstName+
+                ", fatherLastName = " + fatherLastName+", fatherSSN = "+fatherSSN+
+                ", fatherAddress_1 = "+ fatherAddress_1+
+                ", fatherAddress_2 = "+ fatherAddress_2+
+                ", fatherCity = "+fatherCity+", motherState = "+fatherState+
+                ", fatherZip = "+fatherZipCode+", motherHomePhone ="+fatherHomePhone+
+                ", fatherCellPhone = "+fatherCellPhone+ 
+                ", fatherEmail = " + fatherEmail+
+                "]";
     }
 }

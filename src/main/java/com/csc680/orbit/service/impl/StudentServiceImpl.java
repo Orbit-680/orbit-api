@@ -35,4 +35,10 @@ public class StudentServiceImpl implements StudentService
         Student student = studentRepository.findOne(Id);
         return student;
     }   
+    
+    public Student addStudent(Student student) 
+    {
+        Student newStudent = studentRepository.save(student);
+        return newStudent;
+    }
 }

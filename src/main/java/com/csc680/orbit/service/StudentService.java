@@ -7,4 +7,5 @@ public interface StudentService
 {
     List <Student> getAllStudents();   
     Student getStudentById(String Id);
+    Student addStudent(Student student);
 }
