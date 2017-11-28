@@ -31,6 +31,11 @@ public class CourseController {
 	public List<Course> allCourses() {
 		LOGGER.info("AllCourses controller hit");
 		List<Course> courses = courseService.getAllCourses();
+		Course demo = new Course();
+		demo.setName("CSC 680");
+		
+		demo.setYear("1718");
+				
 		return courses;
 	}
 
