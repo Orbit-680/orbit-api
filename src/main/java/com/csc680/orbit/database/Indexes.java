@@ -68,6 +68,7 @@ public class Indexes {
     public static final Index TEACHER_PRIMARY = Indexes0.TEACHER_PRIMARY;
     public static final Index USER_PRIMARY = Indexes0.USER_PRIMARY;
     public static final Index USER_ROLE_ID = Indexes0.USER_ROLE_ID;
+    public static final Index USER_USERNAME = Indexes0.USER_USERNAME;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -100,5 +101,6 @@ public class Indexes {
         public static Index TEACHER_PRIMARY = createIndex("PRIMARY", Teacher.TEACHER, new OrderField[] { Teacher.TEACHER.ID }, true);
         public static Index USER_PRIMARY = createIndex("PRIMARY", User.USER, new OrderField[] { User.USER.ID }, true);
         public static Index USER_ROLE_ID = createIndex("Role_ID", User.USER, new OrderField[] { User.USER.ROLE_ID }, false);
+        public static Index USER_USERNAME = createIndex("Username", User.USER, new OrderField[] { User.USER.EMAIL }, true);
     }
 }

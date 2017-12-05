@@ -22,7 +22,7 @@ public class UserRepositoryImpl implements UserRepository {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <S extends User> S save(S user) {
-		String username = user.getUsername();
+		String username = user.getEmail();
 		String uid = user.getUid();
 		Date lastLogin = user.getLastLogin();
 		int invalidAttempts = user.getInvalidAttempts();
@@ -30,14 +30,14 @@ public class UserRepositoryImpl implements UserRepository {
 		Role role = user.getRole();
 		
 		User inUser = this.dslContext.insertInto(USER,
-						USER.USERNAME,
+						USER.EMAIL,
 						USER.UID,
 						USER.LAST_LOGIN,
 						USER.INVALID_ATTEMPTS,
 						USER.ACTIVE,
 						USER.ROLE_ID)
 						.values(username, uid, lastLogin, invalidAttempts, active, role.getRoleID())
-						.returning(USER.ID, USER.USERNAME, USER.UID, USER.LAST_LOGIN, USER.INVALID_ATTEMPTS, USER.ACTIVE, USER.ROLE_ID)
+						.returning(USER.ID, USER.EMAIL, USER.UID, USER.LAST_LOGIN, USER.INVALID_ATTEMPTS, USER.ACTIVE, USER.ROLE_ID)
 						.fetchOne()
 						.map(new UserRecordMapper());
 		

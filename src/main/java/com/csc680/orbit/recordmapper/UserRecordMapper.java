@@ -15,7 +15,7 @@ public class UserRecordMapper implements RecordMapper<Record, User>{
 		Role role = new Role(r.getValue(USER.ROLE_ID));
 		return new User(
 				r.getValue(USER.ID),
-				r.getValue(USER.USERNAME),
+				r.getValue(USER.EMAIL),
 				r.getValue(USER.UID),
 				r.getValue(USER.LAST_LOGIN),
 				r.getValue(USER.INVALID_ATTEMPTS),

@@ -13,7 +13,7 @@ public class User {
 
 	@Id
 	private int userID;
-	private String username;
+	private String email;
 	private String uid;
 	private Date lastLogin;
 	private int invalidAttempts;
@@ -26,9 +26,9 @@ public class User {
 
 	}
 
-	public User(int userID, String username, String uid, Date lastLogin, int invalidAttempts, String active, Role role) {
+	public User(int userID, String email, String uid, Date lastLogin, int invalidAttempts, String active, Role role) {
 		this.userID = userID;
-		this.username = username;
+		this.email = email;
 		this.uid = uid;
 		this.lastLogin = lastLogin;
 		this.invalidAttempts = invalidAttempts;
@@ -44,12 +44,12 @@ public class User {
 		this.userID = userID;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getUid() {
@@ -94,7 +94,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userID=" + userID + ", username=" + username + ", uid=" + uid + ", lastLogin=" + lastLogin
+		return "User [userID=" + userID + ", email=" + email + ", uid=" + uid + ", lastLogin=" + lastLogin
 				+ ", invalidAttempts=" + invalidAttempts + ", active=" + active + ", role=" + role + "]";
 	}
 

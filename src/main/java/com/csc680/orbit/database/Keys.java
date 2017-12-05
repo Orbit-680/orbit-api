@@ -88,6 +88,7 @@ public class Keys {
     public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = UniqueKeys0.KEY_STUDENT_PRIMARY;
     public static final UniqueKey<TeacherRecord> KEY_TEACHER_PRIMARY = UniqueKeys0.KEY_TEACHER_PRIMARY;
     public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = UniqueKeys0.KEY_USER_PRIMARY;
+    public static final UniqueKey<UserRecord> KEY_USER_USERNAME = UniqueKeys0.KEY_USER_USERNAME;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -141,6 +142,7 @@ public class Keys {
         public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = createUniqueKey(Student.STUDENT, "KEY_student_PRIMARY", Student.STUDENT.ID);
         public static final UniqueKey<TeacherRecord> KEY_TEACHER_PRIMARY = createUniqueKey(Teacher.TEACHER, "KEY_teacher_PRIMARY", Teacher.TEACHER.ID);
         public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = createUniqueKey(User.USER, "KEY_user_PRIMARY", User.USER.ID);
+        public static final UniqueKey<UserRecord> KEY_USER_USERNAME = createUniqueKey(User.USER, "KEY_user_Username", User.USER.EMAIL);
     }
 
     private static class ForeignKeys0 extends AbstractKeys {
