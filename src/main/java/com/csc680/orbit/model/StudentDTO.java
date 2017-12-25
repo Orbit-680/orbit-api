@@ -1,11 +1,11 @@
 package com.csc680.orbit.model;
 
-public class SearchedStudent 
+public class StudentDTO 
 {
     private String firstName, lastName, dateOfBirth, studentSSN;
         
-    public SearchedStudent(){}
-    public SearchedStudent(String firstName, String lastName, 
+    public StudentDTO(){}
+    public StudentDTO(String firstName, String lastName, 
                            String dateOfBirth, String studentSSN)
     {
         this.firstName = firstName;

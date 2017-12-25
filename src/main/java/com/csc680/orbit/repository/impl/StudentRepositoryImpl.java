@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
-
 import static com.csc680.orbit.database.Tables.STUDENT;
 
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
 import com.csc680.orbit.model.Student;
+import com.csc680.orbit.model.StudentDTO;
 import com.csc680.orbit.recordmapper.StudentRecordMapper;
 import com.csc680.orbit.service.DBConnection;
 import com.csc680.orbit.repository.StudentRepository;
@@ -267,8 +267,10 @@ public class StudentRepositoryImpl implements StudentRepository
                             .returning(STUDENT.ID)
                             .fetchOne()
                             .map(new StudentRecordMapper());
-        Student newStudent = (Student)arg0;
+        
+        	Student newStudent = (Student)arg0;
             newStudent.setStudentId(iStudent.getStudentId());
+            
 	        if(newStudent != null){
 	        	   LOGGER.info("Successfully added Student to DB: " + newStudent.toString());
 	        }
@@ -286,5 +288,55 @@ public class StudentRepositoryImpl implements StudentRepository
     public List<Student> findById(String id) 
     {
 	return null;
+    }
+    
+    @Override
+    public Student findStudent(StudentDTO studentDto) 
+    {	
+                
+                List<Student> students = new ArrayList<Student>();
+                students = this.dslContext.select(STUDENT.FIRST_NAME,
+                                             STUDENT.LAST_NAME,
+                                             STUDENT.ID,
+                                             STUDENT.DATE_OF_BIRTH,
+                                             STUDENT.SSN,
+                                             STUDENT.ADDRESS_1,
+                                             STUDENT.ADDRESS_2,
+                                             STUDENT.CITY,
+                                             STUDENT.STATE,
+                                             STUDENT.ZIP_CODE,
+                                             STUDENT.GRADE,
+                                             STUDENT.MOTHER_FIRST_NAME,
+                                             STUDENT.MOTHER_LAST_NAME,
+                                             STUDENT.MOTHER_SSN,
+                                             STUDENT.MOTHER_ADDRESS_1,
+                                             STUDENT.MOTHER_ADDRESS_2,
+                                             STUDENT.MOTHER_CITY, 
+                                             STUDENT.MOTHER_STATE,
+                                             STUDENT.MOTHER_ZIP_CODE,
+                                             STUDENT.MOTHER_HOME_PHONE,
+                                             STUDENT.MOTHER_CELL_PHONE,
+                                             STUDENT.MOTHER_EMAIL,
+                                             STUDENT.FATHER_FIRST_NAME,
+                                             STUDENT.FATHER_LAST_NAME,
+                                             STUDENT.FATHER_SSN,
+                                             STUDENT.FATHER_ADDRESS_1,
+                                             STUDENT.FATHER_ADDRESS_2,
+                                             STUDENT.FATHER_CITY, 
+                                             STUDENT.FATHER_STATE,
+                                             STUDENT.FATHER_ZIP_CODE,
+                                             STUDENT.FATHER_HOME_PHONE,
+                                             STUDENT.FATHER_CELL_PHONE,
+                                             STUDENT.FATHER_EMAIL)
+								 .from(STUDENT)
+								 .where(STUDENT.LAST_NAME.eq(studentDto.getLastName()))
+								 .and(STUDENT.FIRST_NAME.eq(studentDto.getFirstName()))
+								 .and(STUDENT.DATE_OF_BIRTH.eq(studentDto.getDateOfBirth()))
+								 .and(STUDENT.SSN.eq(studentDto.getStudentSSN()))
+								 .fetch()
+								 .map(new StudentRecordMapper());
+                
+                return students.get(0);
+                
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.csc680.orbit.model.Student;
+import com.csc680.orbit.model.StudentDTO;
 import com.csc680.orbit.repository.StudentRepository;
 import com.csc680.orbit.service.StudentService;
 
@@ -40,5 +41,12 @@ public class StudentServiceImpl implements StudentService
     {
         Student newStudent = studentRepository.save(student);
         return newStudent;
+    }
+    
+    public Student getStudent(StudentDTO studentDto)
+    
+    {
+        Student student  = studentRepository.findStudent(studentDto);
+        return student;
     }
 }

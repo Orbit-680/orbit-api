@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.csc680.orbit.model.Student;
+import com.csc680.orbit.model.StudentDTO;
 import com.csc680.orbit.service.StudentService;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
@@ -43,9 +44,9 @@ public class StudentController
     }
     
     @RequestMapping(value = "/get-student/{id}", method = RequestMethod.GET)
-    public Student getStudent(@PathVariable("id") String id)
+    public Student getStudentById(@PathVariable("id") String id)
     {
-        LOGGER.info("getStudent endpoint hit find id" + id);
+        LOGGER.info("getStudentById endpoint hit find id" + id);
         Student student = studentService.getStudentById(id);
         return student;
     }
@@ -55,5 +56,13 @@ public class StudentController
     	LOGGER.info("Hit the add-student end point.");
         Student newStudent = studentService.addStudent(student);
         return newStudent;
+    }
+    
+    @RequestMapping(value = "/get-student", method = RequestMethod.POST)
+    public Student getStudent(@RequestBody StudentDTO studentDto)
+    {
+    	LOGGER.info("Hit the get-student end point. Looking for sutdent with this info " + studentDto.toString());
+        Student foundStudent = studentService.getStudent(studentDto);
+        return foundStudent;
     }
 }
