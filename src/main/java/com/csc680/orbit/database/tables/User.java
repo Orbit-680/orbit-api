@@ -41,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends TableImpl<UserRecord> {
 
-    private static final long serialVersionUID = 526799048;
+    private static final long serialVersionUID = -1879038166;
 
     /**
      * The reference instance of <code>orbit.user</code>
@@ -62,9 +62,9 @@ public class User extends TableImpl<UserRecord> {
     public final TableField<UserRecord, Integer> ID = createField("ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
-     * The column <code>orbit.user.Username</code>.
+     * The column <code>orbit.user.Email</code>.
      */
-    public final TableField<UserRecord, String> USERNAME = createField("Username", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
+    public final TableField<UserRecord, String> EMAIL = createField("Email", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
 
     /**
      * The column <code>orbit.user.UID</code>.
@@ -133,7 +133,7 @@ public class User extends TableImpl<UserRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.USER_PRIMARY, Indexes.USER_ROLE_ID);
+        return Arrays.<Index>asList(Indexes.USER_PRIMARY, Indexes.USER_ROLE_ID, Indexes.USER_USERNAME);
     }
 
     /**
@@ -157,7 +157,7 @@ public class User extends TableImpl<UserRecord> {
      */
     @Override
     public List<UniqueKey<UserRecord>> getKeys() {
-        return Arrays.<UniqueKey<UserRecord>>asList(Keys.KEY_USER_PRIMARY);
+        return Arrays.<UniqueKey<UserRecord>>asList(Keys.KEY_USER_PRIMARY, Keys.KEY_USER_USERNAME);
     }
 
     /**

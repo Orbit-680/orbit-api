@@ -30,7 +30,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserRecord extends UpdatableRecordImpl<UserRecord> implements Record7<Integer, String, String, Date, Integer, String, Integer> {
 
-    private static final long serialVersionUID = 576192261;
+    private static final long serialVersionUID = -1034551641;
 
     /**
      * Setter for <code>orbit.user.ID</code>.
@@ -47,16 +47,16 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements Recor
     }
 
     /**
-     * Setter for <code>orbit.user.Username</code>.
+     * Setter for <code>orbit.user.Email</code>.
      */
-    public void setUsername(String value) {
+    public void setEmail(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>orbit.user.Username</code>.
+     * Getter for <code>orbit.user.Email</code>.
      */
-    public String getUsername() {
+    public String getEmail() {
         return (String) get(1);
     }
 
@@ -175,7 +175,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements Recor
      */
     @Override
     public Field<String> field2() {
-        return User.USER.USERNAME;
+        return User.USER.EMAIL;
     }
 
     /**
@@ -231,7 +231,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements Recor
      */
     @Override
     public String component2() {
-        return getUsername();
+        return getEmail();
     }
 
     /**
@@ -287,7 +287,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements Recor
      */
     @Override
     public String value2() {
-        return getUsername();
+        return getEmail();
     }
 
     /**
@@ -344,7 +344,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements Recor
      */
     @Override
     public UserRecord value2(String value) {
-        setUsername(value);
+        setEmail(value);
         return this;
     }
 
@@ -422,11 +422,11 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements Recor
     /**
      * Create a detached, initialised UserRecord
      */
-    public UserRecord(Integer id, String username, String uid, Date lastLogin, Integer invalidAttempts, String active, Integer roleId) {
+    public UserRecord(Integer id, String email, String uid, Date lastLogin, Integer invalidAttempts, String active, Integer roleId) {
         super(User.USER);
 
         set(0, id);
-        set(1, username);
+        set(1, email);
         set(2, uid);
         set(3, lastLogin);
         set(4, invalidAttempts);
