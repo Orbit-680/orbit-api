@@ -60,9 +60,10 @@ public class StudentController
     
     @RequestMapping(value = "/get-student", method = RequestMethod.POST)
     public Student getStudent(@RequestBody StudentDTO studentDto)
-    {
+    {	
+    	LOGGER.info("Hit the get-student end point.");
         Student foundStudent = studentService.getStudent(studentDto);
-        LOGGER.info("Hit the get-student end point. Here is the student we found: " + foundStudent);
+        LOGGER.info("Here is the student we found: " + foundStudent);
         return foundStudent;
     }
 }
