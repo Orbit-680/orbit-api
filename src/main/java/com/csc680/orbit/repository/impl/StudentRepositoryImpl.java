@@ -336,6 +336,10 @@ public class StudentRepositoryImpl implements StudentRepository
 								 .fetch()
 								 .map(new StudentRecordMapper());
                 
+                if(students.isEmpty()){
+                	return null;
+                }
+                
                 return students.get(0);
                 
     }

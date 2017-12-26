@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.csc680.orbit.exceptions.NotFoundException;
 import com.csc680.orbit.model.Student;
 import com.csc680.orbit.model.StudentDTO;
 import com.csc680.orbit.repository.StudentRepository;
@@ -47,6 +48,9 @@ public class StudentServiceImpl implements StudentService
     
     {
         Student student  = studentRepository.findStudent(studentDto);
+        if(student == null){
+        	throw new NotFoundException("Could not find the student with those search parameters.");
+        }
         return student;
     }
 }
