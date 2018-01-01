@@ -13,8 +13,10 @@ import javassist.bytecode.stackmap.TypeData.ClassName;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.csc680.orbit.model.AccountLink;
 import com.csc680.orbit.model.Student;
 import com.csc680.orbit.model.StudentDTO;
+import com.csc680.orbit.model.AccountLinkDTO;
 import com.csc680.orbit.service.StudentService;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
@@ -66,4 +68,26 @@ public class StudentController
         LOGGER.info("Here is the student we found: " + foundStudent);
         return foundStudent;
     }
+    
+    @RequestMapping(value = "/link-student", method = RequestMethod.POST)
+    public AccountLink linkStudent(@RequestBody AccountLinkDTO accountLinkDto)
+    {	
+    	LOGGER.info("Hit the link-student end point.");
+        
+    	AccountLink accountLink = studentService.linkStudent(accountLinkDto);
+        return accountLink;
+    }
+    
+    @RequestMapping(value = "/link-student/{userID}/{studentID}", method = RequestMethod.GET)
+    public AccountLink linkStudent(@PathVariable("userID") int user_id, @PathVariable("studentID") int student_id)
+    {	
+    	LOGGER.info("Hit the link-student end point.");
+        
+    	//StudentDTO studentDto = new StudentDTO();
+    	AccountLinkDTO accountLinkDto = new AccountLinkDTO("dCNdrck1TDgh6J281p6no3H1ryH3", student_id);
+    	AccountLink accountLink = studentService.linkStudent(accountLinkDto);
+        //LOGGER.info("Here is the student we found: " + foundStudent);
+        return accountLink;
+    }
+    
 }

@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.csc680.orbit.exceptions.NotFoundException;
+import com.csc680.orbit.model.AccountLink;
+import com.csc680.orbit.model.AccountLinkDTO;
 import com.csc680.orbit.model.Student;
 import com.csc680.orbit.model.StudentDTO;
 import com.csc680.orbit.repository.StudentRepository;
@@ -52,5 +54,14 @@ public class StudentServiceImpl implements StudentService
         	throw new NotFoundException("Could not find the student with those search parameters.");
         }
         return student;
+    }
+    
+    public AccountLink linkStudent(AccountLinkDTO accountLinkDto)
+    {
+        AccountLink accountLink  = studentRepository.linkStudent(accountLinkDto);
+        if(accountLink == null){
+        	throw new NotFoundException("Could create an account link.");
+        }
+        return accountLink;
     }
 }

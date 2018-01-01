@@ -1,19 +1,29 @@
 package com.csc680.orbit.repository.impl;
 
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
 import static com.csc680.orbit.database.Tables.STUDENT;
+import static com.csc680.orbit.database.Tables.ACCOUNT_LINK;
+import static com.csc680.orbit.database.Tables.USER;
 
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
+import com.csc680.orbit.model.AccountLink;
+import com.csc680.orbit.model.AccountLinkDTO;
 import com.csc680.orbit.model.Student;
 import com.csc680.orbit.model.StudentDTO;
+import com.csc680.orbit.model.User;
+import com.csc680.orbit.recordmapper.AccountLinkRecordMapper;
 import com.csc680.orbit.recordmapper.StudentRecordMapper;
+import com.csc680.orbit.recordmapper.UserRecordMapper;
 import com.csc680.orbit.service.DBConnection;
 import com.csc680.orbit.repository.StudentRepository;
 
@@ -343,4 +353,82 @@ public class StudentRepositoryImpl implements StudentRepository
                 return students.get(0);
                 
     }
+    
+    public AccountLink linkStudent(AccountLinkDTO accountLinkDto) 
+    {    	
+    	Calendar currenttime = Calendar.getInstance();
+        Date now = new Date((currenttime.getTime()).getTime());
+        int userID = 0;
+        boolean isDuplicate = false;
+        
+        //find user ID
+        List<User> searchUsers = new ArrayList<User>();
+        searchUsers = this.dslContext.select(USER.ID, 
+        									USER.ROLE_ID, 
+        									USER.EMAIL,
+        									USER.UID,
+        									USER.LAST_LOGIN, 
+        									USER.INVALID_ATTEMPTS, 
+        									USER.ACTIVE)
+                             .from(USER)
+                             .fetch()
+                             .map(new UserRecordMapper());
+        
+        
+        if(!searchUsers.isEmpty())
+        {
+        	userID = searchUsers.get(0).getUserID();
+        }    	
+
+
+        //check for duplicate link records for this user UID and student
+        List<AccountLink> duplicateLinks = new ArrayList<AccountLink>();
+        duplicateLinks = this.dslContext.select(ACCOUNT_LINK.DATE_LINKED, 
+        										ACCOUNT_LINK.ACTIVE,
+        										ACCOUNT_LINK.USER_ID, 
+        										ACCOUNT_LINK.STUDENT_ID)
+                             .from(ACCOUNT_LINK)
+                             .where(ACCOUNT_LINK.USER_ID.eq(userID))
+							 .and(ACCOUNT_LINK.STUDENT_ID.eq(accountLinkDto.getStudentID()))
+                             .fetch()
+                             .map(new AccountLinkRecordMapper());
+        
+        
+        if(!duplicateLinks.isEmpty())
+        	isDuplicate = true;
+        
+        //if not a duplicate then create link record
+        if(!isDuplicate)
+        {
+	    	AccountLink account = this.dslContext.insertInto(ACCOUNT_LINK, 
+	        									ACCOUNT_LINK.DATE_LINKED,
+								        		ACCOUNT_LINK.ACTIVE,
+								        		ACCOUNT_LINK.USER_ID,
+								        		ACCOUNT_LINK.STUDENT_ID)
+								        		.values(now,
+								        				"Y",
+								        				userID,
+								        				accountLinkDto.getStudentID())
+								                .returning(ACCOUNT_LINK.ID)
+								                .fetchOne()
+								                .map(new AccountLinkRecordMapper());
+			
+			if(account != null){
+				account.setMessage("Successfully linked student to user account!");
+				LOGGER.info("Successfully linked student to user account: " + account.toString());
+			}
+			return account;
+        }
+        else
+        {
+        	AccountLink blankAccount = new AccountLink();
+        	blankAccount.setMessage("Account already linked to student.");
+        	return blankAccount;
+        }
+        
+        
+                
+    }
+    
+    
 }

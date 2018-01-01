@@ -210,7 +210,7 @@ public @Data class Student
     @Override
     public String toString() 
     {
-        return "Student [id = " + studentID + ", firstName = " + studentFirstName+
+        return "Student [studentID = " + studentID + ", firstName = " + studentFirstName+
                 ",lastName = " + studentLastName + ",DOB = "+studentDateOfBirth+
                 ", SSN = " + studentSSN + ", address1 = " + studentAddress_1+
                 ", address2 = " + studentAddress_2 + 
