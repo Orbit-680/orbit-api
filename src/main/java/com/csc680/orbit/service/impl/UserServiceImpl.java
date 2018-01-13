@@ -1,5 +1,6 @@
 package com.csc680.orbit.service.impl;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,20 @@ public class UserServiceImpl implements UserService{
 		LOGGER.info("Adding user service hit...");
 		User u = userRepository.save(user);
 		return u;
+	}
+
+	@Override
+	public User getUserByUID(String uid) {
+		LOGGER.info("Get user service hit...");
+		User u = userRepository.findOne(uid);
+		return u;
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		LOGGER.info("getAllUsers service hit");
+		List<User> users = (List<User>) userRepository.findAll();
+		return users;
 	}
 
 }

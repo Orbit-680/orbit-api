@@ -3,6 +3,8 @@ package com.csc680.orbit.repository.impl;
 import static com.csc680.orbit.database.Tables.USER;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.jooq.DSLContext;
@@ -58,7 +60,21 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public User findOne(String id) {
-		// TODO Auto-generated method stub
+		List<User> users = new ArrayList<User>();
+		users = this.dslContext.select(USER.ID,
+						USER.EMAIL,
+						USER.UID,
+						USER.LAST_LOGIN,
+						USER.INVALID_ATTEMPTS,
+						USER.ACTIVE,
+						USER.ROLE_ID)
+					.from(USER)
+					.where(USER.UID.eq(id))
+					.fetch()
+					.map(new UserRecordMapper());
+		if (users.size() == 1) {
+			return users.get(0);
+		}
 		return null;
 	}
 
@@ -70,8 +86,18 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public Iterable<User> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<User> users = new ArrayList<User>();
+		users = this.dslContext.select(USER.ID,
+						USER.EMAIL,
+						USER.UID,
+						USER.LAST_LOGIN,
+						USER.INVALID_ATTEMPTS,
+						USER.ACTIVE,
+						USER.ROLE_ID)
+                             .from(USER)
+                             .fetch()
+                             .map(new UserRecordMapper());
+        return users;
 	}
 
 	@Override
