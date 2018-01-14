@@ -4,7 +4,8 @@
 package com.csc680.orbit.database;
 
 
-import com.csc680.orbit.database.tables.AccountLink;
+import com.csc680.orbit.database.tables.AccountLinkStudent;
+import com.csc680.orbit.database.tables.AccountLinkTeacher;
 import com.csc680.orbit.database.tables.Assignment;
 import com.csc680.orbit.database.tables.Course;
 import com.csc680.orbit.database.tables.Grade;
@@ -42,9 +43,12 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index ACCOUNT_LINK_PRIMARY = Indexes0.ACCOUNT_LINK_PRIMARY;
-    public static final Index ACCOUNT_LINK_STUDENT_ID = Indexes0.ACCOUNT_LINK_STUDENT_ID;
-    public static final Index ACCOUNT_LINK_USER_ID = Indexes0.ACCOUNT_LINK_USER_ID;
+    public static final Index ACCOUNT_LINK_STUDENT_PRIMARY = Indexes0.ACCOUNT_LINK_STUDENT_PRIMARY;
+    public static final Index ACCOUNT_LINK_STUDENT_STUDENT_ID = Indexes0.ACCOUNT_LINK_STUDENT_STUDENT_ID;
+    public static final Index ACCOUNT_LINK_STUDENT_USER_ID = Indexes0.ACCOUNT_LINK_STUDENT_USER_ID;
+    public static final Index ACCOUNT_LINK_TEACHER_PRIMARY = Indexes0.ACCOUNT_LINK_TEACHER_PRIMARY;
+    public static final Index ACCOUNT_LINK_TEACHER_TEACHER_ID = Indexes0.ACCOUNT_LINK_TEACHER_TEACHER_ID;
+    public static final Index ACCOUNT_LINK_TEACHER_USER_ID = Indexes0.ACCOUNT_LINK_TEACHER_USER_ID;
     public static final Index ASSIGNMENT_COURSE_ID = Indexes0.ASSIGNMENT_COURSE_ID;
     public static final Index ASSIGNMENT_PRIMARY = Indexes0.ASSIGNMENT_PRIMARY;
     public static final Index COURSE_PRIMARY = Indexes0.COURSE_PRIMARY;
@@ -75,9 +79,12 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     private static class Indexes0 extends AbstractKeys {
-        public static Index ACCOUNT_LINK_PRIMARY = createIndex("PRIMARY", AccountLink.ACCOUNT_LINK, new OrderField[] { AccountLink.ACCOUNT_LINK.ID }, true);
-        public static Index ACCOUNT_LINK_STUDENT_ID = createIndex("Student_ID", AccountLink.ACCOUNT_LINK, new OrderField[] { AccountLink.ACCOUNT_LINK.STUDENT_ID }, false);
-        public static Index ACCOUNT_LINK_USER_ID = createIndex("User_ID", AccountLink.ACCOUNT_LINK, new OrderField[] { AccountLink.ACCOUNT_LINK.USER_ID }, false);
+        public static Index ACCOUNT_LINK_STUDENT_PRIMARY = createIndex("PRIMARY", AccountLinkStudent.ACCOUNT_LINK_STUDENT, new OrderField[] { AccountLinkStudent.ACCOUNT_LINK_STUDENT.ID }, true);
+        public static Index ACCOUNT_LINK_STUDENT_STUDENT_ID = createIndex("Student_ID", AccountLinkStudent.ACCOUNT_LINK_STUDENT, new OrderField[] { AccountLinkStudent.ACCOUNT_LINK_STUDENT.STUDENT_ID }, false);
+        public static Index ACCOUNT_LINK_STUDENT_USER_ID = createIndex("User_ID", AccountLinkStudent.ACCOUNT_LINK_STUDENT, new OrderField[] { AccountLinkStudent.ACCOUNT_LINK_STUDENT.USER_ID }, false);
+        public static Index ACCOUNT_LINK_TEACHER_PRIMARY = createIndex("PRIMARY", AccountLinkTeacher.ACCOUNT_LINK_TEACHER, new OrderField[] { AccountLinkTeacher.ACCOUNT_LINK_TEACHER.ID }, true);
+        public static Index ACCOUNT_LINK_TEACHER_TEACHER_ID = createIndex("Teacher_ID", AccountLinkTeacher.ACCOUNT_LINK_TEACHER, new OrderField[] { AccountLinkTeacher.ACCOUNT_LINK_TEACHER.TEACHER_ID }, false);
+        public static Index ACCOUNT_LINK_TEACHER_USER_ID = createIndex("User_ID", AccountLinkTeacher.ACCOUNT_LINK_TEACHER, new OrderField[] { AccountLinkTeacher.ACCOUNT_LINK_TEACHER.USER_ID }, false);
         public static Index ASSIGNMENT_COURSE_ID = createIndex("Course_ID", Assignment.ASSIGNMENT, new OrderField[] { Assignment.ASSIGNMENT.COURSE_ID }, false);
         public static Index ASSIGNMENT_PRIMARY = createIndex("PRIMARY", Assignment.ASSIGNMENT, new OrderField[] { Assignment.ASSIGNMENT.ID }, true);
         public static Index COURSE_PRIMARY = createIndex("PRIMARY", Course.COURSE, new OrderField[] { Course.COURSE.ID }, true);

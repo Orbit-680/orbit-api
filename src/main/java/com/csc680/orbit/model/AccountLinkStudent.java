@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class AccountLink {
+public class AccountLinkStudent {
 	@Id
 	private int accountLinkID;
 	private Date date_linked;
@@ -15,9 +15,9 @@ public class AccountLink {
 	private Integer student_id;
 	private String message;
 	
-	public AccountLink() {}
+	public AccountLinkStudent() {}
 	
-	public AccountLink(Date date_linked, String active, Integer user_id, Integer student_id)
+	public AccountLinkStudent(Date date_linked, String active, Integer user_id, Integer student_id)
 	{
 		this.date_linked = date_linked;
 		this.active = active;
@@ -25,7 +25,7 @@ public class AccountLink {
 		this.student_id = student_id;
 	}
 	
-	public AccountLink(int accountLinkID) {
+	public AccountLinkStudent(int accountLinkID) {
 		this.accountLinkID = accountLinkID;
 	}
 
@@ -79,7 +79,7 @@ public class AccountLink {
 
 	@Override
 	public String toString() {
-		return "AccountLink [accountLinkID=" + accountLinkID + ", dateLinked=" + date_linked + ", active=" + active
+		return "AccountLinkStudent [accountLinkID=" + accountLinkID + ", dateLinked=" + date_linked + ", active=" + active
 				+ ", userID=" + user_id + ", studentID=" + student_id + ", message=" + message + "]";
 	}	
 

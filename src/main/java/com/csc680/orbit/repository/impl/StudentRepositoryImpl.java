@@ -10,14 +10,14 @@ import java.util.logging.Logger;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
 import static com.csc680.orbit.database.Tables.STUDENT;
-import static com.csc680.orbit.database.Tables.ACCOUNT_LINK;
+import static com.csc680.orbit.database.Tables.ACCOUNT_LINK_STUDENT;
 import static com.csc680.orbit.database.Tables.USER;
 
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
-import com.csc680.orbit.model.AccountLink;
-import com.csc680.orbit.model.AccountLinkDTO;
+import com.csc680.orbit.model.AccountLinkStudent;
+import com.csc680.orbit.model.AccountLinkStudentDTO;
 import com.csc680.orbit.model.Student;
 import com.csc680.orbit.model.StudentDTO;
 import com.csc680.orbit.model.User;
@@ -354,7 +354,7 @@ public class StudentRepositoryImpl implements StudentRepository
                 
     }
     
-    public AccountLink linkStudent(AccountLinkDTO accountLinkDto) 
+    public AccountLinkStudent linkStudent(AccountLinkStudentDTO accountLinkDto) 
     {    	
     	Calendar currenttime = Calendar.getInstance();
         Date now = new Date((currenttime.getTime()).getTime());
@@ -382,14 +382,14 @@ public class StudentRepositoryImpl implements StudentRepository
 
 
         //check for duplicate link records for this user UID and student
-        List<AccountLink> duplicateLinks = new ArrayList<AccountLink>();
-        duplicateLinks = this.dslContext.select(ACCOUNT_LINK.DATE_LINKED, 
-        										ACCOUNT_LINK.ACTIVE,
-        										ACCOUNT_LINK.USER_ID, 
-        										ACCOUNT_LINK.STUDENT_ID)
-                             .from(ACCOUNT_LINK)
-                             .where(ACCOUNT_LINK.USER_ID.eq(userID))
-							 .and(ACCOUNT_LINK.STUDENT_ID.eq(accountLinkDto.getStudentID()))
+        List<AccountLinkStudent> duplicateLinks = new ArrayList<AccountLinkStudent>();
+        duplicateLinks = this.dslContext.select(ACCOUNT_LINK_STUDENT.DATE_LINKED, 
+				        		ACCOUNT_LINK_STUDENT.ACTIVE,
+				        		ACCOUNT_LINK_STUDENT.USER_ID, 
+				        		ACCOUNT_LINK_STUDENT.STUDENT_ID)
+                             .from(ACCOUNT_LINK_STUDENT)
+                             .where(ACCOUNT_LINK_STUDENT.USER_ID.eq(userID))
+							 .and(ACCOUNT_LINK_STUDENT.STUDENT_ID.eq(accountLinkDto.getStudentID()))
                              .fetch()
                              .map(new AccountLinkRecordMapper());
         
@@ -400,16 +400,16 @@ public class StudentRepositoryImpl implements StudentRepository
         //if not a duplicate then create link record
         if(!isDuplicate)
         {
-	    	AccountLink account = this.dslContext.insertInto(ACCOUNT_LINK, 
-	        									ACCOUNT_LINK.DATE_LINKED,
-								        		ACCOUNT_LINK.ACTIVE,
-								        		ACCOUNT_LINK.USER_ID,
-								        		ACCOUNT_LINK.STUDENT_ID)
+	    	AccountLinkStudent account = this.dslContext.insertInto(ACCOUNT_LINK_STUDENT, 
+								    			ACCOUNT_LINK_STUDENT.DATE_LINKED,
+								    			ACCOUNT_LINK_STUDENT.ACTIVE,
+								    			ACCOUNT_LINK_STUDENT.USER_ID,
+								    			ACCOUNT_LINK_STUDENT.STUDENT_ID)
 								        		.values(now,
 								        				"Y",
 								        				userID,
 								        				accountLinkDto.getStudentID())
-								                .returning(ACCOUNT_LINK.ID)
+								                .returning(ACCOUNT_LINK_STUDENT.ID)
 								                .fetchOne()
 								                .map(new AccountLinkRecordMapper());
 			
@@ -421,7 +421,7 @@ public class StudentRepositoryImpl implements StudentRepository
         }
         else
         {
-        	AccountLink blankAccount = new AccountLink();
+        	AccountLinkStudent blankAccount = new AccountLinkStudent();
         	blankAccount.setMessage("Account already linked to student.");
         	return blankAccount;
         }

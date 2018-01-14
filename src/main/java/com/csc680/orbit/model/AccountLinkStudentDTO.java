@@ -1,12 +1,12 @@
 package com.csc680.orbit.model;
 
-public class AccountLinkDTO 
+public class AccountLinkStudentDTO 
 {
 	private String userID;
     private int studentID;
         
-    public AccountLinkDTO(){}
-    public AccountLinkDTO(String userID, int studentID)
+    public AccountLinkStudentDTO(){}
+    public AccountLinkStudentDTO(String userID, int studentID)
     {
         this.userID = userID;
         this.studentID = studentID;

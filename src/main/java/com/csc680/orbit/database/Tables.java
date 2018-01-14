@@ -4,7 +4,8 @@
 package com.csc680.orbit.database;
 
 
-import com.csc680.orbit.database.tables.AccountLink;
+import com.csc680.orbit.database.tables.AccountLinkStudent;
+import com.csc680.orbit.database.tables.AccountLinkTeacher;
 import com.csc680.orbit.database.tables.Assignment;
 import com.csc680.orbit.database.tables.Course;
 import com.csc680.orbit.database.tables.Grade;
@@ -35,9 +36,14 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
-     * The table <code>orbit.account_link</code>.
+     * The table <code>orbit.account_link_student</code>.
      */
-    public static final AccountLink ACCOUNT_LINK = com.csc680.orbit.database.tables.AccountLink.ACCOUNT_LINK;
+    public static final AccountLinkStudent ACCOUNT_LINK_STUDENT = com.csc680.orbit.database.tables.AccountLinkStudent.ACCOUNT_LINK_STUDENT;
+
+    /**
+     * The table <code>orbit.account_link_teacher</code>.
+     */
+    public static final AccountLinkTeacher ACCOUNT_LINK_TEACHER = com.csc680.orbit.database.tables.AccountLinkTeacher.ACCOUNT_LINK_TEACHER;
 
     /**
      * The table <code>orbit.assignment</code>.

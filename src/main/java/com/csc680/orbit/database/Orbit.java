@@ -4,7 +4,8 @@
 package com.csc680.orbit.database;
 
 
-import com.csc680.orbit.database.tables.AccountLink;
+import com.csc680.orbit.database.tables.AccountLinkStudent;
+import com.csc680.orbit.database.tables.AccountLinkTeacher;
 import com.csc680.orbit.database.tables.Assignment;
 import com.csc680.orbit.database.tables.Course;
 import com.csc680.orbit.database.tables.Grade;
@@ -42,7 +43,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Orbit extends SchemaImpl {
 
-    private static final long serialVersionUID = -1513862824;
+    private static final long serialVersionUID = -1045269433;
 
     /**
      * The reference instance of <code>orbit</code>
@@ -50,9 +51,14 @@ public class Orbit extends SchemaImpl {
     public static final Orbit ORBIT = new Orbit();
 
     /**
-     * The table <code>orbit.account_link</code>.
+     * The table <code>orbit.account_link_student</code>.
      */
-    public final AccountLink ACCOUNT_LINK = com.csc680.orbit.database.tables.AccountLink.ACCOUNT_LINK;
+    public final AccountLinkStudent ACCOUNT_LINK_STUDENT = com.csc680.orbit.database.tables.AccountLinkStudent.ACCOUNT_LINK_STUDENT;
+
+    /**
+     * The table <code>orbit.account_link_teacher</code>.
+     */
+    public final AccountLinkTeacher ACCOUNT_LINK_TEACHER = com.csc680.orbit.database.tables.AccountLinkTeacher.ACCOUNT_LINK_TEACHER;
 
     /**
      * The table <code>orbit.assignment</code>.
@@ -139,7 +145,8 @@ public class Orbit extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
-            AccountLink.ACCOUNT_LINK,
+            AccountLinkStudent.ACCOUNT_LINK_STUDENT,
+            AccountLinkTeacher.ACCOUNT_LINK_TEACHER,
             Assignment.ASSIGNMENT,
             Course.COURSE,
             Grade.GRADE,

@@ -4,7 +4,8 @@
 package com.csc680.orbit.database;
 
 
-import com.csc680.orbit.database.tables.AccountLink;
+import com.csc680.orbit.database.tables.AccountLinkStudent;
+import com.csc680.orbit.database.tables.AccountLinkTeacher;
 import com.csc680.orbit.database.tables.Assignment;
 import com.csc680.orbit.database.tables.Course;
 import com.csc680.orbit.database.tables.Grade;
@@ -17,7 +18,8 @@ import com.csc680.orbit.database.tables.SchoolStudent;
 import com.csc680.orbit.database.tables.Student;
 import com.csc680.orbit.database.tables.Teacher;
 import com.csc680.orbit.database.tables.User;
-import com.csc680.orbit.database.tables.records.AccountLinkRecord;
+import com.csc680.orbit.database.tables.records.AccountLinkStudentRecord;
+import com.csc680.orbit.database.tables.records.AccountLinkTeacherRecord;
 import com.csc680.orbit.database.tables.records.AssignmentRecord;
 import com.csc680.orbit.database.tables.records.CourseRecord;
 import com.csc680.orbit.database.tables.records.GradeRecord;
@@ -57,7 +59,8 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
-    public static final Identity<AccountLinkRecord, Integer> IDENTITY_ACCOUNT_LINK = Identities0.IDENTITY_ACCOUNT_LINK;
+    public static final Identity<AccountLinkStudentRecord, Integer> IDENTITY_ACCOUNT_LINK_STUDENT = Identities0.IDENTITY_ACCOUNT_LINK_STUDENT;
+    public static final Identity<AccountLinkTeacherRecord, Integer> IDENTITY_ACCOUNT_LINK_TEACHER = Identities0.IDENTITY_ACCOUNT_LINK_TEACHER;
     public static final Identity<AssignmentRecord, Integer> IDENTITY_ASSIGNMENT = Identities0.IDENTITY_ASSIGNMENT;
     public static final Identity<CourseRecord, Integer> IDENTITY_COURSE = Identities0.IDENTITY_COURSE;
     public static final Identity<GradeRecord, Integer> IDENTITY_GRADE = Identities0.IDENTITY_GRADE;
@@ -75,7 +78,8 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<AccountLinkRecord> KEY_ACCOUNT_LINK_PRIMARY = UniqueKeys0.KEY_ACCOUNT_LINK_PRIMARY;
+    public static final UniqueKey<AccountLinkStudentRecord> KEY_ACCOUNT_LINK_STUDENT_PRIMARY = UniqueKeys0.KEY_ACCOUNT_LINK_STUDENT_PRIMARY;
+    public static final UniqueKey<AccountLinkTeacherRecord> KEY_ACCOUNT_LINK_TEACHER_PRIMARY = UniqueKeys0.KEY_ACCOUNT_LINK_TEACHER_PRIMARY;
     public static final UniqueKey<AssignmentRecord> KEY_ASSIGNMENT_PRIMARY = UniqueKeys0.KEY_ASSIGNMENT_PRIMARY;
     public static final UniqueKey<CourseRecord> KEY_COURSE_PRIMARY = UniqueKeys0.KEY_COURSE_PRIMARY;
     public static final UniqueKey<GradeRecord> KEY_GRADE_PRIMARY = UniqueKeys0.KEY_GRADE_PRIMARY;
@@ -94,8 +98,10 @@ public class Keys {
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final ForeignKey<AccountLinkRecord, UserRecord> ACCOUNT_LINK_IBFK_1 = ForeignKeys0.ACCOUNT_LINK_IBFK_1;
-    public static final ForeignKey<AccountLinkRecord, StudentRecord> ACCOUNT_LINK_IBFK_2 = ForeignKeys0.ACCOUNT_LINK_IBFK_2;
+    public static final ForeignKey<AccountLinkStudentRecord, UserRecord> ACCOUNT_LINK_STUDENT_IBFK_1 = ForeignKeys0.ACCOUNT_LINK_STUDENT_IBFK_1;
+    public static final ForeignKey<AccountLinkStudentRecord, StudentRecord> ACCOUNT_LINK_STUDENT_IBFK_2 = ForeignKeys0.ACCOUNT_LINK_STUDENT_IBFK_2;
+    public static final ForeignKey<AccountLinkTeacherRecord, UserRecord> ACCOUNT_LINK_TEACHER_IBFK_1 = ForeignKeys0.ACCOUNT_LINK_TEACHER_IBFK_1;
+    public static final ForeignKey<AccountLinkTeacherRecord, TeacherRecord> ACCOUNT_LINK_TEACHER_IBFK_2 = ForeignKeys0.ACCOUNT_LINK_TEACHER_IBFK_2;
     public static final ForeignKey<AssignmentRecord, CourseRecord> ASSIGNMENT_IBFK_1 = ForeignKeys0.ASSIGNMENT_IBFK_1;
     public static final ForeignKey<CourseRecord, TeacherRecord> COURSE_IBFK_1 = ForeignKeys0.COURSE_IBFK_1;
     public static final ForeignKey<GradeRecord, StudentRecord> GRADE_IBFK_1 = ForeignKeys0.GRADE_IBFK_1;
@@ -113,7 +119,8 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class Identities0 extends AbstractKeys {
-        public static Identity<AccountLinkRecord, Integer> IDENTITY_ACCOUNT_LINK = createIdentity(AccountLink.ACCOUNT_LINK, AccountLink.ACCOUNT_LINK.ID);
+        public static Identity<AccountLinkStudentRecord, Integer> IDENTITY_ACCOUNT_LINK_STUDENT = createIdentity(AccountLinkStudent.ACCOUNT_LINK_STUDENT, AccountLinkStudent.ACCOUNT_LINK_STUDENT.ID);
+        public static Identity<AccountLinkTeacherRecord, Integer> IDENTITY_ACCOUNT_LINK_TEACHER = createIdentity(AccountLinkTeacher.ACCOUNT_LINK_TEACHER, AccountLinkTeacher.ACCOUNT_LINK_TEACHER.ID);
         public static Identity<AssignmentRecord, Integer> IDENTITY_ASSIGNMENT = createIdentity(Assignment.ASSIGNMENT, Assignment.ASSIGNMENT.ID);
         public static Identity<CourseRecord, Integer> IDENTITY_COURSE = createIdentity(Course.COURSE, Course.COURSE.ID);
         public static Identity<GradeRecord, Integer> IDENTITY_GRADE = createIdentity(Grade.GRADE, Grade.GRADE.ID);
@@ -129,7 +136,8 @@ public class Keys {
     }
 
     private static class UniqueKeys0 extends AbstractKeys {
-        public static final UniqueKey<AccountLinkRecord> KEY_ACCOUNT_LINK_PRIMARY = createUniqueKey(AccountLink.ACCOUNT_LINK, "KEY_account_link_PRIMARY", AccountLink.ACCOUNT_LINK.ID);
+        public static final UniqueKey<AccountLinkStudentRecord> KEY_ACCOUNT_LINK_STUDENT_PRIMARY = createUniqueKey(AccountLinkStudent.ACCOUNT_LINK_STUDENT, "KEY_account_link_student_PRIMARY", AccountLinkStudent.ACCOUNT_LINK_STUDENT.ID);
+        public static final UniqueKey<AccountLinkTeacherRecord> KEY_ACCOUNT_LINK_TEACHER_PRIMARY = createUniqueKey(AccountLinkTeacher.ACCOUNT_LINK_TEACHER, "KEY_account_link_teacher_PRIMARY", AccountLinkTeacher.ACCOUNT_LINK_TEACHER.ID);
         public static final UniqueKey<AssignmentRecord> KEY_ASSIGNMENT_PRIMARY = createUniqueKey(Assignment.ASSIGNMENT, "KEY_assignment_PRIMARY", Assignment.ASSIGNMENT.ID);
         public static final UniqueKey<CourseRecord> KEY_COURSE_PRIMARY = createUniqueKey(Course.COURSE, "KEY_course_PRIMARY", Course.COURSE.ID);
         public static final UniqueKey<GradeRecord> KEY_GRADE_PRIMARY = createUniqueKey(Grade.GRADE, "KEY_grade_PRIMARY", Grade.GRADE.ID);
@@ -146,8 +154,10 @@ public class Keys {
     }
 
     private static class ForeignKeys0 extends AbstractKeys {
-        public static final ForeignKey<AccountLinkRecord, UserRecord> ACCOUNT_LINK_IBFK_1 = createForeignKey(com.csc680.orbit.database.Keys.KEY_USER_PRIMARY, AccountLink.ACCOUNT_LINK, "account_link_ibfk_1", AccountLink.ACCOUNT_LINK.USER_ID);
-        public static final ForeignKey<AccountLinkRecord, StudentRecord> ACCOUNT_LINK_IBFK_2 = createForeignKey(com.csc680.orbit.database.Keys.KEY_STUDENT_PRIMARY, AccountLink.ACCOUNT_LINK, "account_link_ibfk_2", AccountLink.ACCOUNT_LINK.STUDENT_ID);
+        public static final ForeignKey<AccountLinkStudentRecord, UserRecord> ACCOUNT_LINK_STUDENT_IBFK_1 = createForeignKey(com.csc680.orbit.database.Keys.KEY_USER_PRIMARY, AccountLinkStudent.ACCOUNT_LINK_STUDENT, "account_link_student_ibfk_1", AccountLinkStudent.ACCOUNT_LINK_STUDENT.USER_ID);
+        public static final ForeignKey<AccountLinkStudentRecord, StudentRecord> ACCOUNT_LINK_STUDENT_IBFK_2 = createForeignKey(com.csc680.orbit.database.Keys.KEY_STUDENT_PRIMARY, AccountLinkStudent.ACCOUNT_LINK_STUDENT, "account_link_student_ibfk_2", AccountLinkStudent.ACCOUNT_LINK_STUDENT.STUDENT_ID);
+        public static final ForeignKey<AccountLinkTeacherRecord, UserRecord> ACCOUNT_LINK_TEACHER_IBFK_1 = createForeignKey(com.csc680.orbit.database.Keys.KEY_USER_PRIMARY, AccountLinkTeacher.ACCOUNT_LINK_TEACHER, "account_link_teacher_ibfk_1", AccountLinkTeacher.ACCOUNT_LINK_TEACHER.USER_ID);
+        public static final ForeignKey<AccountLinkTeacherRecord, TeacherRecord> ACCOUNT_LINK_TEACHER_IBFK_2 = createForeignKey(com.csc680.orbit.database.Keys.KEY_TEACHER_PRIMARY, AccountLinkTeacher.ACCOUNT_LINK_TEACHER, "account_link_teacher_ibfk_2", AccountLinkTeacher.ACCOUNT_LINK_TEACHER.TEACHER_ID);
         public static final ForeignKey<AssignmentRecord, CourseRecord> ASSIGNMENT_IBFK_1 = createForeignKey(com.csc680.orbit.database.Keys.KEY_COURSE_PRIMARY, Assignment.ASSIGNMENT, "assignment_ibfk_1", Assignment.ASSIGNMENT.COURSE_ID);
         public static final ForeignKey<CourseRecord, TeacherRecord> COURSE_IBFK_1 = createForeignKey(com.csc680.orbit.database.Keys.KEY_TEACHER_PRIMARY, Course.COURSE, "course_ibfk_1", Course.COURSE.TEACHER_ID);
         public static final ForeignKey<GradeRecord, StudentRecord> GRADE_IBFK_1 = createForeignKey(com.csc680.orbit.database.Keys.KEY_STUDENT_PRIMARY, Grade.GRADE, "grade_ibfk_1", Grade.GRADE.STUDENT_ID);
