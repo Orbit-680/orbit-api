@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import com.csc680.orbit.model.AccountLinkStudent;
 import com.csc680.orbit.model.Student;
 import com.csc680.orbit.model.StudentDTO;
+import com.csc680.orbit.model.User;
 import com.csc680.orbit.model.AccountLinkStudentDTO;
 import com.csc680.orbit.service.StudentService;
 
@@ -88,6 +89,18 @@ public class StudentController
     	AccountLinkStudent accountLink = studentService.linkStudent(accountLinkDto);
         //LOGGER.info("Here is the student we found: " + foundStudent);
         return accountLink;
+    }
+    
+    @RequestMapping(value = "/find-linked/{uid}", method = RequestMethod.GET)
+    public List<Student> findLinked(@PathVariable("uid") String UID)
+    {	
+    	LOGGER.info("Hit the get-student end point.");
+    	LOGGER.info("user - " + UID);
+    	User user = new User();
+    	user.setUid(UID);
+    	List<Student> students = studentService.findLinkedStudents(user);
+        //LOGGER.info("Here is the student we found: " + students);
+        return students;
     }
     
 }

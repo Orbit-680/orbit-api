@@ -15,6 +15,7 @@ import com.csc680.orbit.model.AccountLinkStudent;
 import com.csc680.orbit.model.AccountLinkStudentDTO;
 import com.csc680.orbit.model.Student;
 import com.csc680.orbit.model.StudentDTO;
+import com.csc680.orbit.model.User;
 import com.csc680.orbit.repository.StudentRepository;
 import com.csc680.orbit.service.StudentService;
 
@@ -63,5 +64,11 @@ public class StudentServiceImpl implements StudentService
         	throw new NotFoundException("Could create an account link.");
         }
         return accountLink;
+    }
+    
+    public List <Student> findLinkedStudents(User user)
+    {
+    	List<Student> students = (List<Student>) studentRepository.findLinkedStudents(user.getUid());
+    	return students;
     }
 }

@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Vector;
 import java.util.logging.Logger;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
@@ -428,6 +429,111 @@ public class StudentRepositoryImpl implements StudentRepository
         
         
                 
+    }
+    
+    /**
+     * findUser - finds a user with the matching UID.  Used to find primary key ID of user using the UID
+     * @param UID
+     */
+    public int findUser(String UID)
+    {
+    	int userID = 0;
+    	//find user ID
+        List<User> searchUsers = new ArrayList<User>();
+        searchUsers = this.dslContext.select(USER.ID, 
+        									USER.ROLE_ID, 
+        									USER.EMAIL,
+        									USER.UID,
+        									USER.LAST_LOGIN, 
+        									USER.INVALID_ATTEMPTS, 
+        									USER.ACTIVE)
+                             .from(USER)
+                             .where(USER.UID.eq(UID))
+                             .fetch()
+                             .map(new UserRecordMapper());
+        
+        
+        if(!searchUsers.isEmpty())
+        {
+        	userID = searchUsers.get(0).getUserID();
+        }
+        
+        return userID;
+    }
+    
+    
+    /**
+     * findLinkedStudents - Find all students with records linked to a user account with UID
+     * @param UID
+     */
+    public List<Student> findLinkedStudents(String UID)
+    {
+    	//find user ID
+        int userID = this.findUser(UID);
+        
+        //check link table and find any student IDs linked to user ID
+        List<AccountLinkStudent> linkRecords = new ArrayList<AccountLinkStudent>();
+        linkRecords = this.dslContext.select(ACCOUNT_LINK_STUDENT.DATE_LINKED, 
+				        		ACCOUNT_LINK_STUDENT.ACTIVE,
+				        		ACCOUNT_LINK_STUDENT.USER_ID, 
+				        		ACCOUNT_LINK_STUDENT.STUDENT_ID)
+                             .from(ACCOUNT_LINK_STUDENT)
+                             .where(ACCOUNT_LINK_STUDENT.USER_ID.eq(userID))
+                             .fetch()
+                             .map(new AccountLinkRecordMapper());
+        
+        
+        //add linked student id to List to be used in select to find Student Records
+        Vector linkedIDs = new Vector();
+        if(linkRecords != null && !linkRecords.isEmpty())
+        {
+        	for(int i = 0; i < linkRecords.size(); i++)
+        	{
+        		linkedIDs.add( ((AccountLinkStudent)linkRecords.get(i)).getStudent_id() );
+        	}
+        }
+        
+        //find students with linked student IDs
+        List<Student> students = new ArrayList<Student>();
+        students = this.dslContext.select(STUDENT.FIRST_NAME,
+                                     STUDENT.LAST_NAME,
+                                     STUDENT.ID,
+                                     STUDENT.DATE_OF_BIRTH,
+                                     STUDENT.SSN,
+                                     STUDENT.ADDRESS_1,
+                                     STUDENT.ADDRESS_2,
+                                     STUDENT.CITY,
+                                     STUDENT.STATE,
+                                     STUDENT.ZIP_CODE,
+                                     STUDENT.GRADE,
+                                     STUDENT.MOTHER_FIRST_NAME,
+                                     STUDENT.MOTHER_LAST_NAME,
+                                     STUDENT.MOTHER_SSN,
+                                     STUDENT.MOTHER_ADDRESS_1,
+                                     STUDENT.MOTHER_ADDRESS_2,
+                                     STUDENT.MOTHER_CITY, 
+                                     STUDENT.MOTHER_STATE,
+                                     STUDENT.MOTHER_ZIP_CODE,
+                                     STUDENT.MOTHER_HOME_PHONE,
+                                     STUDENT.MOTHER_CELL_PHONE,
+                                     STUDENT.MOTHER_EMAIL,
+                                     STUDENT.FATHER_FIRST_NAME,
+                                     STUDENT.FATHER_LAST_NAME,
+                                     STUDENT.FATHER_SSN,
+                                     STUDENT.FATHER_ADDRESS_1,
+                                     STUDENT.FATHER_ADDRESS_2,
+                                     STUDENT.FATHER_CITY, 
+                                     STUDENT.FATHER_STATE,
+                                     STUDENT.FATHER_ZIP_CODE,
+                                     STUDENT.FATHER_HOME_PHONE,
+                                     STUDENT.FATHER_CELL_PHONE,
+                                     STUDENT.FATHER_EMAIL)
+                             .from(STUDENT)
+                             .where(STUDENT.ID.in(linkedIDs))
+                             .fetch()
+                             .map(new StudentRecordMapper());
+        return students;
+    	
     }
     
     
