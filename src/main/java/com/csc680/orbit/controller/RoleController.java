@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.csc680.orbit.model.Role;
 import com.csc680.orbit.service.RoleService;
+import com.csc680.orbit.utils.Constants;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
 
@@ -38,5 +39,41 @@ public class RoleController {
 		LOGGER.info("GetRole controller hit, ID passed: " + id);
 		Role role = roleService.getRoleByID(id);
 		return role;
+	}
+	
+	@RequestMapping(value = "/has-teacher-role/{uid}", method = RequestMethod.GET)
+	public Boolean hasTeacherRole(@PathVariable("uid") String uid) {
+		Role role = roleService.getUsersRoleByUid(uid);
+		if(role.getName().equalsIgnoreCase(Constants.ROLE_TEACHER)){
+			return true;
+		}
+		return false;
+	}
+	
+	@RequestMapping(value = "/has-student-role/{uid}", method = RequestMethod.GET)
+	public Boolean hasStudentRole(@PathVariable("uid") String uid) {
+		Role role = roleService.getUsersRoleByUid(uid);
+		if(role.getName().equalsIgnoreCase(Constants.ROLE_STUDENT)){
+			return true;
+		}
+		return false;
+	}
+	
+	@RequestMapping(value = "/has-admin-role/{uid}", method = RequestMethod.GET)
+	public Boolean hasAdminRole(@PathVariable("uid") String uid) {
+		Role role = roleService.getUsersRoleByUid(uid);
+		if(role.getName().equalsIgnoreCase(Constants.ROLE_ADMIN)){
+			return true;
+		}
+		return false;
+	}
+	
+	@RequestMapping(value = "/has-parent-role/{uid}", method = RequestMethod.GET)
+	public Boolean hasParentRole(@PathVariable("uid") String uid) {
+		Role role = roleService.getUsersRoleByUid(uid);
+		if(role.getName().equalsIgnoreCase(Constants.ROLE_PARENT)){
+			return true;
+		}
+		return false;
 	}
 }

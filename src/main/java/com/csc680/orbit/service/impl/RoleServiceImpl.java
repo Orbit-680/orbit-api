@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.csc680.orbit.model.Role;
 import com.csc680.orbit.repository.RoleRepository;
 import com.csc680.orbit.service.RoleService;
+import com.csc680.orbit.service.UserService;
+import com.csc680.orbit.model.User;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
 
@@ -19,6 +21,9 @@ public class RoleServiceImpl implements RoleService{
 
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private UserService userService;
 
 	@Override
 	public List<Role> getAllRoles() {
@@ -32,5 +37,14 @@ public class RoleServiceImpl implements RoleService{
 		Role role = roleRepository.findOne(id);
 		return role;
 	}
+	
+	@Override
+	public Role getUsersRoleByUid(String uid) {
+		User currentUser = userService.getUserByUID(uid);
+		Role role = currentUser.getRole();
+		return role;
+	}
+	
+	
 
 }
