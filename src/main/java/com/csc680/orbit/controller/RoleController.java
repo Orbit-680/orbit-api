@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.csc680.orbit.model.CheckRoleDTO;
 import com.csc680.orbit.model.Role;
 import com.csc680.orbit.service.RoleService;
 import com.csc680.orbit.utils.Constants;
@@ -42,42 +43,46 @@ public class RoleController {
 	}
 	
 	@RequestMapping(value = "/has-teacher-role/{uid}", method = RequestMethod.GET)
-	public Boolean hasTeacherRole(@PathVariable("uid") String uid) {
+	public CheckRoleDTO hasTeacherRole(@PathVariable("uid") String uid) {
 		LOGGER.info("Checking to see if user has teacher role.");
 		Role role = roleService.getUsersRoleByUid(uid);
+		CheckRoleDTO checkRole = new CheckRoleDTO(role.getName());
 		if(role.getName().equalsIgnoreCase(Constants.ROLE_TEACHER)){
-			return true;
+			checkRole.setHasRole(true);
 		}
-		return false;
+		return checkRole;
 	}
 	
 	@RequestMapping(value = "/has-student-role/{uid}", method = RequestMethod.GET)
-	public Boolean hasStudentRole(@PathVariable("uid") String uid) {
+	public CheckRoleDTO hasStudentRole(@PathVariable("uid") String uid) {
 		LOGGER.info("Checking to see if user has student role.");
 		Role role = roleService.getUsersRoleByUid(uid);
+		CheckRoleDTO checkRole = new CheckRoleDTO(role.getName());
 		if(role.getName().equalsIgnoreCase(Constants.ROLE_STUDENT)){
-			return true;
+			checkRole.setHasRole(true);
 		}
-		return false;
+		return checkRole;
 	}
 	
 	@RequestMapping(value = "/has-admin-role/{uid}", method = RequestMethod.GET)
-	public Boolean hasAdminRole(@PathVariable("uid") String uid) {
+	public CheckRoleDTO hasAdminRole(@PathVariable("uid") String uid) {
 		LOGGER.info("Checking to see if user has admin role.");
 		Role role = roleService.getUsersRoleByUid(uid);
+		CheckRoleDTO checkRole = new CheckRoleDTO(role.getName());
 		if(role.getName().equalsIgnoreCase(Constants.ROLE_ADMIN)){
-			return true;
+			checkRole.setHasRole(true);
 		}
-		return false;
+		return checkRole;
 	}
 	
 	@RequestMapping(value = "/has-parent-role/{uid}", method = RequestMethod.GET)
-	public Boolean hasParentRole(@PathVariable("uid") String uid) {
+	public CheckRoleDTO hasParentRole(@PathVariable("uid") String uid) {
 		LOGGER.info("Checking to see if user has parent role.");
 		Role role = roleService.getUsersRoleByUid(uid);
+		CheckRoleDTO checkRole = new CheckRoleDTO(role.getName());
 		if(role.getName().equalsIgnoreCase(Constants.ROLE_PARENT)){
-			return true;
+			checkRole.setHasRole(true);
 		}
-		return false;
+		return checkRole;
 	}
 }
