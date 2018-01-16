@@ -1,6 +1,7 @@
 package com.csc680.orbit.repository.impl;
 
 import static com.csc680.orbit.database.Tables.USER;
+import static com.csc680.orbit.database.Tables.ROLE;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -67,8 +68,10 @@ public class UserRepositoryImpl implements UserRepository {
 						USER.LAST_LOGIN,
 						USER.INVALID_ATTEMPTS,
 						USER.ACTIVE,
-						USER.ROLE_ID)
+						USER.ROLE_ID,
+						ROLE.NAME)
 					.from(USER)
+					.join(ROLE).on(USER.ROLE_ID.eq(ROLE.ID))
 					.where(USER.UID.eq(id))
 					.fetch()
 					.map(new UserRecordMapper());

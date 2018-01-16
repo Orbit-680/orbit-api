@@ -43,6 +43,7 @@ public class RoleController {
 	
 	@RequestMapping(value = "/has-teacher-role/{uid}", method = RequestMethod.GET)
 	public Boolean hasTeacherRole(@PathVariable("uid") String uid) {
+		LOGGER.info("Checking to see if user has teacher role.");
 		Role role = roleService.getUsersRoleByUid(uid);
 		if(role.getName().equalsIgnoreCase(Constants.ROLE_TEACHER)){
 			return true;
@@ -52,6 +53,7 @@ public class RoleController {
 	
 	@RequestMapping(value = "/has-student-role/{uid}", method = RequestMethod.GET)
 	public Boolean hasStudentRole(@PathVariable("uid") String uid) {
+		LOGGER.info("Checking to see if user has student role.");
 		Role role = roleService.getUsersRoleByUid(uid);
 		if(role.getName().equalsIgnoreCase(Constants.ROLE_STUDENT)){
 			return true;
@@ -61,6 +63,7 @@ public class RoleController {
 	
 	@RequestMapping(value = "/has-admin-role/{uid}", method = RequestMethod.GET)
 	public Boolean hasAdminRole(@PathVariable("uid") String uid) {
+		LOGGER.info("Checking to see if user has admin role.");
 		Role role = roleService.getUsersRoleByUid(uid);
 		if(role.getName().equalsIgnoreCase(Constants.ROLE_ADMIN)){
 			return true;
@@ -70,6 +73,7 @@ public class RoleController {
 	
 	@RequestMapping(value = "/has-parent-role/{uid}", method = RequestMethod.GET)
 	public Boolean hasParentRole(@PathVariable("uid") String uid) {
+		LOGGER.info("Checking to see if user has parent role.");
 		Role role = roleService.getUsersRoleByUid(uid);
 		if(role.getName().equalsIgnoreCase(Constants.ROLE_PARENT)){
 			return true;

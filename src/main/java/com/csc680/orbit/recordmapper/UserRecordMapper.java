@@ -1,6 +1,7 @@
 package com.csc680.orbit.recordmapper;
 
 import static com.csc680.orbit.database.tables.User.USER;
+import static com.csc680.orbit.database.tables.Role.ROLE;
 
 import org.jooq.Record;
 import org.jooq.RecordMapper;
@@ -12,7 +13,7 @@ public class UserRecordMapper implements RecordMapper<Record, User>{
 
 	@Override
 	public User map(Record r) {
-		Role role = new Role(r.getValue(USER.ROLE_ID));
+		Role role = new Role(r.getValue(USER.ROLE_ID), r.getValue(ROLE.NAME));
 		return new User(
 				r.getValue(USER.ID),
 				r.getValue(USER.EMAIL),
