@@ -25,7 +25,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	public String enrollStudentsInCourse(EnrollStudentInClassDTO enrollList) {
 		LOGGER.info("enrollStudentsInCourse service hit");
 		scheduleRepository.enrollStudentsInCourse(enrollList);
-		return "";
+		return "SUCCESS";
 	}
 
 	@Override

@@ -3,21 +3,27 @@ package com.csc680.orbit.repository.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.jooq.DSLContext;
 
 import static com.csc680.orbit.database.Tables.ACCOUNT_LINK_STUDENT;
+import static com.csc680.orbit.database.Tables.STUDENT;
 import static com.csc680.orbit.database.tables.Schedule.SCHEDULE;
 
 import com.csc680.orbit.model.EnrollStudentInClassDTO;
 import com.csc680.orbit.model.Schedule;
 import com.csc680.orbit.recordmapper.AccountLinkRecordMapper;
 import com.csc680.orbit.recordmapper.ScheduleRecordMapper;
+import com.csc680.orbit.recordmapper.StudentRecordMapper;
 import com.csc680.orbit.repository.ScheduleRepository;
 import com.csc680.orbit.service.DBConnection;
+
+import javassist.bytecode.stackmap.TypeData.ClassName;
 
 public class ScheduleRepositoryImpl implements ScheduleRepository{
 	
 	DSLContext dslContext = DBConnection.getConnection();
+	private static final Logger LOGGER = Logger.getLogger(ClassName.class.getName());
 
 	@Override
 	public <S extends Schedule> S save(S entity) {
@@ -120,26 +126,35 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
 
 	@Override
 	public String enrollStudentsInCourse(EnrollStudentInClassDTO enrollList) {
-		/*Schedule account = this.dslContext.insertInto(ACCOUNT_LINK_STUDENT, 
-    			ACCOUNT_LINK_STUDENT.DATE_LINKED,
-    			ACCOUNT_LINK_STUDENT.ACTIVE,
-    			ACCOUNT_LINK_STUDENT.USER_ID,
-    			ACCOUNT_LINK_STUDENT.STUDENT_ID)
-        		.values(now,
-        				"Y",
-        				userID,
-        				accountLinkDto.getStudentID())
-                .returning(ACCOUNT_LINK_STUDENT.ID)
-                .fetchOne()
-                .map(new AccountLinkRecordMapper());
-
-		if(account != null){
-		account.setMessage("Successfully linked student to user account!");
-		LOGGER.info("Successfully linked student to user account: " + account.toString());
-		}*/
+		
+		for(int i = 0; i < enrollList.getEnrollRecords().size(); i++)
+		{
+			//try
+			//{
+				this.dslContext.insertInto(SCHEDULE, 
+						SCHEDULE.YEAR,
+						SCHEDULE.STUDENT_ID,
+						SCHEDULE.COURSE_ID)
+		        		.values("1718",
+		        				enrollList.getEnrollRecords().get(i).getStudentID(),
+		        				enrollList.getEnrollRecords().get(i).getCourseID())
+		                .returning(SCHEDULE.ID)
+		                .fetchOne();
+		                //.map(new ScheduleRecordMapper());
+		
+				//if(schedule != null)
+				//{
+					LOGGER.info("Successfully enrolled student: " + enrollList.getEnrollRecords().get(i).getStudentID() + " to course: " + enrollList.getEnrollRecords().get(i).getCourseID());
+				//}
+			/*}
+			catch(Exception e) {
+				LOGGER.info("Error mapping student: " + enrollList.getEnrollRecords().get(i).getStudentID() + " to course:" + enrollList.getEnrollRecords().get(i).getCourseID());
+				LOGGER.info(e.getMessage() + e.getStackTrace().toString());
+			}*/
+		}
 		
 		
-		return "";
+		return "SUCCESS";
 	}
 
 }

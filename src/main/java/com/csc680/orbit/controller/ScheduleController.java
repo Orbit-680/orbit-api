@@ -43,13 +43,14 @@ public class ScheduleController {
 		return schedules;
 	}
 	
-	@RequestMapping(value = "/enroll-student-course", method = RequestMethod.POST)
-    public String enrollStudentsInCourse(@RequestBody EnrollStudentInClassDTO enrollList)
+	@RequestMapping(value = "/enroll-students-course", method = RequestMethod.POST)
+    public Schedule enrollStudentsInCourse(@RequestBody EnrollStudentInClassDTO enrollList)
     {	
     	LOGGER.info("Hit the link-student end point.");
         
     	String enroll = scheduleService.enrollStudentsInCourse(enrollList);
-        return "THIS IS A TEST";
+    	LOGGER.info("RETURNING SUCCESS.");
+        return new Schedule();
     }
 
 }

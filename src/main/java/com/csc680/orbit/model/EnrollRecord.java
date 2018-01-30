@@ -4,6 +4,11 @@ public class EnrollRecord
 {
     private int studentID;
     private int courseID;
+    
+    public EnrollRecord()
+    {
+    	
+    }
 
     public EnrollRecord(int studentID, int courseID)
     {
