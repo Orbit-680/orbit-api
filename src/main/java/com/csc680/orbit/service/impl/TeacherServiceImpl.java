@@ -41,5 +41,10 @@ public class TeacherServiceImpl implements TeacherService{
         Teacher newTeacher = teacherRepository.save(teacher);
         return newTeacher;
     }
+    
+    public Teacher getTeacherByUid(String uid){
+    	Teacher teacher = teacherRepository.findOneByUid(uid);
+		return teacher;
+    }
 
 }

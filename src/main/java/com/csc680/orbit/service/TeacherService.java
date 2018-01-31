@@ -8,5 +8,6 @@ public interface TeacherService {
 	List <Teacher> getAllTeachers();   
 	Teacher getTeacherById(String Id);
     Teacher addTeacher(Teacher teacher);
+    Teacher getTeacherByUid(String uid);
 
 }

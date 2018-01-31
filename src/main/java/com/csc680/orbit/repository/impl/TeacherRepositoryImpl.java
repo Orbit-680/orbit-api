@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import static com.csc680.orbit.database.Tables.TEACHER;
+import static com.csc680.orbit.database.Tables.USER;
 
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
@@ -168,6 +169,28 @@ public class TeacherRepositoryImpl implements TeacherRepository{
 	public List<Teacher> findById(String Id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public Teacher findOneByUid(String uid){
+		List<Teacher> teachers = new ArrayList<Teacher>();
+		teachers = this.dslContext.select(
+							TEACHER.ID,
+							TEACHER.FIRST_NAME,
+                             TEACHER.LAST_NAME,
+                             TEACHER.DATE_OF_BIRTH,
+                             TEACHER.SSN,
+                             TEACHER.ADDRESS_1,
+                             TEACHER.ADDRESS_2,
+                             TEACHER.CITY,
+                             TEACHER.STATE,
+                             TEACHER.ZIP_CODE)
+					.from(TEACHER)
+					.join(USER).on(USER.ID.equals(TEACHER.ID))
+					.where(USER.UID.eq(uid))
+					.fetch()
+					.map(new TeacherRecordMapper());
+		return teachers.get(0);
+		
 	}
 
 }

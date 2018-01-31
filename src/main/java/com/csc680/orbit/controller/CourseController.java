@@ -43,4 +43,11 @@ public class CourseController {
 		return course;
 	}
 	
+	@RequestMapping(value = "/get-courses-by-teacher-id/{id}", method = RequestMethod.GET)
+	public Course getCoursesByTeacherId(@PathVariable("id") Long id) {
+		LOGGER.info("GetCourse ontroller hit, ID passed: " + id);
+		//Course course = courseService.getCourseByID(id);
+		return null;
+	}
+	
 }

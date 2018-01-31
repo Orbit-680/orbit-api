@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface TeacherRepository extends CrudRepository<Teacher, String>{
 	List<Teacher> findById(String Id);
+	Teacher findOneByUid(String uid);
 }

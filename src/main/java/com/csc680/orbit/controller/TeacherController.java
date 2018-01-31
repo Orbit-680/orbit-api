@@ -52,4 +52,12 @@ public class TeacherController {
         Teacher newTeacher = teacherService.addTeacher(teacher);
         return newTeacher;
     }
+    
+    @RequestMapping(value = "/get-teacher-id/{uid}", method = RequestMethod.GET)
+    public Teacher getTeacherId(@PathVariable("uid") String uid)
+    {
+        LOGGER.info("Getting teacher by UID and returning Id. ");
+        Teacher teacher = teacherService.getTeacherByUid(uid);
+        return teacher;
+    }
 }
