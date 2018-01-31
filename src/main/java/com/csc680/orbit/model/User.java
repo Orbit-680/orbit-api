@@ -76,7 +76,7 @@ public class User {
 		this.invalidAttempts = invalidAttempts;
 	}
 
-	public String isActive() {
+	public String getActive() {
 		return active;
 	}
 

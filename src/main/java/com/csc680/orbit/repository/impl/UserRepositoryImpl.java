@@ -29,7 +29,7 @@ public class UserRepositoryImpl implements UserRepository {
 		String uid = user.getUid();
 		Date lastLogin = user.getLastLogin();
 		int invalidAttempts = user.getInvalidAttempts();
-		String active = user.isActive();
+		String active = user.getActive();
 		Role role = user.getRole();
 		
 		User inUser = this.dslContext.insertInto(USER,
