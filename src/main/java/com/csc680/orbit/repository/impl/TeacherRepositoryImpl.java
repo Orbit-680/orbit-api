@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import static com.csc680.orbit.database.Tables.TEACHER;
 import static com.csc680.orbit.database.Tables.USER;
+import static com.csc680.orbit.database.Tables.ACCOUNT_LINK_TEACHER;
 
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
@@ -185,7 +186,8 @@ public class TeacherRepositoryImpl implements TeacherRepository{
                              TEACHER.STATE,
                              TEACHER.ZIP_CODE)
 					.from(TEACHER)
-					.join(USER).on(USER.ID.eq(TEACHER.ID))
+					.join(ACCOUNT_LINK_TEACHER).on(ACCOUNT_LINK_TEACHER.TEACHER_ID.eq(TEACHER.ID))
+					.join(USER).on(ACCOUNT_LINK_TEACHER.USER_ID.eq(USER.ID))
 					.where(USER.UID.eq(uid))
 					.fetch()
 					.map(new TeacherRecordMapper());
