@@ -185,7 +185,7 @@ public class TeacherRepositoryImpl implements TeacherRepository{
                              TEACHER.STATE,
                              TEACHER.ZIP_CODE)
 					.from(TEACHER)
-					.join(USER).on(USER.ID.equals(TEACHER.ID))
+					.join(USER).on(USER.ID.eq(TEACHER.ID))
 					.where(USER.UID.eq(uid))
 					.fetch()
 					.map(new TeacherRecordMapper());
