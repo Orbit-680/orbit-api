@@ -7,4 +7,5 @@ import com.csc680.orbit.model.Course;
 public interface CourseService {
 	List<Course> getAllCourses();
 	Course getCourseByID(String id);
+	List<Course> getCoursesByTeacherId(String teacherId);
 }

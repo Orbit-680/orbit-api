@@ -1,6 +1,7 @@
 package com.csc680.orbit.repository.impl;
 
 import static com.csc680.orbit.database.Tables.COURSE;
+import static com.csc680.orbit.database.Tables.TEACHER;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,6 +118,21 @@ public class CourseRepositoryImpl implements CourseRepository {
 	public void deleteAll() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public List<Course> findAllAssociatedWithTeacher(String teacherId) {
+		List<Course> courses = new ArrayList<Course>();
+		int tId = Integer.parseInt(teacherId);
+		courses = this.dslContext.select(
+				COURSE.ID,
+				COURSE.NAME,
+				COURSE.YEAR,
+				COURSE.TEACHER_ID)
+				.from(COURSE)
+				.where(COURSE.TEACHER_ID.eq(tId))
+				.fetch()
+				.map(new CourseRecordMapper());
+		return courses;
 	}
 
 }

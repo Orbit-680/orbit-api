@@ -31,8 +31,7 @@ public class CourseController {
 	@RequestMapping(value = "/all-courses", method = RequestMethod.GET)
 	public List<Course> allCourses() {
 		LOGGER.info("AllCourses controller hit");
-		List<Course> courses = courseService.getAllCourses();
-				
+		List<Course> courses = courseService.getAllCourses();		
 		return courses;
 	}
 
@@ -43,11 +42,12 @@ public class CourseController {
 		return course;
 	}
 	
-	@RequestMapping(value = "/get-courses-by-teacher-id/{id}", method = RequestMethod.GET)
-	public Course getCoursesByTeacherId(@PathVariable("id") Long id) {
-		LOGGER.info("GetCourse ontroller hit, ID passed: " + id);
-		//Course course = courseService.getCourseByID(id);
-		return null;
+	@RequestMapping(value = "/get-courses-by-teacher-id/{teacherId}", method = RequestMethod.GET)
+	public List<Course> getCoursesByTeacherId(@PathVariable("teacherId") String teacherId) {
+		LOGGER.info("GetCourses where teacher id is " + teacherId);
+		List<Course> courses = courseService.getCoursesByTeacherId(teacherId);
+		LOGGER.info("Here are the courses found " + courses);
+		return courses;
 	}
 	
 }

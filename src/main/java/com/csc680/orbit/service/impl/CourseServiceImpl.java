@@ -32,5 +32,11 @@ public class CourseServiceImpl implements CourseService {
 		Course course = courseRepository.findOne(id);
 		return course;
 	}
+	
+	@Override
+	public List<Course> getCoursesByTeacherId(String teacherId) {
+		List<Course> courses = courseRepository.findAllAssociatedWithTeacher(teacherId);
+		return courses;
+	}
 
 }

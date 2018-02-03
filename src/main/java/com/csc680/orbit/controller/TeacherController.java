@@ -56,9 +56,9 @@ public class TeacherController {
     @RequestMapping(value = "/get-teacher-by-uid/{uid}", method = RequestMethod.GET)
     public Teacher getTeacherByUid(@PathVariable("uid") String uid)
     {
-        LOGGER.info("Getting teacher by UID and returning Teacher.");
+        LOGGER.info("Getting teacher by UID and returning Teacher. ");
         Teacher teacher = teacherService.getTeacherByUid(uid);
-        LOGGER.info("Found a Teacher." + teacher.toString());
+        LOGGER.info("Found a Teacher. " + teacher.toString());
         return teacher;
     }
 }
