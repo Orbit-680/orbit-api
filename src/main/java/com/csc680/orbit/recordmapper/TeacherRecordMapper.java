@@ -2,9 +2,10 @@ package com.csc680.orbit.recordmapper;
 
 import static com.csc680.orbit.database.tables.Teacher.TEACHER;
 
-import com.csc680.orbit.model.Teacher;
 import org.jooq.Record;
 import org.jooq.RecordMapper;
+
+import com.csc680.orbit.model.pojo.Teacher;
 
 public class TeacherRecordMapper implements RecordMapper<Record,Teacher>{
 	public Teacher map(Record r) 

@@ -6,8 +6,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.csc680.orbit.model.EnrollStudentInClassDTO;
-import com.csc680.orbit.model.Schedule;
+import com.csc680.orbit.model.dto.EnrollStudentInClassDTO;
+import com.csc680.orbit.model.pojo.Schedule;
 import com.csc680.orbit.repository.ScheduleRepository;
 import com.csc680.orbit.service.ScheduleService;
 

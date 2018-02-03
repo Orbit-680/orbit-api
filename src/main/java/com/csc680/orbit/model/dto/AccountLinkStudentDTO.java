@@ -1,4 +1,4 @@
-package com.csc680.orbit.model;
+package com.csc680.orbit.model.dto;
 
 public class AccountLinkStudentDTO 
 {

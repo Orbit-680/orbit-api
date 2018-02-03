@@ -4,7 +4,8 @@ import static com.csc680.orbit.database.tables.School.SCHOOL;
 
 import org.jooq.Record;
 import org.jooq.RecordMapper;
-import com.csc680.orbit.model.School;
+
+import com.csc680.orbit.model.pojo.School;
 
 public class SchoolRecordMapper implements RecordMapper<Record, School> {
 

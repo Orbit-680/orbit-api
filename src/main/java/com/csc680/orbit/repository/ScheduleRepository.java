@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.csc680.orbit.model.EnrollStudentInClassDTO;
-import com.csc680.orbit.model.Schedule;
+import com.csc680.orbit.model.dto.EnrollStudentInClassDTO;
+import com.csc680.orbit.model.pojo.Schedule;
 
 public interface ScheduleRepository extends CrudRepository<Schedule, String>
 {

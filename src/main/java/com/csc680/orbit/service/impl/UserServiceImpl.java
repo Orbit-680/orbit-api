@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.csc680.orbit.model.User;
+import com.csc680.orbit.model.pojo.User;
 import com.csc680.orbit.repository.UserRepository;
 import com.csc680.orbit.service.UserService;
 

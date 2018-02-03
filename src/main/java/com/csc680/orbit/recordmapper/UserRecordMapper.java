@@ -6,8 +6,8 @@ import static com.csc680.orbit.database.tables.Role.ROLE;
 import org.jooq.Record;
 import org.jooq.RecordMapper;
 
-import com.csc680.orbit.model.Role;
-import com.csc680.orbit.model.User;
+import com.csc680.orbit.model.pojo.Role;
+import com.csc680.orbit.model.pojo.User;
 
 public class UserRecordMapper implements RecordMapper<Record, User>{
 

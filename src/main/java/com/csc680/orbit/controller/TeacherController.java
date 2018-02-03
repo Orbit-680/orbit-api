@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.logging.Logger;
 
-import com.csc680.orbit.model.Teacher;
+import com.csc680.orbit.model.pojo.Teacher;
 import com.csc680.orbit.service.TeacherService;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;

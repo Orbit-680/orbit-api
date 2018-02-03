@@ -11,7 +11,7 @@ import static com.csc680.orbit.database.Tables.ACCOUNT_LINK_TEACHER;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
-import com.csc680.orbit.model.Teacher;
+import com.csc680.orbit.model.pojo.Teacher;
 import com.csc680.orbit.recordmapper.TeacherRecordMapper;
 import com.csc680.orbit.service.DBConnection;
 

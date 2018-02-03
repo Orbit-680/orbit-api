@@ -5,8 +5,8 @@ import static com.csc680.orbit.database.tables.Course.COURSE;
 import org.jooq.Record;
 import org.jooq.RecordMapper;
 
-import com.csc680.orbit.model.Teacher;
-import com.csc680.orbit.model.Course;
+import com.csc680.orbit.model.pojo.Course;
+import com.csc680.orbit.model.pojo.Teacher;
 
 public class CourseRecordMapper implements RecordMapper<Record, Course> {
 

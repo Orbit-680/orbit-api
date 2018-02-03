@@ -1,9 +1,11 @@
 package com.csc680.orbit.recordmapper;
 
 import static com.csc680.orbit.database.tables.Student.STUDENT;
-import com.csc680.orbit.model.Student;
+
 import org.jooq.Record;
 import org.jooq.RecordMapper;
+
+import com.csc680.orbit.model.pojo.Student;
 
 public class StudentRecordMapper implements RecordMapper<Record,Student>
 {

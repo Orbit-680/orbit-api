@@ -10,8 +10,8 @@ import static com.csc680.orbit.database.Tables.ACCOUNT_LINK_STUDENT;
 import static com.csc680.orbit.database.Tables.STUDENT;
 import static com.csc680.orbit.database.tables.Schedule.SCHEDULE;
 
-import com.csc680.orbit.model.EnrollStudentInClassDTO;
-import com.csc680.orbit.model.Schedule;
+import com.csc680.orbit.model.dto.EnrollStudentInClassDTO;
+import com.csc680.orbit.model.pojo.Schedule;
 import com.csc680.orbit.recordmapper.AccountLinkRecordMapper;
 import com.csc680.orbit.recordmapper.ScheduleRecordMapper;
 import com.csc680.orbit.recordmapper.StudentRecordMapper;

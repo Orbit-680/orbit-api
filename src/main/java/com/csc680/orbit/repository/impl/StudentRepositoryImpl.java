@@ -17,11 +17,11 @@ import static com.csc680.orbit.database.Tables.USER;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
-import com.csc680.orbit.model.AccountLinkStudent;
-import com.csc680.orbit.model.AccountLinkStudentDTO;
-import com.csc680.orbit.model.Student;
-import com.csc680.orbit.model.StudentDTO;
-import com.csc680.orbit.model.User;
+import com.csc680.orbit.model.dto.AccountLinkStudentDTO;
+import com.csc680.orbit.model.dto.StudentDTO;
+import com.csc680.orbit.model.pojo.AccountLinkStudent;
+import com.csc680.orbit.model.pojo.Student;
+import com.csc680.orbit.model.pojo.User;
 import com.csc680.orbit.recordmapper.AccountLinkRecordMapper;
 import com.csc680.orbit.recordmapper.StudentRecordMapper;
 import com.csc680.orbit.recordmapper.UserRecordMapper;

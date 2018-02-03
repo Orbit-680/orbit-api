@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.csc680.orbit.model.School;
+import com.csc680.orbit.model.pojo.School;
 import com.csc680.orbit.service.SchoolService;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;

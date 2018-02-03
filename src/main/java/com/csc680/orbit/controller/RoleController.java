@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.csc680.orbit.model.CheckRoleDTO;
-import com.csc680.orbit.model.Role;
+import com.csc680.orbit.model.dto.CheckRoleDTO;
+import com.csc680.orbit.model.pojo.Role;
 import com.csc680.orbit.service.RoleService;
 import com.csc680.orbit.utils.Constants;
 

@@ -7,7 +7,7 @@ import org.jooq.DSLContext;
 
 import static com.csc680.orbit.database.tables.Role.ROLE;
 
-import com.csc680.orbit.model.Role;
+import com.csc680.orbit.model.pojo.Role;
 import com.csc680.orbit.recordmapper.RoleRecordMapper;
 import com.csc680.orbit.repository.RoleRepository;
 import com.csc680.orbit.service.DBConnection;

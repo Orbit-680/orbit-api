@@ -11,11 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.csc680.orbit.exceptions.NotFoundException;
-import com.csc680.orbit.model.AccountLinkStudent;
-import com.csc680.orbit.model.AccountLinkStudentDTO;
-import com.csc680.orbit.model.Student;
-import com.csc680.orbit.model.StudentDTO;
-import com.csc680.orbit.model.User;
+import com.csc680.orbit.model.dto.AccountLinkStudentDTO;
+import com.csc680.orbit.model.dto.StudentDTO;
+import com.csc680.orbit.model.pojo.AccountLinkStudent;
+import com.csc680.orbit.model.pojo.Student;
+import com.csc680.orbit.model.pojo.User;
 import com.csc680.orbit.repository.StudentRepository;
 import com.csc680.orbit.service.StudentService;
 

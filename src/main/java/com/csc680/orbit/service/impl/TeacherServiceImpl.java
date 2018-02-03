@@ -10,7 +10,7 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.csc680.orbit.model.Teacher;
+import com.csc680.orbit.model.pojo.Teacher;
 import com.csc680.orbit.repository.TeacherRepository;
 import com.csc680.orbit.service.TeacherService;
 

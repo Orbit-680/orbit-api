@@ -8,7 +8,7 @@ import static com.csc680.orbit.database.Tables.SCHOOL;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
-import com.csc680.orbit.model.School;
+import com.csc680.orbit.model.pojo.School;
 import com.csc680.orbit.recordmapper.SchoolRecordMapper;
 import com.csc680.orbit.repository.SchoolRepository;
 import com.csc680.orbit.service.DBConnection;

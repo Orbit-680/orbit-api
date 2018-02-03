@@ -5,7 +5,7 @@ import static com.csc680.orbit.database.tables.Schedule.SCHEDULE;
 import org.jooq.Record;
 import org.jooq.RecordMapper;
 
-import com.csc680.orbit.model.Schedule;
+import com.csc680.orbit.model.pojo.Schedule;
 
 public class ScheduleRecordMapper implements RecordMapper<Record, Schedule>{
 	public Schedule map(Record r) {

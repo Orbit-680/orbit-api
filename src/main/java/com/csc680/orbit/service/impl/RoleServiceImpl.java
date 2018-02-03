@@ -6,11 +6,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.csc680.orbit.model.Role;
+import com.csc680.orbit.model.pojo.Role;
+import com.csc680.orbit.model.pojo.User;
 import com.csc680.orbit.repository.RoleRepository;
 import com.csc680.orbit.service.RoleService;
 import com.csc680.orbit.service.UserService;
-import com.csc680.orbit.model.User;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
 

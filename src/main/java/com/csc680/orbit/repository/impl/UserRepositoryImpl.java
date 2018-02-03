@@ -10,8 +10,8 @@ import java.util.logging.Logger;
 
 import org.jooq.DSLContext;
 
-import com.csc680.orbit.model.Role;
-import com.csc680.orbit.model.User;
+import com.csc680.orbit.model.pojo.Role;
+import com.csc680.orbit.model.pojo.User;
 import com.csc680.orbit.recordmapper.UserRecordMapper;
 import com.csc680.orbit.repository.UserRepository;
 import com.csc680.orbit.service.DBConnection;

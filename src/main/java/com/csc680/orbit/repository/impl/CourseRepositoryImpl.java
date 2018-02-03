@@ -9,7 +9,7 @@ import java.util.List;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
-import com.csc680.orbit.model.Course;
+import com.csc680.orbit.model.pojo.Course;
 import com.csc680.orbit.recordmapper.CourseRecordMapper;
 import com.csc680.orbit.repository.CourseRepository;
 import com.csc680.orbit.service.DBConnection;

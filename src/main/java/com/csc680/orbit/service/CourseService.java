@@ -2,7 +2,7 @@ package com.csc680.orbit.service;
 
 import java.util.List;
 
-import com.csc680.orbit.model.Course;
+import com.csc680.orbit.model.pojo.Course;
 
 public interface CourseService {
 	List<Course> getAllCourses();

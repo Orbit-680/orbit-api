@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.csc680.orbit.model.AccountLinkStudent;
-import com.csc680.orbit.model.AccountLinkStudentDTO;
-import com.csc680.orbit.model.Course;
-import com.csc680.orbit.model.EnrollStudentInClassDTO;
-import com.csc680.orbit.model.Schedule;
+import com.csc680.orbit.model.dto.AccountLinkStudentDTO;
+import com.csc680.orbit.model.dto.EnrollStudentInClassDTO;
+import com.csc680.orbit.model.pojo.AccountLinkStudent;
+import com.csc680.orbit.model.pojo.Course;
+import com.csc680.orbit.model.pojo.Schedule;
 import com.csc680.orbit.repository.CourseRepository;
 import com.csc680.orbit.repository.ScheduleRepository;
 import com.csc680.orbit.service.CourseService;

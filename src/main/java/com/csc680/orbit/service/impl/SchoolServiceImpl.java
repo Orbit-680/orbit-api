@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.csc680.orbit.model.School;
+import com.csc680.orbit.model.pojo.School;
 import com.csc680.orbit.repository.SchoolRepository;
 import com.csc680.orbit.service.SchoolService;
 
