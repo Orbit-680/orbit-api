@@ -2,6 +2,7 @@ package com.csc680.orbit.repository.impl;
 
 import static com.csc680.orbit.database.Tables.COURSE;
 import static com.csc680.orbit.database.Tables.TEACHER;
+import static com.csc680.orbit.database.tables.Schedule.SCHEDULE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,5 +135,13 @@ public class CourseRepositoryImpl implements CourseRepository {
 				.map(new CourseRecordMapper());
 		return courses;
 	}
-
+	public void assignCoursesToTeacher(List<Course> courseList, String teacherId){
+		int tId = Integer.parseInt(teacherId);
+		for(Course c : courseList){
+			this.dslContext.update(COURSE)
+				.set(COURSE.TEACHER_ID, tId)
+			    .where(COURSE.ID.eq(c.getCourseId()));
+		}
+		
+	}
 }

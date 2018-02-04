@@ -8,4 +8,5 @@ public interface CourseService {
 	List<Course> getAllCourses();
 	Course getCourseByID(String id);
 	List<Course> getCoursesByTeacherId(String teacherId);
+	void assignCoursesToTeacher(List<Course> courseList, String teacherId);
 }

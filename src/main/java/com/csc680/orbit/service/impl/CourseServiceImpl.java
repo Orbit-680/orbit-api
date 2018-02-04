@@ -38,5 +38,9 @@ public class CourseServiceImpl implements CourseService {
 		List<Course> courses = courseRepository.findAllAssociatedWithTeacher(teacherId);
 		return courses;
 	}
+	
+	public void assignCoursesToTeacher(List<Course> courseList, String teacherId){
+		courseRepository.assignCoursesToTeacher(courseList, teacherId);
+	}
 
 }
