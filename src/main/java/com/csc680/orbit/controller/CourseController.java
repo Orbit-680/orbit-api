@@ -60,7 +60,7 @@ public class CourseController {
 		String status = courseService.assignCoursesToTeacher(assignDTO.getCourseList(), teacherId);
 		if(status.equals(Constants.SUCCESS_STATUS)){
 			LOGGER.info("Successfully assigned teacher to courses. ");
-			return new ResponseStatusDTO(true);	
+			return new ResponseStatusDTO(true);
 		}
 		throw new BadRequestException("Something went wrong trying to assign teacher to a course.");
 	}
