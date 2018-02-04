@@ -6,4 +6,9 @@ public class Constants {
 	public static final String ROLE_ADMIN = "Admin";
 	public static final String ROLE_PARENT = "Parent";
 	
+	public static final String SUCCESS_STATUS = "SUCCESS";
+	public static final String FAIL_STATUS = "FAIL";
+	public static final String SUCCESS_STATUS_DISPLAY = "Success";
+	public static final String FAIL_STATUS_DISPLAY = "Failure";
+	
 }

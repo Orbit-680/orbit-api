@@ -39,8 +39,8 @@ public class CourseServiceImpl implements CourseService {
 		return courses;
 	}
 	
-	public void assignCoursesToTeacher(List<Course> courseList, String teacherId){
-		courseRepository.assignCoursesToTeacher(courseList, teacherId);
+	public String assignCoursesToTeacher(List<Course> courseList, String teacherId){
+		return courseRepository.assignCoursesToTeacher(courseList, teacherId);
 	}
 
 }

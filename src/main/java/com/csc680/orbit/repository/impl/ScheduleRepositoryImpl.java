@@ -17,6 +17,7 @@ import com.csc680.orbit.recordmapper.ScheduleRecordMapper;
 import com.csc680.orbit.recordmapper.StudentRecordMapper;
 import com.csc680.orbit.repository.ScheduleRepository;
 import com.csc680.orbit.service.DBConnection;
+import com.csc680.orbit.utils.Constants;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
 
@@ -154,7 +155,7 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
 		}
 		
 		
-		return "SUCCESS";
+		return Constants.SUCCESS_STATUS;
 	}
 
 }

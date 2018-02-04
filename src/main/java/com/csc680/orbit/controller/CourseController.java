@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.csc680.orbit.exceptions.BadRequestException;
 import com.csc680.orbit.model.dto.AssignCourseToTeacherDTO;
+import com.csc680.orbit.model.dto.ResponseStatusDTO;
 import com.csc680.orbit.model.pojo.Course;
 import com.csc680.orbit.service.CourseService;
+import com.csc680.orbit.utils.Constants;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
 
@@ -52,10 +55,14 @@ public class CourseController {
 	}
 	
 	@RequestMapping(value = "/assign-course-to-teacher/{teacherId}", method = RequestMethod.POST)
-	public void assignCoursesToTeacher(@RequestBody AssignCourseToTeacherDTO assignDTO, @PathVariable("teacherId") String teacherId) {
+	public ResponseStatusDTO assignCoursesToTeacher(@RequestBody AssignCourseToTeacherDTO assignDTO, @PathVariable("teacherId") String teacherId) {
 		LOGGER.info("Assigning courses to teacher endpoint hit. ");
-		courseService.assignCoursesToTeacher(assignDTO.getCourseList(), teacherId);
-		LOGGER.info("Successfully assigned courses to teacher.");
+		String status = courseService.assignCoursesToTeacher(assignDTO.getCourseList(), teacherId);
+		if(status.equals(Constants.SUCCESS_STATUS)){
+			LOGGER.info("Successfully assigned teacher to courses. ");
+			return new ResponseStatusDTO(true);	
+		}
+		throw new BadRequestException("Something went wrong trying to assign teacher to a course.");
 	}
 	
 }

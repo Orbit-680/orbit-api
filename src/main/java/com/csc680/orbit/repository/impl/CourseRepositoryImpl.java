@@ -14,6 +14,7 @@ import com.csc680.orbit.model.pojo.Course;
 import com.csc680.orbit.recordmapper.CourseRecordMapper;
 import com.csc680.orbit.repository.CourseRepository;
 import com.csc680.orbit.service.DBConnection;
+import com.csc680.orbit.utils.Constants;
 
 @Repository ("courseRepository")
 public class CourseRepositoryImpl implements CourseRepository {
@@ -135,13 +136,14 @@ public class CourseRepositoryImpl implements CourseRepository {
 				.map(new CourseRecordMapper());
 		return courses;
 	}
-	public void assignCoursesToTeacher(List<Course> courseList, String teacherId){
+	public String assignCoursesToTeacher(List<Course> courseList, String teacherId){
 		int tId = Integer.parseInt(teacherId);
 		for(Course c : courseList){
 			this.dslContext.update(COURSE)
 				.set(COURSE.TEACHER_ID, tId)
 			    .where(COURSE.ID.eq(c.getCourseId()));
 		}
+		return Constants.SUCCESS_STATUS;
 		
 	}
 }

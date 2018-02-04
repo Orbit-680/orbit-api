@@ -24,7 +24,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
 
-
+import com.csc680.orbit.exceptions.BadRequestException;
 import com.csc680.orbit.exceptions.NotFoundException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
@@ -42,6 +42,12 @@ public class GlobalRestExceptionHandler extends DefaultHandlerExceptionResolver 
     @ExceptionHandler(value = { NotFoundException.class })
     protected ResponseEntity<Object> handleNotFound(RuntimeException e, WebRequest request) {
         HttpStatus status = HttpStatus.NOT_FOUND;
+        return handleException(e, status, request);
+    }
+    
+    @ExceptionHandler(value = { BadRequestException.class })
+    protected ResponseEntity<Object> handleRadRequest(RuntimeException e, WebRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
         return handleException(e, status, request);
     }
 

@@ -9,7 +9,7 @@ import com.csc680.orbit.model.pojo.Course;
 public interface CourseRepository extends CrudRepository<Course, String> {
 
 	List<Course> findAllAssociatedWithTeacher(String teacherId);
-	void assignCoursesToTeacher(List<Course> courseList, String teacherId);
+	String assignCoursesToTeacher(List<Course> courseList, String teacherId);
 
 }
 
