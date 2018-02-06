@@ -11,7 +11,14 @@ import com.csc680.orbit.model.pojo.Teacher;
 public class CourseRecordMapper implements RecordMapper<Record, Course> {
 
 	public Course map(Record r) {
-		Teacher teacher = new Teacher(r.getValue(COURSE.TEACHER_ID));
+		Teacher teacher = new Teacher();
+		
+		try{
+			teacher = new Teacher(r.getValue(COURSE.TEACHER_ID));
+		}catch (NullPointerException e){
+	
+		}
+		
 		return new Course(
 				r.getValue(COURSE.ID),
 				r.getValue(COURSE.NAME),
