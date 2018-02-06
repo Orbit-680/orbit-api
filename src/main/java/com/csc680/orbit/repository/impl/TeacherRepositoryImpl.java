@@ -1,6 +1,8 @@
 package com.csc680.orbit.repository.impl;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -193,6 +195,19 @@ public class TeacherRepositoryImpl implements TeacherRepository{
 					.map(new TeacherRecordMapper());
 		return teachers.get(0);
 		
+	}
+	
+	public void linkTeacher(Teacher newTeacher, int userId){
+		
+		Calendar currenttime = Calendar.getInstance();
+        Date now = new Date((currenttime.getTime()).getTime());
+        
+		this.dslContext.insertInto(ACCOUNT_LINK_TEACHER,
+				ACCOUNT_LINK_TEACHER.TEACHER_ID,
+				ACCOUNT_LINK_TEACHER.USER_ID,
+				ACCOUNT_LINK_TEACHER.DATE_LINKED,
+				ACCOUNT_LINK_TEACHER.ACTIVE)
+		.values(newTeacher.getTeacherID(), userId, now, "Y");
 	}
 
 }

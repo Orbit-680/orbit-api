@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.csc680.orbit.model.dto.AccountDetailsDTO;
 import com.csc680.orbit.model.pojo.User;
 import com.csc680.orbit.service.UserService;
 
@@ -28,9 +30,9 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/add-user", method = RequestMethod.POST)
-	public User addTeacher(@RequestBody User user, HttpServletResponse response) {
+	public User addTeacher(@RequestBody AccountDetailsDTO accountDetails, HttpServletResponse response) {
 		LOGGER.info("Add user controller hit.");
-		User newUser = userService.addUser(user);
+		User newUser = userService.addUser(accountDetails);
 		return newUser;
 	}
 	
