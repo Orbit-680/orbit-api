@@ -8,7 +8,9 @@ public class AccountDetailsDTO {
     private String lastName;
     // TODO add more details about users address
     // and other info we want to store
-
+    public AccountDetailsDTO(){
+    	
+    }
     public AccountDetailsDTO(User user, String fName, String lName){
         this.user = user;
         this.firstName = fName;

@@ -13,6 +13,7 @@ import static com.csc680.orbit.database.Tables.ACCOUNT_LINK_TEACHER;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
+import com.csc680.orbit.database.tables.records.AccountLinkTeacherRecord;
 import com.csc680.orbit.model.pojo.Teacher;
 import com.csc680.orbit.recordmapper.TeacherRecordMapper;
 import com.csc680.orbit.service.DBConnection;
@@ -143,7 +144,7 @@ public class TeacherRepositoryImpl implements TeacherRepository{
             String city = arg0.getCity();
             String state = arg0.getState();
             String zip = arg0.getZip();
-                        
+             
             Teacher iTeacher = this.dslContext.insertInto(TEACHER,
                                      TEACHER.FIRST_NAME,
                                      TEACHER.LAST_NAME,
@@ -202,12 +203,18 @@ public class TeacherRepositoryImpl implements TeacherRepository{
 		Calendar currenttime = Calendar.getInstance();
         Date now = new Date((currenttime.getTime()).getTime());
         
-		this.dslContext.insertInto(ACCOUNT_LINK_TEACHER,
+		AccountLinkTeacherRecord record = this.dslContext.insertInto(ACCOUNT_LINK_TEACHER,
 				ACCOUNT_LINK_TEACHER.TEACHER_ID,
 				ACCOUNT_LINK_TEACHER.USER_ID,
 				ACCOUNT_LINK_TEACHER.DATE_LINKED,
 				ACCOUNT_LINK_TEACHER.ACTIVE)
-		.values(newTeacher.getTeacherID(), userId, now, "Y");
+		.values(newTeacher.getTeacherID(), userId, now, "Y")
+		.returning(ACCOUNT_LINK_TEACHER.TEACHER_ID)
+        .fetchOne();
+		
+		if(record != null){
+			LOGGER.info("Successfully linked user and teacher.");
+		}
 	}
 
 }
