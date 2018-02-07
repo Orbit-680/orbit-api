@@ -26,6 +26,10 @@ public class Course {
 		this.year = year;
 		this.teacher = teacher;
 	}
+	
+	public Course(int courseId) {
+		this.courseId = courseId;
+	}
 
 	public int getCourseId() {
 		return courseId;

@@ -1,0 +1,140 @@
+package com.csc680.orbit.repository.impl;
+
+import static com.csc680.orbit.database.Tables.ASSIGNMENT;
+import static com.csc680.orbit.database.Tables.COURSE;
+import static com.csc680.orbit.database.tables.Schedule.SCHEDULE;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
+
+import org.jooq.DSLContext;
+
+import com.csc680.orbit.model.dto.AccountDetailsDTO;
+import com.csc680.orbit.model.dto.EnrollStudentInClassDTO;
+import com.csc680.orbit.model.pojo.Assignment;
+import com.csc680.orbit.model.pojo.Course;
+import com.csc680.orbit.model.pojo.Schedule;
+import com.csc680.orbit.model.pojo.User;
+import com.csc680.orbit.recordmapper.AssignmentRecordMapper;
+import com.csc680.orbit.recordmapper.CourseRecordMapper;
+import com.csc680.orbit.recordmapper.ScheduleRecordMapper;
+import com.csc680.orbit.recordmapper.UserRecordMapper;
+import com.csc680.orbit.repository.AssignmentRepository;
+import com.csc680.orbit.repository.UserRepository;
+import com.csc680.orbit.service.DBConnection;
+import com.csc680.orbit.utils.Constants;
+
+import javassist.bytecode.stackmap.TypeData.ClassName;
+
+public class AssignmentRepositoryImpl implements AssignmentRepository {
+
+	DSLContext dslContext = DBConnection.getConnection();
+	private static final Logger LOGGER = Logger.getLogger(ClassName.class.getName());
+
+	@Override
+	public <S extends Assignment> S save(S entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <S extends Assignment> Iterable<S> save(Iterable<S> entities) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public Assignment findOne(String id) {
+		List<Assignment> assignments= new ArrayList<Assignment>();
+		int assignmentID = Integer.parseInt(id);
+		assignments = this.dslContext.select(
+				ASSIGNMENT.ID,
+				ASSIGNMENT.YEAR, 
+				ASSIGNMENT.NAME, 
+				ASSIGNMENT.TYPE,
+				ASSIGNMENT.MAX_POINTS,
+				ASSIGNMENT.COURSE_ID)
+				.from(ASSIGNMENT)
+				.where(ASSIGNMENT.ID.eq(assignmentID))
+				.fetch()
+				.map(new AssignmentRecordMapper());
+		
+		return assignments.get(0);
+	}
+
+	@Override
+	public boolean exists(String id) {
+		boolean assignmentExists = false;
+		int assignmentID = Integer.parseInt(id);
+		int assignmentCount = this.dslContext
+				.selectCount()
+				.from(ASSIGNMENT)
+				.where(ASSIGNMENT.ID.eq(assignmentID))
+				.fetchOne(0, int.class);
+		
+		if (assignmentCount != 0) {
+			assignmentExists = true;
+		}
+		
+		return assignmentExists;
+	}
+
+	@Override
+	public Iterable<Assignment> findAll() {
+		List<Assignment> assignments = new ArrayList<Assignment>();
+		assignments = this.dslContext.select(
+				ASSIGNMENT.ID,
+				ASSIGNMENT.YEAR, 
+				ASSIGNMENT.NAME, 
+				ASSIGNMENT.TYPE,
+				ASSIGNMENT.MAX_POINTS,
+				ASSIGNMENT.COURSE_ID)
+				.from(ASSIGNMENT)
+				.fetch()
+				.map(new AssignmentRecordMapper());
+		return assignments;
+	}
+
+	@Override
+	public Iterable<Assignment> findAll(Iterable<String> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long count() {
+		int scheduleCount = 0;
+		scheduleCount = this.dslContext
+				.selectCount()
+				.from(SCHEDULE)
+				.fetchOne(0, int.class);
+		return scheduleCount;
+	}
+
+	@Override
+	public void delete(String id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Assignment entity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Iterable<? extends Assignment> entities) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
