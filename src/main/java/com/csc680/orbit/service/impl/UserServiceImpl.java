@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.csc680.orbit.model.dto.AccountDetailsDTO;
+import com.csc680.orbit.model.dto.AccountLinkStudentDTO;
 import com.csc680.orbit.model.pojo.User;
 import com.csc680.orbit.model.pojo.Student;
 import com.csc680.orbit.model.pojo.Teacher;
@@ -54,8 +55,11 @@ public class UserServiceImpl implements UserService{
 					student.setStudentFirstName(accountDetails.getFirstName());
 					student.setStudentLastName(accountDetails.getLastName());
 					student.setDateOfBirth(accountDetails.getDob());
-					//Student newStudent = studentRepository.save(student);
-					LOGGER.info("Wanting to carete this newStudent: " + student.toString());
+					Student newStudent = studentRepository.save(student);
+					AccountLinkStudentDTO accountLinkStudent = new AccountLinkStudentDTO();
+					accountLinkStudent.setStudentID(newStudent.getStudentId());
+					accountLinkStudent.setUserID(Integer.toString(u.getUserID()));
+					studentRepository.linkStudent(accountLinkStudent);
 				}
 			}
 		}
