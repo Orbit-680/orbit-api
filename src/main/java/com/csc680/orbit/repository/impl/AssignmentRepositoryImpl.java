@@ -2,6 +2,7 @@ package com.csc680.orbit.repository.impl;
 
 import static com.csc680.orbit.database.Tables.ASSIGNMENT;
 import static com.csc680.orbit.database.Tables.COURSE;
+import static com.csc680.orbit.database.Tables.STUDENT;
 import static com.csc680.orbit.database.tables.Schedule.SCHEDULE;
 
 import java.sql.Date;
@@ -16,10 +17,12 @@ import com.csc680.orbit.model.dto.EnrollStudentInClassDTO;
 import com.csc680.orbit.model.pojo.Assignment;
 import com.csc680.orbit.model.pojo.Course;
 import com.csc680.orbit.model.pojo.Schedule;
+import com.csc680.orbit.model.pojo.Student;
 import com.csc680.orbit.model.pojo.User;
 import com.csc680.orbit.recordmapper.AssignmentRecordMapper;
 import com.csc680.orbit.recordmapper.CourseRecordMapper;
 import com.csc680.orbit.recordmapper.ScheduleRecordMapper;
+import com.csc680.orbit.recordmapper.StudentRecordMapper;
 import com.csc680.orbit.recordmapper.UserRecordMapper;
 import com.csc680.orbit.repository.AssignmentRepository;
 import com.csc680.orbit.repository.UserRepository;
@@ -36,7 +39,35 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
 	@Override
 	public <S extends Assignment> S save(S entity) {
 		// TODO Auto-generated method stub
-		return null;
+		String assignmentName = entity.getName();
+		String maxPoints = entity.getMaxPoints();
+		String year = "1718";
+		String type = "Homework";
+		int courseID = entity.getCourse().getCourseId();
+		
+		Assignment iAssignment = this.dslContext.insertInto(ASSIGNMENT, 
+							ASSIGNMENT.YEAR,
+							ASSIGNMENT.NAME,
+							ASSIGNMENT.TYPE,
+							ASSIGNMENT.MAX_POINTS,
+							ASSIGNMENT.COURSE_ID)
+			        .values(year, 
+			        		assignmentName,
+			        		type, 
+			        		maxPoints,
+			        		courseID)
+			        .returning(ASSIGNMENT.ID, ASSIGNMENT.COURSE_ID)
+			        .fetchOne()
+			        .map(new AssignmentRecordMapper());
+
+		Assignment newAssignment = (Assignment)entity;
+		newAssignment.setAssignmentId(iAssignment.getAssignmentId());
+		newAssignment.setCourse(new Course(courseID));
+		
+		if(newAssignment != null){
+		LOGGER.info("Successfully added Assignment to DB: " + newAssignment.toString());
+		}
+		return (S)newAssignment;
 	}
 
 	@Override
@@ -92,6 +123,23 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
 				ASSIGNMENT.MAX_POINTS,
 				ASSIGNMENT.COURSE_ID)
 				.from(ASSIGNMENT)
+				.fetch()
+				.map(new AssignmentRecordMapper());
+		return assignments;
+	}
+	
+	@Override
+	public List<Assignment> findAllAssignmentsForCourse(int courseID) {
+		List<Assignment> assignments = new ArrayList<Assignment>();
+		assignments = this.dslContext.select(
+				ASSIGNMENT.ID,
+				ASSIGNMENT.YEAR, 
+				ASSIGNMENT.NAME, 
+				ASSIGNMENT.TYPE,
+				ASSIGNMENT.MAX_POINTS,
+				ASSIGNMENT.COURSE_ID)
+				.from(ASSIGNMENT)
+				.where(ASSIGNMENT.COURSE_ID.eq(courseID))
 				.fetch()
 				.map(new AssignmentRecordMapper());
 		return assignments;

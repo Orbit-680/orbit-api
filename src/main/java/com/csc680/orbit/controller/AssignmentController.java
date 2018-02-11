@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.csc680.orbit.model.dto.AccountDetailsDTO;
+import com.csc680.orbit.model.dto.AccountLinkStudentDTO;
+import com.csc680.orbit.model.dto.CreateAssignmentDTO;
+import com.csc680.orbit.model.pojo.AccountLinkStudent;
 import com.csc680.orbit.model.pojo.Assignment;
 import com.csc680.orbit.model.pojo.User;
 import com.csc680.orbit.service.AssignmentService;
@@ -32,13 +35,13 @@ public class AssignmentController {
 	}
 
 	
-    /*@RequestMapping(value = "/get-user/{uid}", method = RequestMethod.GET)
-    public User getUser(@PathVariable("uid") String uid)
+    @RequestMapping(value = "/all-assignments-for-course/{courseID}", method = RequestMethod.GET)
+    public List<Assignment> getAllAssignmentsForCourse(@PathVariable("courseID") int courseID)
     {
-        LOGGER.info("getUser endpoint hit find uid " + uid);
-        User user = userService.getUserByUID(uid);
-        return user;
-    }*/
+        LOGGER.info("getAllAssignmentsForCourse endpoint hit find uid " + courseID);
+        List<Assignment> assignments = assignmentService.getAllAssignmentsForCourse(courseID);
+        return assignments;
+    }
     
     @RequestMapping(value = "/all-assignments", method = RequestMethod.GET)
     public List<Assignment> allAssignments()
@@ -46,5 +49,14 @@ public class AssignmentController {
         LOGGER.info("allAssignments endpoint hit");
         List<Assignment> assignments = assignmentService.getAllAssignments();
         return assignments;
+    }
+    
+    @RequestMapping(value = "/create-assignment", method = RequestMethod.POST)
+    public Assignment createAssignment(@RequestBody CreateAssignmentDTO createAssignmentDto)
+    {	
+    	LOGGER.info("Hit the create-assignment end point.");
+        
+    	Assignment assignment = assignmentService.createAssignment(createAssignmentDto);
+        return assignment;
     }
 }
