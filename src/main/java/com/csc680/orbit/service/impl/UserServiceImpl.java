@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.csc680.orbit.model.dto.AccountDetailsDTO;
+import com.csc680.orbit.model.dto.AccountLinkStudentDTO;
 import com.csc680.orbit.model.pojo.User;
+import com.csc680.orbit.model.pojo.Student;
 import com.csc680.orbit.model.pojo.Teacher;
+import com.csc680.orbit.repository.StudentRepository;
 import com.csc680.orbit.repository.TeacherRepository;
 import com.csc680.orbit.repository.UserRepository;
 import com.csc680.orbit.service.UserService;
@@ -27,6 +30,9 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private TeacherRepository teacherRepository;
 	
+	@Autowired
+	private StudentRepository studentRepository;
+	
 	@Override
 	public User addUser(AccountDetailsDTO accountDetails) {
 		LOGGER.info("Adding user service hit...");
@@ -40,8 +46,20 @@ public class UserServiceImpl implements UserService{
 					Teacher teacher = new Teacher();
 					teacher.setFirstName(accountDetails.getFirstName());
 					teacher.setLastName(accountDetails.getLastName());
+					teacher.setDateOfBirth(accountDetails.getDob());
 					Teacher newTeacher = teacherRepository.save(teacher);
 					teacherRepository.linkTeacher(newTeacher, u.getUserID());
+				}
+				case Constants.ROLE_STUDENT: {
+					Student student = new Student();
+					student.setStudentFirstName(accountDetails.getFirstName());
+					student.setStudentLastName(accountDetails.getLastName());
+					student.setDateOfBirth(accountDetails.getDob());
+					Student newStudent = studentRepository.save(student);
+					AccountLinkStudentDTO accountLinkStudent = new AccountLinkStudentDTO();
+					accountLinkStudent.setStudentID(newStudent.getStudentId());
+					accountLinkStudent.setUserID(Integer.toString(u.getUserID()));
+					studentRepository.linkStudent(accountLinkStudent);
 				}
 			}
 		}
