@@ -39,7 +39,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Teacher extends TableImpl<TeacherRecord> {
 
-    private static final long serialVersionUID = -1973089528;
+    private static final long serialVersionUID = 1490615049;
 
     /**
      * The reference instance of <code>orbit.teacher</code>
@@ -72,37 +72,37 @@ public class Teacher extends TableImpl<TeacherRecord> {
     /**
      * The column <code>orbit.teacher.Date_Of_Birth</code>.
      */
-    public final TableField<TeacherRecord, String> DATE_OF_BIRTH = createField("Date_Of_Birth", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
+    public final TableField<TeacherRecord, String> DATE_OF_BIRTH = createField("Date_Of_Birth", org.jooq.impl.SQLDataType.VARCHAR(45), this, "");
 
     /**
      * The column <code>orbit.teacher.SSN</code>.
      */
-    public final TableField<TeacherRecord, String> SSN = createField("SSN", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
+    public final TableField<TeacherRecord, String> SSN = createField("SSN", org.jooq.impl.SQLDataType.VARCHAR(45), this, "");
 
     /**
      * The column <code>orbit.teacher.Address_1</code>.
      */
-    public final TableField<TeacherRecord, String> ADDRESS_1 = createField("Address_1", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
+    public final TableField<TeacherRecord, String> ADDRESS_1 = createField("Address_1", org.jooq.impl.SQLDataType.VARCHAR(45), this, "");
 
     /**
      * The column <code>orbit.teacher.Address_2</code>.
      */
-    public final TableField<TeacherRecord, String> ADDRESS_2 = createField("Address_2", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
+    public final TableField<TeacherRecord, String> ADDRESS_2 = createField("Address_2", org.jooq.impl.SQLDataType.VARCHAR(45), this, "");
 
     /**
      * The column <code>orbit.teacher.City</code>.
      */
-    public final TableField<TeacherRecord, String> CITY = createField("City", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
+    public final TableField<TeacherRecord, String> CITY = createField("City", org.jooq.impl.SQLDataType.VARCHAR(45), this, "");
 
     /**
      * The column <code>orbit.teacher.State</code>.
      */
-    public final TableField<TeacherRecord, String> STATE = createField("State", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
+    public final TableField<TeacherRecord, String> STATE = createField("State", org.jooq.impl.SQLDataType.VARCHAR(45), this, "");
 
     /**
      * The column <code>orbit.teacher.Zip_Code</code>.
      */
-    public final TableField<TeacherRecord, String> ZIP_CODE = createField("Zip_Code", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
+    public final TableField<TeacherRecord, String> ZIP_CODE = createField("Zip_Code", org.jooq.impl.SQLDataType.VARCHAR(45), this, "");
 
     /**
      * Create a <code>orbit.teacher</code> table reference

@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Grade extends TableImpl<GradeRecord> {
 
-    private static final long serialVersionUID = -1039909778;
+    private static final long serialVersionUID = -1783065183;
 
     /**
      * The reference instance of <code>orbit.grade</code>
@@ -79,6 +79,11 @@ public class Grade extends TableImpl<GradeRecord> {
      * The column <code>orbit.grade.Course_ID</code>.
      */
     public final TableField<GradeRecord, Integer> COURSE_ID = createField("Course_ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>orbit.grade.Assignment_ID</code>.
+     */
+    public final TableField<GradeRecord, Integer> ASSIGNMENT_ID = createField("Assignment_ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * Create a <code>orbit.grade</code> table reference
@@ -122,7 +127,7 @@ public class Grade extends TableImpl<GradeRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.GRADE_COURSE_ID, Indexes.GRADE_PRIMARY, Indexes.GRADE_STUDENT_ID);
+        return Arrays.<Index>asList(Indexes.GRADE_ASSIGNMENT_ID, Indexes.GRADE_COURSE_ID, Indexes.GRADE_PRIMARY, Indexes.GRADE_STUDENT_ID);
     }
 
     /**
@@ -154,7 +159,7 @@ public class Grade extends TableImpl<GradeRecord> {
      */
     @Override
     public List<ForeignKey<GradeRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<GradeRecord, ?>>asList(Keys.GRADE_IBFK_1, Keys.GRADE_IBFK_2);
+        return Arrays.<ForeignKey<GradeRecord, ?>>asList(Keys.GRADE_IBFK_1, Keys.GRADE_IBFK_2, Keys.GRADE_IBFK_3);
     }
 
     /**

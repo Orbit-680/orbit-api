@@ -17,6 +17,7 @@ import com.csc680.orbit.database.tables.School;
 import com.csc680.orbit.database.tables.SchoolStudent;
 import com.csc680.orbit.database.tables.Student;
 import com.csc680.orbit.database.tables.Teacher;
+import com.csc680.orbit.database.tables.Tickets;
 import com.csc680.orbit.database.tables.User;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Orbit extends SchemaImpl {
 
-    private static final long serialVersionUID = -1045269433;
+    private static final long serialVersionUID = 382655754;
 
     /**
      * The reference instance of <code>orbit</code>
@@ -116,6 +117,11 @@ public class Orbit extends SchemaImpl {
     public final Teacher TEACHER = com.csc680.orbit.database.tables.Teacher.TEACHER;
 
     /**
+     * The table <code>orbit.tickets</code>.
+     */
+    public final Tickets TICKETS = com.csc680.orbit.database.tables.Tickets.TICKETS;
+
+    /**
      * The table <code>orbit.user</code>.
      */
     public final User USER = com.csc680.orbit.database.tables.User.USER;
@@ -158,6 +164,7 @@ public class Orbit extends SchemaImpl {
             SchoolStudent.SCHOOL_STUDENT,
             Student.STUDENT,
             Teacher.TEACHER,
+            Tickets.TICKETS,
             User.USER);
     }
 }
