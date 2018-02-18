@@ -21,10 +21,11 @@ public class Grade {
     @OneToOne
 	@JoinColumn(name = "Assignment_ID")
     private Assignment assignment;
+    private char updateType;
     
     public Grade() {}
 	
-	public Grade(int gradeId, String grade, String year, Student student, Course course, Assignment assignment)
+	public Grade(int gradeId, String grade, String year, Student student, Course course, Assignment assignment, char updateType)
 	{
 		this.gradeId = gradeId;
         this.grade = grade;
@@ -32,6 +33,7 @@ public class Grade {
         this.student = student;
         this.course = course;
         this.assignment = assignment;
+        this.updateType = updateType;
 	}
     
 	public int getGradeId() {
@@ -82,9 +84,17 @@ public class Grade {
 		this.assignment = assignment;
 	}
 
+	public char getUpdateType() {
+		return updateType;
+	}
+
+	public void setUpdateType(char updateType) {
+		this.updateType = updateType;
+	}
+
 	@Override
 	public String toString() {
-		return "Grade [gradeId=" + gradeId + ", grade=" + grade + ", year=" + year + ", student=" + student + ", course=" + course+ ", assignment=" + assignment + "]";
+		return "Grade [gradeId=" + gradeId + ", grade=" + grade + ", year=" + year + ", student=" + student + ", course=" + course + ", assignment=" + assignment + ", updateType=" + updateType + "]";
 	}
     
 

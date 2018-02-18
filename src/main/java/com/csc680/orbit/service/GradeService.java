@@ -10,6 +10,6 @@ import com.csc680.orbit.model.pojo.User;
 
 public interface GradeService {
 	List <Grade> getAllGrades();
-	List <Grade> getAllGradesForAssignment(int assignmentID);
+	List <Grade> getAllGradesForAssignment(int courseID, int assignmentID);
 	//Assignment createAssignment(CreateAssignmentDTO createAssignmentDTO);
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.csc680.orbit.model.dto.AccountDetailsDTO;
 import com.csc680.orbit.model.dto.AccountLinkStudentDTO;
 import com.csc680.orbit.model.dto.CreateAssignmentDTO;
+import com.csc680.orbit.model.dto.GetGradesForAssignmentDTO;
 import com.csc680.orbit.model.pojo.AccountLinkStudent;
 import com.csc680.orbit.model.pojo.Assignment;
 import com.csc680.orbit.model.pojo.Grade;
@@ -37,11 +38,11 @@ public class GradeController {
 	}
 
 	
-    @RequestMapping(value = "/all-grades-for-assignment/{assignmentID}", method = RequestMethod.GET)
-    public List<Grade> getAllGradesForAssignment(@PathVariable("assignmentID") int assignmentID)
+    @RequestMapping(value = "/all-grades-for-assignment/{courseID}/{assignmentID}", method = RequestMethod.GET)
+    public List<Grade> getAllGradesForAssignment(@PathVariable("courseID") int courseID, @PathVariable("assignmentID") int assignmentID)
     {
-        LOGGER.info("getAllGradesForAssignment endpoint hit find uid " + assignmentID);
-        List<Grade> grades = gradeService.getAllGradesForAssignment(assignmentID);
+        LOGGER.info("getAllGradesForAssignment endpoint hit find course " + courseID + " and assignment " + assignmentID);
+        List<Grade> grades = gradeService.getAllGradesForAssignment(courseID, assignmentID);
         return grades;
     }
     

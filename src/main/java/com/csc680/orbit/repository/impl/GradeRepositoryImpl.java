@@ -132,7 +132,12 @@ public class GradeRepositoryImpl implements GradeRepository {
 	}
 	
 	@Override
-	public List<Grade> findAllGradesForAssignment(int assignmentID) {
+	public List<Grade> findAllGradesForAssignment(int courseID, int assignmentID) {
+		/*select * from orbit.schedule
+		join orbit.student on schedule.Student_ID = student.ID
+		left join orbit.grade on student.ID = grade.ID and grade.Assignment_ID = 1
+		where schedule.Course_ID = 1*/
+		
 		List<Grade> grades = new ArrayList<Grade>();
 		grades = this.dslContext.select(
 				GRADE.ID,
@@ -141,11 +146,14 @@ public class GradeRepositoryImpl implements GradeRepository {
 				GRADE.STUDENT_ID,
 				GRADE.COURSE_ID,
 				GRADE.ASSIGNMENT_ID,
+				STUDENT.ID,
 				STUDENT.FIRST_NAME,
-				STUDENT.LAST_NAME)
-				.from(GRADE)
-				.join(STUDENT).on(STUDENT.ID.eq(GRADE.STUDENT_ID))
-				.where(GRADE.COURSE_ID.eq(assignmentID))
+				STUDENT.LAST_NAME,
+				SCHEDULE.COURSE_ID)
+				.from(SCHEDULE)
+				.join(STUDENT).on(STUDENT.ID.eq(SCHEDULE.STUDENT_ID))
+				.leftJoin(GRADE).on(GRADE.STUDENT_ID.eq(STUDENT.ID)).and(GRADE.ASSIGNMENT_ID.eq(assignmentID))
+				.where(SCHEDULE.COURSE_ID.eq(courseID))
 				.fetch()
 				.map(new GradeRecordMapper());
 		return grades;

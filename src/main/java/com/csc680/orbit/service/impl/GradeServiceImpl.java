@@ -41,9 +41,9 @@ public class GradeServiceImpl implements GradeService{
 	}
 	
 	@Override
-	public List<Grade> getAllGradesForAssignment(int assignmentID) {
+	public List<Grade> getAllGradesForAssignment(int courseID, int assignmentID) {
 		LOGGER.info("getAllGradesForAssignment service hit");
-		List<Grade> grades = (List<Grade>) gradeRepository.findAllGradesForAssignment(assignmentID);
+		List<Grade> grades = (List<Grade>) gradeRepository.findAllGradesForAssignment(courseID, assignmentID);
 		return grades;
 	}
 	
