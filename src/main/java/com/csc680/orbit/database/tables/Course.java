@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Course extends TableImpl<CourseRecord> {
 
-    private static final long serialVersionUID = 252292883;
+    private static final long serialVersionUID = -193162422;
 
     /**
      * The reference instance of <code>orbit.course</code>
@@ -73,7 +73,7 @@ public class Course extends TableImpl<CourseRecord> {
     /**
      * The column <code>orbit.course.Teacher_ID</code>.
      */
-    public final TableField<CourseRecord, Integer> TEACHER_ID = createField("Teacher_ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<CourseRecord, Integer> TEACHER_ID = createField("Teacher_ID", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
     /**
      * Create a <code>orbit.course</code> table reference
@@ -117,7 +117,7 @@ public class Course extends TableImpl<CourseRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.COURSE_PRIMARY, Indexes.COURSE_TEACHER_ID);
+        return Arrays.<Index>asList(Indexes.COURSE_COURSE_IBFK_1, Indexes.COURSE_PRIMARY);
     }
 
     /**

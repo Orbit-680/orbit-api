@@ -17,6 +17,7 @@ import com.csc680.orbit.database.tables.School;
 import com.csc680.orbit.database.tables.SchoolStudent;
 import com.csc680.orbit.database.tables.Student;
 import com.csc680.orbit.database.tables.Teacher;
+import com.csc680.orbit.database.tables.Tickets;
 import com.csc680.orbit.database.tables.User;
 
 import javax.annotation.Generated;
@@ -99,6 +100,11 @@ public class Tables {
      * The table <code>orbit.teacher</code>.
      */
     public static final Teacher TEACHER = com.csc680.orbit.database.tables.Teacher.TEACHER;
+
+    /**
+     * The table <code>orbit.tickets</code>.
+     */
+    public static final Tickets TICKETS = com.csc680.orbit.database.tables.Tickets.TICKETS;
 
     /**
      * The table <code>orbit.user</code>.

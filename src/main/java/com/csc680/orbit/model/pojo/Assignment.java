@@ -29,6 +29,11 @@ public class Assignment {
         this.course = course;
 	}
 	
+	public Assignment(int assignmentId)
+	{
+		this.assignmentId = assignmentId;
+	}
+	
 	public int getAssignmentId() {
 		return assignmentId;
 	}

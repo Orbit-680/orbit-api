@@ -153,12 +153,12 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
 
 	@Override
 	public long count() {
-		int scheduleCount = 0;
-		scheduleCount = this.dslContext
+		int assignmentCount = 0;
+		assignmentCount = this.dslContext
 				.selectCount()
-				.from(SCHEDULE)
+				.from(ASSIGNMENT)
 				.fetchOne(0, int.class);
-		return scheduleCount;
+		return assignmentCount;
 	}
 
 	@Override
