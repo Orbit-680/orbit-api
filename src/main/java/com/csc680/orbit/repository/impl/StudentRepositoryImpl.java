@@ -351,8 +351,8 @@ public class StudentRepositoryImpl implements StudentRepository
                                              STUDENT.FATHER_CELL_PHONE,
                                              STUDENT.FATHER_EMAIL)
 								 .from(STUDENT)
-								 .where(STUDENT.LAST_NAME.eq(studentDto.getLastName()))
-								 .and(STUDENT.FIRST_NAME.eq(studentDto.getFirstName()))
+								 .where(STUDENT.LAST_NAME.upper().eq(studentDto.getLastName().toUpperCase()))
+								 .and(STUDENT.FIRST_NAME.upper().eq(studentDto.getFirstName().toUpperCase()))
 								 .and(STUDENT.DATE_OF_BIRTH.eq(studentDto.getDateOfBirth()))
 								 .fetch()
 								 .map(new StudentRecordMapper());
