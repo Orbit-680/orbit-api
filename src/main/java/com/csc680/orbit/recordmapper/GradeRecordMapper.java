@@ -36,8 +36,9 @@ public class GradeRecordMapper implements RecordMapper<Record, Grade>{
 			student.setStudentLastName(r.getValue(STUDENT.LAST_NAME));
 			course = new Course(r.getValue(SCHEDULE.COURSE_ID));
 			
+			if(STUDENT.FIRST_NAME != null)
 			if(GRADE.ASSIGNMENT_ID != null)
-				assignment = new Assignment(r.getValue(GRADE.ASSIGNMENT_ID));
+				assignment = new Assignment(r.getValue(GRADE.ASSIGNMENT_ID), course);
 			
 			if(GRADE.ID != null)
 				gradeID = r.getValue(GRADE.ID);
