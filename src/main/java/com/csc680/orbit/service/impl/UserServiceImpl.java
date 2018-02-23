@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService{
 						AccountLinkStudentDTO accountLinkStudent = new AccountLinkStudentDTO();
 						accountLinkStudent.setStudentID(newStudent.getStudentId());
 						accountLinkStudent.setUserID(Integer.toString(u.getUserID()));
-						studentRepository.linkStudent(accountLinkStudent);
+						studentRepository.linkStudent(accountLinkStudent, u.getUid());
 						
 					}
 					
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService{
 						AccountLinkStudentDTO accountLinkStudent = new AccountLinkStudentDTO();
 						accountLinkStudent.setStudentID(existingStudent.getStudentId());
 						accountLinkStudent.setUserID(Integer.toString(u.getUserID()));
-						studentRepository.linkStudent(accountLinkStudent);
+						studentRepository.linkStudent(accountLinkStudent,  u.getUid());
 					}
 					
 

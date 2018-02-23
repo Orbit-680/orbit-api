@@ -365,14 +365,14 @@ public class StudentRepositoryImpl implements StudentRepository
                 
     }
     
-    public AccountLinkStudent linkStudent(AccountLinkStudentDTO accountLinkDto) 
+    public AccountLinkStudent linkStudent(AccountLinkStudentDTO accountLinkDto, String UID) 
     {    	
     	Calendar currenttime = Calendar.getInstance();
         Date now = new Date((currenttime.getTime()).getTime());
-        int userID = 0;
         boolean isDuplicate = false;
-        
-        //find user ID
+        int userID = 0;
+
+    	//find user ID
         List<User> searchUsers = new ArrayList<User>();
         searchUsers = this.dslContext.select(USER.ID, 
         									USER.ROLE_ID, 
@@ -382,6 +382,7 @@ public class StudentRepositoryImpl implements StudentRepository
         									USER.INVALID_ATTEMPTS, 
         									USER.ACTIVE)
                              .from(USER)
+                             .where(USER.UID.eq(UID))
                              .fetch()
                              .map(new UserRecordMapper());
         
@@ -389,7 +390,7 @@ public class StudentRepositoryImpl implements StudentRepository
         if(!searchUsers.isEmpty())
         {
         	userID = searchUsers.get(0).getUserID();
-        }    	
+        }  	
 
 
         //check for duplicate link records for this user UID and student

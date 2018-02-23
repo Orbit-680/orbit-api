@@ -71,7 +71,7 @@ public class StudentServiceImpl implements StudentService
     
     public AccountLinkStudent linkStudent(AccountLinkStudentDTO accountLinkDto)
     {
-        AccountLinkStudent accountLink  = studentRepository.linkStudent(accountLinkDto);
+        AccountLinkStudent accountLink  = studentRepository.linkStudent(accountLinkDto, null);
         if(accountLink == null){
         	throw new NotFoundException("Could create an account link.");
         }
