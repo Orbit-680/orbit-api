@@ -30,7 +30,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/add-user", method = RequestMethod.POST)
-	public User addTeacher(@RequestBody AccountDetailsDTO accountDetails, HttpServletResponse response) {
+	public User addUser(@RequestBody AccountDetailsDTO accountDetails, HttpServletResponse response) {
 		LOGGER.info("Add user controller hit.");
 		User newUser = userService.addUser(accountDetails);
 		return newUser;
