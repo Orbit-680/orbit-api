@@ -72,6 +72,27 @@ public class GradeRepositoryImpl implements GradeRepository {
 		}
 		return (S)newGrade;
 	}
+	
+	/**
+	 * updateGrade - Update an existing grade in the database.
+	 * @param entity
+	 * @return
+	 */
+	public void updateGrade(Grade entity) {
+		// TODO Auto-generated method stub
+		String grade = entity.getGrade();
+		int gradeID = entity.getGradeId();
+		
+		int result = this.dslContext.update(GRADE)
+						.set(GRADE.GRADE_, grade)
+						.where(GRADE.ID.eq(gradeID))
+						.execute();
+		
+		if(result != 0){
+			LOGGER.info("Successfully updated Grade to DB: " + gradeID);
+		}
+		
+	}
 
 	@Override
 	public <S extends Grade> Iterable<S> save(Iterable<S> entities) {
@@ -157,6 +178,18 @@ public class GradeRepositoryImpl implements GradeRepository {
 				.fetch()
 				.map(new GradeRecordMapper());
 		return grades;
+	}
+	
+	public boolean saveGrade(Grade grade)
+	{
+		boolean result = true;
+		
+		if(grade.getUpdateType() == 'U')
+			this.updateGrade(grade);
+		else
+			this.save(grade);
+		
+		return result;
 	}
 
 	@Override
