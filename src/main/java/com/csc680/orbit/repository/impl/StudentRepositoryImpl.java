@@ -365,42 +365,19 @@ public class StudentRepositoryImpl implements StudentRepository
                 
     }
     
-    public AccountLinkStudent linkStudent(AccountLinkStudentDTO accountLinkDto, String UID) 
+    public AccountLinkStudent linkStudent(AccountLinkStudentDTO accountLinkDto) 
     {    	
     	Calendar currenttime = Calendar.getInstance();
         Date now = new Date((currenttime.getTime()).getTime());
         boolean isDuplicate = false;
-        int userID = 0;
 
-    	//find user ID
-        List<User> searchUsers = new ArrayList<User>();
-        searchUsers = this.dslContext.select(USER.ID, 
-        									USER.ROLE_ID, 
-        									USER.EMAIL,
-        									USER.UID,
-        									USER.LAST_LOGIN, 
-        									USER.INVALID_ATTEMPTS, 
-        									USER.ACTIVE)
-                             .from(USER)
-                             .where(USER.UID.eq(UID))
-                             .fetch()
-                             .map(new UserRecordMapper());
-        
-        
-        if(!searchUsers.isEmpty())
-        {
-        	userID = searchUsers.get(0).getUserID();
-        }  	
-
-
-        //check for duplicate link records for this user UID and student
+        //check for duplicate link records for this user ID and student
         List<AccountLinkStudent> duplicateLinks = new ArrayList<AccountLinkStudent>();
-        duplicateLinks = this.dslContext.select(ACCOUNT_LINK_STUDENT.DATE_LINKED, 
-				        		ACCOUNT_LINK_STUDENT.ACTIVE,
+        duplicateLinks = this.dslContext.select(ACCOUNT_LINK_STUDENT.ACTIVE,
 				        		ACCOUNT_LINK_STUDENT.USER_ID, 
 				        		ACCOUNT_LINK_STUDENT.STUDENT_ID)
                              .from(ACCOUNT_LINK_STUDENT)
-                             .where(ACCOUNT_LINK_STUDENT.USER_ID.eq(userID))
+                             .where(ACCOUNT_LINK_STUDENT.USER_ID.eq(accountLinkDto.getUserID()))
 							 .and(ACCOUNT_LINK_STUDENT.STUDENT_ID.eq(accountLinkDto.getStudentID()))
                              .fetch()
                              .map(new AccountLinkRecordMapper());
@@ -419,10 +396,9 @@ public class StudentRepositoryImpl implements StudentRepository
 								    			ACCOUNT_LINK_STUDENT.STUDENT_ID)
 								        		.values(now,
 								        				"Y",
-								        				userID,
+								        				accountLinkDto.getUserID(),
 								        				accountLinkDto.getStudentID())
-								                .returning(ACCOUNT_LINK_STUDENT.DATE_LINKED,
-										    			ACCOUNT_LINK_STUDENT.ACTIVE,
+								                .returning(ACCOUNT_LINK_STUDENT.ACTIVE,
 										    			ACCOUNT_LINK_STUDENT.USER_ID,
 										    			ACCOUNT_LINK_STUDENT.STUDENT_ID)
 								                .fetchOne()
@@ -480,11 +456,8 @@ public class StudentRepositoryImpl implements StudentRepository
      * findLinkedStudents - Find all students with records linked to a user account with UID
      * @param UID
      */
-    public List<Student> findLinkedStudents(String UID)
-    {
-    	//find user ID
-        int userID = this.findUser(UID);
-        
+    public List<Student> findLinkedStudents(int userID)
+    {        
         //check link table and find any student IDs linked to user ID
         List<AccountLinkStudent> linkRecords = new ArrayList<AccountLinkStudent>();
         linkRecords = this.dslContext.select(ACCOUNT_LINK_STUDENT.DATE_LINKED, 

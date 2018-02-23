@@ -9,7 +9,6 @@ import javax.persistence.Id;
 public class AccountLinkStudent {
 	@Id
 	private int accountLinkID;
-	private Date date_linked;
 	private String active;
 	private Integer user_id;
 	private Integer student_id;
@@ -17,9 +16,8 @@ public class AccountLinkStudent {
 	
 	public AccountLinkStudent() {}
 	
-	public AccountLinkStudent(Date date_linked, String active, Integer user_id, Integer student_id)
+	public AccountLinkStudent(String active, Integer user_id, Integer student_id)
 	{
-		this.date_linked = date_linked;
 		this.active = active;
 		this.user_id = user_id;
 		this.student_id = student_id;
@@ -35,14 +33,6 @@ public class AccountLinkStudent {
 
 	public void setAccountLinkID(int accountLinkID) {
 		this.accountLinkID = accountLinkID;
-	}
-
-	public Date getDate_linked() {
-		return date_linked;
-	}
-
-	public void setDate_linked(Date date_linked) {
-		this.date_linked = date_linked;
 	}
 
 	public String getActive() {
@@ -79,7 +69,7 @@ public class AccountLinkStudent {
 
 	@Override
 	public String toString() {
-		return "AccountLinkStudent [accountLinkID=" + accountLinkID + ", dateLinked=" + date_linked + ", active=" + active
+		return "AccountLinkStudent [accountLinkID=" + accountLinkID + ", active=" + active
 				+ ", userID=" + user_id + ", studentID=" + student_id + ", message=" + message + "]";
 	}	
 

@@ -69,8 +69,8 @@ public class UserServiceImpl implements UserService{
 						Student newStudent = studentRepository.save(student);
 						AccountLinkStudentDTO accountLinkStudent = new AccountLinkStudentDTO();
 						accountLinkStudent.setStudentID(newStudent.getStudentId());
-						accountLinkStudent.setUserID(Integer.toString(u.getUserID()));
-						studentRepository.linkStudent(accountLinkStudent, u.getUid());
+						accountLinkStudent.setUserID(u.getUserID());
+						studentRepository.linkStudent(accountLinkStudent);
 						
 					}
 					
@@ -78,8 +78,8 @@ public class UserServiceImpl implements UserService{
 						LOGGER.info("This Student has already been added by a Teacher. We can link them to their preexsiting account.");
 						AccountLinkStudentDTO accountLinkStudent = new AccountLinkStudentDTO();
 						accountLinkStudent.setStudentID(existingStudent.getStudentId());
-						accountLinkStudent.setUserID(Integer.toString(u.getUserID()));
-						studentRepository.linkStudent(accountLinkStudent,  u.getUid());
+						accountLinkStudent.setUserID(u.getUserID());
+						studentRepository.linkStudent(accountLinkStudent);
 					}
 					
 

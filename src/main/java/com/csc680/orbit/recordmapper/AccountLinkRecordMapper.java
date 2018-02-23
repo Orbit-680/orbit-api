@@ -11,8 +11,7 @@ public class AccountLinkRecordMapper implements RecordMapper<Record,AccountLinkS
 {
     public AccountLinkStudent map(Record r) 
     {
-        return new AccountLinkStudent(r.getValue(ACCOUNT_LINK_STUDENT.DATE_LINKED),
-                           r.getValue(ACCOUNT_LINK_STUDENT.ACTIVE),
+        return new AccountLinkStudent(r.getValue(ACCOUNT_LINK_STUDENT.ACTIVE),
                            r.getValue(ACCOUNT_LINK_STUDENT.USER_ID),
                            r.getValue(ACCOUNT_LINK_STUDENT.STUDENT_ID));
     }

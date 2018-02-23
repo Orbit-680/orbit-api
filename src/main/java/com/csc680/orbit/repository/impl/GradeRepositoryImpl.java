@@ -48,8 +48,6 @@ public class GradeRepositoryImpl implements GradeRepository {
 		int courseID = entity.getCourse().getCourseId();
 		int assignmentID = entity.getAssignment().getAssignmentId();
 		
-		LOGGER.info("LOOK HERE C: " + courseID + " ASSIGN " + assignmentID + "  STUDENT " + studentID);
-		
 		this.dslContext.insertInto(GRADE, 
 								GRADE.GRADE_,
 								GRADE.YEAR,
