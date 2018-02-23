@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService{
 					}
 					
 					if(existingStudent != null){
-						LOGGER.info("This Student has already been added by a Teacher. We can link him to his preexsiting account.");
+						LOGGER.info("This Student has already been added by a Teacher. We can link them to their preexsiting account.");
 						AccountLinkStudentDTO accountLinkStudent = new AccountLinkStudentDTO();
 						accountLinkStudent.setStudentID(existingStudent.getStudentId());
 						accountLinkStudent.setUserID(Integer.toString(u.getUserID()));

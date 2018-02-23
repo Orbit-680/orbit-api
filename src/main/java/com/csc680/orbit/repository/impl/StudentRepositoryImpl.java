@@ -421,7 +421,10 @@ public class StudentRepositoryImpl implements StudentRepository
 								        				"Y",
 								        				userID,
 								        				accountLinkDto.getStudentID())
-								                .returning(ACCOUNT_LINK_STUDENT.ID)
+								                .returning(ACCOUNT_LINK_STUDENT.DATE_LINKED,
+										    			ACCOUNT_LINK_STUDENT.ACTIVE,
+										    			ACCOUNT_LINK_STUDENT.USER_ID,
+										    			ACCOUNT_LINK_STUDENT.STUDENT_ID)
 								                .fetchOne()
 								                .map(new AccountLinkRecordMapper());
 			
