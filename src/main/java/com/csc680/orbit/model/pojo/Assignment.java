@@ -17,7 +17,9 @@ public class Assignment {
 	@JoinColumn(name = "Course_ID")
     private Course course;
     
-    public Assignment() {}
+    public Assignment() {
+    	this.course = new Course();
+    }
 	
 	public Assignment(int assignmentId, String year, String name, String type, String maxPoints, Course course)
 	{
@@ -29,9 +31,10 @@ public class Assignment {
         this.course = course;
 	}
 	
-	public Assignment(int assignmentId)
+	public Assignment(int assignmentId, Course course)
 	{
 		this.assignmentId = assignmentId;
+		this.course = course;
 	}
 	
 	public int getAssignmentId() {

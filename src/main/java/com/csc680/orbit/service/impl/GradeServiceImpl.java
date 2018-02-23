@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.csc680.orbit.model.dto.AccountDetailsDTO;
 import com.csc680.orbit.model.dto.CreateAssignmentDTO;
+import com.csc680.orbit.model.dto.SaveGradesDTO;
+import com.csc680.orbit.model.dto.SaveGradesResultsDTO;
 import com.csc680.orbit.model.pojo.User;
 import com.csc680.orbit.model.pojo.Assignment;
 import com.csc680.orbit.model.pojo.Course;
@@ -47,16 +49,19 @@ public class GradeServiceImpl implements GradeService{
 		return grades;
 	}
 	
-	/*@Override
-	public Assignment createAssignment(CreateAssignmentDTO createAssignmentDTO) {
-		LOGGER.info("createAssignment service hit");
-		Assignment assignment = new Assignment();
-		assignment.setCourse(new Course(createAssignmentDTO.getCourseID()));
-		assignment.setName(createAssignmentDTO.getName());
-		assignment.setMaxPoints(createAssignmentDTO.getMaxPoints());
-		Assignment assignmentSaved = (Assignment) assignmentRepository.save(assignment);
-		return assignment;
-	}*/
+	@Override
+	public SaveGradesResultsDTO saveGrades(SaveGradesDTO saveGradesDTO) {
+		LOGGER.info("saveGrades service hit");
+		SaveGradesResultsDTO gradeSaveResults = new SaveGradesResultsDTO();
+		
+		for(Grade grade : saveGradesDTO.getGradeList())
+		{
+			gradeRepository.saveGrade(grade);
+			gradeSaveResults.addResult(grade.getGradeId(), true);
+		}
+		
+		return gradeSaveResults;
+	}
 	
 	
 

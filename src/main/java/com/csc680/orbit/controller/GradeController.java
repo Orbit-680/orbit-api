@@ -16,6 +16,8 @@ import com.csc680.orbit.model.dto.AccountDetailsDTO;
 import com.csc680.orbit.model.dto.AccountLinkStudentDTO;
 import com.csc680.orbit.model.dto.CreateAssignmentDTO;
 import com.csc680.orbit.model.dto.GetGradesForAssignmentDTO;
+import com.csc680.orbit.model.dto.SaveGradesDTO;
+import com.csc680.orbit.model.dto.SaveGradesResultsDTO;
 import com.csc680.orbit.model.pojo.AccountLinkStudent;
 import com.csc680.orbit.model.pojo.Assignment;
 import com.csc680.orbit.model.pojo.Grade;
@@ -54,12 +56,12 @@ public class GradeController {
         return grades;
     }
     
-    /*@RequestMapping(value = "/create-assignment", method = RequestMethod.POST)
-    public Assignment createAssignment(@RequestBody CreateAssignmentDTO createAssignmentDto)
+    @RequestMapping(value = "/save-grades", method = RequestMethod.POST)
+    public SaveGradesResultsDTO saveGrades(@RequestBody SaveGradesDTO saveGradesDto)
     {	
-    	LOGGER.info("Hit the create-assignment end point.");
+    	LOGGER.info("Hit the save-grades end point.");
         
-    	Assignment assignment = assignmentService.createAssignment(createAssignmentDto);
-        return assignment;
-    }*/
+    	SaveGradesResultsDTO gradeSaveResult = gradeService.saveGrades(saveGradesDto);
+        return gradeSaveResult;
+    }
 }
