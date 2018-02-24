@@ -13,6 +13,7 @@ import com.csc680.orbit.model.dto.SaveGradesResultsDTO;
 import com.csc680.orbit.model.pojo.User;
 import com.csc680.orbit.model.pojo.Assignment;
 import com.csc680.orbit.model.pojo.Course;
+import com.csc680.orbit.model.pojo.CourseGrade;
 import com.csc680.orbit.model.pojo.Grade;
 import com.csc680.orbit.model.pojo.Teacher;
 import com.csc680.orbit.repository.AssignmentRepository;
@@ -61,6 +62,13 @@ public class GradeServiceImpl implements GradeService{
 		}
 		
 		return gradeSaveResults;
+	}
+	
+	@Override
+	public List <CourseGrade> getCourseGrades(int studentID) {
+		LOGGER.info("getCourseGrades service hit");
+		List<CourseGrade> grades = (List<CourseGrade>) gradeRepository.getCourseGrades(studentID);
+		return grades;
 	}
 	
 	

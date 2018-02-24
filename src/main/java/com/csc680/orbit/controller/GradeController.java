@@ -20,6 +20,7 @@ import com.csc680.orbit.model.dto.SaveGradesDTO;
 import com.csc680.orbit.model.dto.SaveGradesResultsDTO;
 import com.csc680.orbit.model.pojo.AccountLinkStudent;
 import com.csc680.orbit.model.pojo.Assignment;
+import com.csc680.orbit.model.pojo.CourseGrade;
 import com.csc680.orbit.model.pojo.Grade;
 import com.csc680.orbit.model.pojo.User;
 import com.csc680.orbit.service.AssignmentService;
@@ -63,5 +64,13 @@ public class GradeController {
         
     	SaveGradesResultsDTO gradeSaveResult = gradeService.saveGrades(saveGradesDto);
         return gradeSaveResult;
+    }
+    
+    @RequestMapping(value = "/course-grades/{studentID}", method = RequestMethod.GET)
+    public List<CourseGrade> courseGrades(@PathVariable("studentID") int studentID)
+    {
+        LOGGER.info("course endpoint hit");
+        List<CourseGrade> grades = gradeService.getCourseGrades(studentID);
+        return grades;
     }
 }

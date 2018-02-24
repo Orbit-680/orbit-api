@@ -30,6 +30,12 @@ public class Course {
 	public Course(int courseId) {
 		this.courseId = courseId;
 	}
+	
+	public Course(int courseId, String name) {
+		this.courseId = courseId;
+		this.name = name;
+		this.teacher = new Teacher();
+	}
 
 	public int getCourseId() {
 		return courseId;

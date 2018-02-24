@@ -16,11 +16,13 @@ import com.csc680.orbit.model.dto.AccountDetailsDTO;
 import com.csc680.orbit.model.dto.EnrollStudentInClassDTO;
 import com.csc680.orbit.model.pojo.Assignment;
 import com.csc680.orbit.model.pojo.Course;
+import com.csc680.orbit.model.pojo.CourseGrade;
 import com.csc680.orbit.model.pojo.Grade;
 import com.csc680.orbit.model.pojo.Schedule;
 import com.csc680.orbit.model.pojo.Student;
 import com.csc680.orbit.model.pojo.User;
 import com.csc680.orbit.recordmapper.AssignmentRecordMapper;
+import com.csc680.orbit.recordmapper.CourseGradeRecordMapper;
 import com.csc680.orbit.recordmapper.CourseRecordMapper;
 import com.csc680.orbit.recordmapper.GradeRecordMapper;
 import com.csc680.orbit.recordmapper.ScheduleRecordMapper;
@@ -153,10 +155,6 @@ public class GradeRepositoryImpl implements GradeRepository {
 	
 	@Override
 	public List<Grade> findAllGradesForAssignment(int courseID, int assignmentID) {
-		/*select * from orbit.schedule
-		join orbit.student on schedule.Student_ID = student.ID
-		left join orbit.grade on student.ID = grade.ID and grade.Assignment_ID = 1
-		where schedule.Course_ID = 1*/
 		
 		List<Grade> grades = new ArrayList<Grade>();
 		grades = this.dslContext.select(
@@ -179,9 +177,31 @@ public class GradeRepositoryImpl implements GradeRepository {
 		return grades;
 	}
 	
+	@Override
+	public List <CourseGrade> getCourseGrades(int studentID) {
+		
+		List<CourseGrade> grades = new ArrayList<CourseGrade>();
+		grades = this.dslContext.select(
+				COURSE.ID,
+				COURSE.NAME,
+				GRADE.GRADE_.sum(),
+				GRADE.GRADE_.count())
+				.from(SCHEDULE)
+				.join(COURSE).on(SCHEDULE.COURSE_ID.eq(COURSE.ID))
+				.leftJoin(GRADE).on(SCHEDULE.STUDENT_ID.eq(GRADE.STUDENT_ID)).and(SCHEDULE.COURSE_ID.eq(GRADE.COURSE_ID))
+				.where(SCHEDULE.STUDENT_ID.eq(studentID))
+				.groupBy(SCHEDULE.STUDENT_ID, COURSE.ID, COURSE.NAME)
+				.fetch()
+				.map(new CourseGradeRecordMapper());
+		return grades;
+	}
+	
 	public boolean saveGrade(Grade grade)
 	{
 		boolean result = true;
+		
+		if(grade.getGrade() == null || grade.getGrade().equals(""))
+			return true;
 		
 		if(grade.getUpdateType() == 'U')
 			this.updateGrade(grade);
