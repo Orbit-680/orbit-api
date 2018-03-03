@@ -21,7 +21,7 @@ public class CourseGradeRecordMapper implements RecordMapper<Record, CourseGrade
 		}
 		
 		return new CourseGrade(
-				r.get(2).toString(),
+				(r.get(2) == null) ? "0" : r.get(2).toString(),
 				Integer.parseInt(r.get(3).toString()),
 				course
 				);

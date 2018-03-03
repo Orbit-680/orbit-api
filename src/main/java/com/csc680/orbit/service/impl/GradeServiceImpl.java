@@ -66,7 +66,7 @@ public class GradeServiceImpl implements GradeService{
 	
 	@Override
 	public List <CourseGrade> getCourseGrades(int studentID) {
-		LOGGER.info("getCourseGrades service hit");
+		LOGGER.info("getCourseGrades service hit for student ID : " + studentID);
 		List<CourseGrade> grades = (List<CourseGrade>) gradeRepository.getCourseGrades(studentID);
 		return grades;
 	}
