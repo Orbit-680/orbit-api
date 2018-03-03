@@ -71,6 +71,10 @@ public class GradeServiceImpl implements GradeService{
 		return grades;
 	}
 	
-	
-
+	@Override
+	public List <Grade> getStudentGrades(int studentID, int courseID) {
+		LOGGER.info("getStudentGrades service hit for student ID : " + studentID + " courseID : " + courseID);
+		List<Grade> grades = (List<Grade>) gradeRepository.getStudentGrades(studentID, courseID);
+		return grades;
+	}
 }

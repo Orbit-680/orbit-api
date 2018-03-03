@@ -16,4 +16,5 @@ public interface GradeRepository extends CrudRepository<Grade, String>{
 	List<Grade> findAllGradesForAssignment(int courseID, int assignmentID);
 	boolean saveGrade(Grade grade);
 	List <CourseGrade> getCourseGrades(int studentID);
+	List <Grade> getStudentGrades(int studentID, int courseID);
 }

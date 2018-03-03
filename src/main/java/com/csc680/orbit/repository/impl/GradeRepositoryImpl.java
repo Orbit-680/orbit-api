@@ -4,6 +4,7 @@ import static com.csc680.orbit.database.Tables.GRADE;
 import static com.csc680.orbit.database.Tables.COURSE;
 import static com.csc680.orbit.database.Tables.STUDENT;
 import static com.csc680.orbit.database.tables.Schedule.SCHEDULE;
+import static com.csc680.orbit.database.Tables.ASSIGNMENT;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import com.csc680.orbit.recordmapper.CourseGradeRecordMapper;
 import com.csc680.orbit.recordmapper.CourseRecordMapper;
 import com.csc680.orbit.recordmapper.GradeRecordMapper;
 import com.csc680.orbit.recordmapper.ScheduleRecordMapper;
+import com.csc680.orbit.recordmapper.StudentGradeRecordMapper;
 import com.csc680.orbit.recordmapper.StudentRecordMapper;
 import com.csc680.orbit.recordmapper.UserRecordMapper;
 import com.csc680.orbit.repository.AssignmentRepository;
@@ -193,6 +195,26 @@ public class GradeRepositoryImpl implements GradeRepository {
 				.groupBy(SCHEDULE.STUDENT_ID, COURSE.ID, COURSE.NAME)
 				.fetch()
 				.map(new CourseGradeRecordMapper());
+		return grades;
+	}
+	
+	@Override
+	public List <Grade> getStudentGrades(int studentID, int courseID) {
+		
+		List<Grade> grades = new ArrayList<Grade>();
+		grades = this.dslContext.select(
+				GRADE.ID,
+				GRADE.GRADE_,
+				GRADE.YEAR,
+				GRADE.STUDENT_ID,
+				GRADE.COURSE_ID,
+				GRADE.ASSIGNMENT_ID,
+				ASSIGNMENT.NAME)
+				.from(GRADE)
+				.join(ASSIGNMENT).on(GRADE.ASSIGNMENT_ID.eq(ASSIGNMENT.ID))
+				.where(GRADE.STUDENT_ID.eq(studentID)).and(GRADE.COURSE_ID.eq(courseID))
+				.fetch()
+				.map(new StudentGradeRecordMapper());
 		return grades;
 	}
 	

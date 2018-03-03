@@ -16,4 +16,5 @@ public interface GradeService {
 	List <Grade> getAllGradesForAssignment(int courseID, int assignmentID);
 	SaveGradesResultsDTO saveGrades(SaveGradesDTO saveGradesDTO);
 	List <CourseGrade> getCourseGrades(int studentID);
+	List <Grade> getStudentGrades(int studentID, int courseID);
 }

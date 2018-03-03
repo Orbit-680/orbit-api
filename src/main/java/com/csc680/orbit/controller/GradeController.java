@@ -73,4 +73,12 @@ public class GradeController {
         List<CourseGrade> grades = gradeService.getCourseGrades(studentID);
         return grades;
     }
+    
+    @RequestMapping(value = "/student-grades/{studentID}/{courseID}", method = RequestMethod.GET)
+    public List<Grade> studentGrades(@PathVariable("studentID") int studentID, @PathVariable("courseID") int courseID)
+    {
+        LOGGER.info("course endpoint hit");
+        List<Grade> grades = gradeService.getStudentGrades(studentID, courseID);
+        return grades;
+    }
 }
