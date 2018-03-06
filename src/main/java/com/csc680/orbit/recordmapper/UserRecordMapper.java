@@ -30,8 +30,8 @@ public class UserRecordMapper implements RecordMapper<Record, User>{
 				r.getValue(USER.INVALID_ATTEMPTS),
 				r.getValue(USER.ACTIVE),
 				role,
-				r.getValue(USER.FIRST_NAME),
-				r.getValue(USER.LAST_NAME));
+				r.getValue(USER.FIRSTNAME),
+				r.getValue(USER.LASTNAME));
 	}
 
 }

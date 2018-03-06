@@ -43,10 +43,10 @@ public class UserRepositoryImpl implements UserRepository {
 						USER.INVALID_ATTEMPTS,
 						USER.ACTIVE,
 						USER.ROLE_ID,
-						USER.FIRST_NAME,
-						USER.LAST_NAME)
+						USER.FIRSTNAME,
+						USER.LASTNAME)
 						.values(username, uid, lastLogin, invalidAttempts, active, role.getRoleID(), firstName, lastName)
-						.returning(USER.ID, USER.EMAIL, USER.UID, USER.LAST_LOGIN, USER.INVALID_ATTEMPTS, USER.ACTIVE, USER.ROLE_ID, USER.FIRST_NAME, USER.LAST_NAME)
+						.returning(USER.ID, USER.EMAIL, USER.UID, USER.LAST_LOGIN, USER.INVALID_ATTEMPTS, USER.ACTIVE, USER.ROLE_ID, USER.FIRSTNAME, USER.LASTNAME)
 						.fetchOne()
 						.map(new UserRecordMapper());
 		
@@ -76,8 +76,8 @@ public class UserRepositoryImpl implements UserRepository {
 						USER.ACTIVE,
 						USER.ROLE_ID,
 						ROLE.NAME,
-						USER.FIRST_NAME,
-						USER.LAST_NAME)
+						USER.FIRSTNAME,
+						USER.LASTNAME)
 					.from(USER)
 					.join(ROLE).on(USER.ROLE_ID.eq(ROLE.ID))
 					.where(USER.UID.eq(id))
@@ -105,8 +105,8 @@ public class UserRepositoryImpl implements UserRepository {
 						USER.INVALID_ATTEMPTS,
 						USER.ACTIVE,
 						USER.ROLE_ID,
-						USER.FIRST_NAME,
-						USER.LAST_NAME)
+						USER.FIRSTNAME,
+						USER.LASTNAME)
                              .from(USER)
                              .fetch()
                              .map(new UserRecordMapper());
