@@ -41,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends TableImpl<UserRecord> {
 
-    private static final long serialVersionUID = -1879038166;
+    private static final long serialVersionUID = 771014908;
 
     /**
      * The reference instance of <code>orbit.user</code>
@@ -90,6 +90,16 @@ public class User extends TableImpl<UserRecord> {
      * The column <code>orbit.user.Role_ID</code>.
      */
     public final TableField<UserRecord, Integer> ROLE_ID = createField("Role_ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>orbit.user.FirstName</code>.
+     */
+    public final TableField<UserRecord, String> FIRSTNAME = createField("FirstName", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
+
+    /**
+     * The column <code>orbit.user.LastName</code>.
+     */
+    public final TableField<UserRecord, String> LASTNAME = createField("LastName", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
 
     /**
      * Create a <code>orbit.user</code> table reference

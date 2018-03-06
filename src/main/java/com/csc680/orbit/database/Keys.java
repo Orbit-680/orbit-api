@@ -104,7 +104,7 @@ public class Keys {
 
     public static final ForeignKey<AccountLinkStudentRecord, UserRecord> ACCOUNT_LINK_STUDENT_IBFK_1 = ForeignKeys0.ACCOUNT_LINK_STUDENT_IBFK_1;
     public static final ForeignKey<AccountLinkStudentRecord, StudentRecord> ACCOUNT_LINK_STUDENT_IBFK_2 = ForeignKeys0.ACCOUNT_LINK_STUDENT_IBFK_2;
-    public static final ForeignKey<AccountLinkTeacherRecord, UserRecord> ACCOUNT_LINK_TEACHER_IBFK_1 = ForeignKeys0.ACCOUNT_LINK_TEACHER_IBFK_1;
+    public static final ForeignKey<AccountLinkTeacherRecord, UserRecord> ACCOUNT_LINK_USER_IBFK_1 = ForeignKeys0.ACCOUNT_LINK_USER_IBFK_1;
     public static final ForeignKey<AccountLinkTeacherRecord, TeacherRecord> ACCOUNT_LINK_TEACHER_IBFK_2 = ForeignKeys0.ACCOUNT_LINK_TEACHER_IBFK_2;
     public static final ForeignKey<AssignmentRecord, CourseRecord> ASSIGNMENT_IBFK_1 = ForeignKeys0.ASSIGNMENT_IBFK_1;
     public static final ForeignKey<CourseRecord, TeacherRecord> COURSE_IBFK_1 = ForeignKeys0.COURSE_IBFK_1;
@@ -164,7 +164,7 @@ public class Keys {
     private static class ForeignKeys0 extends AbstractKeys {
         public static final ForeignKey<AccountLinkStudentRecord, UserRecord> ACCOUNT_LINK_STUDENT_IBFK_1 = createForeignKey(com.csc680.orbit.database.Keys.KEY_USER_PRIMARY, AccountLinkStudent.ACCOUNT_LINK_STUDENT, "account_link_student_ibfk_1", AccountLinkStudent.ACCOUNT_LINK_STUDENT.USER_ID);
         public static final ForeignKey<AccountLinkStudentRecord, StudentRecord> ACCOUNT_LINK_STUDENT_IBFK_2 = createForeignKey(com.csc680.orbit.database.Keys.KEY_STUDENT_PRIMARY, AccountLinkStudent.ACCOUNT_LINK_STUDENT, "account_link_student_ibfk_2", AccountLinkStudent.ACCOUNT_LINK_STUDENT.STUDENT_ID);
-        public static final ForeignKey<AccountLinkTeacherRecord, UserRecord> ACCOUNT_LINK_TEACHER_IBFK_1 = createForeignKey(com.csc680.orbit.database.Keys.KEY_USER_PRIMARY, AccountLinkTeacher.ACCOUNT_LINK_TEACHER, "account_link_teacher_ibfk_1", AccountLinkTeacher.ACCOUNT_LINK_TEACHER.USER_ID);
+        public static final ForeignKey<AccountLinkTeacherRecord, UserRecord> ACCOUNT_LINK_USER_IBFK_1 = createForeignKey(com.csc680.orbit.database.Keys.KEY_USER_PRIMARY, AccountLinkTeacher.ACCOUNT_LINK_TEACHER, "account_link_user_ibfk_1", AccountLinkTeacher.ACCOUNT_LINK_TEACHER.USER_ID);
         public static final ForeignKey<AccountLinkTeacherRecord, TeacherRecord> ACCOUNT_LINK_TEACHER_IBFK_2 = createForeignKey(com.csc680.orbit.database.Keys.KEY_TEACHER_PRIMARY, AccountLinkTeacher.ACCOUNT_LINK_TEACHER, "account_link_teacher_ibfk_2", AccountLinkTeacher.ACCOUNT_LINK_TEACHER.TEACHER_ID);
         public static final ForeignKey<AssignmentRecord, CourseRecord> ASSIGNMENT_IBFK_1 = createForeignKey(com.csc680.orbit.database.Keys.KEY_COURSE_PRIMARY, Assignment.ASSIGNMENT, "assignment_ibfk_1", Assignment.ASSIGNMENT.COURSE_ID);
         public static final ForeignKey<CourseRecord, TeacherRecord> COURSE_IBFK_1 = createForeignKey(com.csc680.orbit.database.Keys.KEY_TEACHER_PRIMARY, Course.COURSE, "course_ibfk_1", Course.COURSE.TEACHER_ID);

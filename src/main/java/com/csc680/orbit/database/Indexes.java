@@ -47,9 +47,9 @@ public class Indexes {
     public static final Index ACCOUNT_LINK_STUDENT_PRIMARY = Indexes0.ACCOUNT_LINK_STUDENT_PRIMARY;
     public static final Index ACCOUNT_LINK_STUDENT_STUDENT_ID = Indexes0.ACCOUNT_LINK_STUDENT_STUDENT_ID;
     public static final Index ACCOUNT_LINK_STUDENT_USER_ID = Indexes0.ACCOUNT_LINK_STUDENT_USER_ID;
+    public static final Index ACCOUNT_LINK_TEACHER_ACCOUNT_LINK_TEACHER_IBFK_2 = Indexes0.ACCOUNT_LINK_TEACHER_ACCOUNT_LINK_TEACHER_IBFK_2;
+    public static final Index ACCOUNT_LINK_TEACHER_ACCOUNT_LINK_USER_IBFK_1 = Indexes0.ACCOUNT_LINK_TEACHER_ACCOUNT_LINK_USER_IBFK_1;
     public static final Index ACCOUNT_LINK_TEACHER_PRIMARY = Indexes0.ACCOUNT_LINK_TEACHER_PRIMARY;
-    public static final Index ACCOUNT_LINK_TEACHER_TEACHER_ID = Indexes0.ACCOUNT_LINK_TEACHER_TEACHER_ID;
-    public static final Index ACCOUNT_LINK_TEACHER_USER_ID = Indexes0.ACCOUNT_LINK_TEACHER_USER_ID;
     public static final Index ASSIGNMENT_COURSE_ID = Indexes0.ASSIGNMENT_COURSE_ID;
     public static final Index ASSIGNMENT_PRIMARY = Indexes0.ASSIGNMENT_PRIMARY;
     public static final Index COURSE_COURSE_IBFK_1 = Indexes0.COURSE_COURSE_IBFK_1;
@@ -86,9 +86,9 @@ public class Indexes {
         public static Index ACCOUNT_LINK_STUDENT_PRIMARY = createIndex("PRIMARY", AccountLinkStudent.ACCOUNT_LINK_STUDENT, new OrderField[] { AccountLinkStudent.ACCOUNT_LINK_STUDENT.ID }, true);
         public static Index ACCOUNT_LINK_STUDENT_STUDENT_ID = createIndex("Student_ID", AccountLinkStudent.ACCOUNT_LINK_STUDENT, new OrderField[] { AccountLinkStudent.ACCOUNT_LINK_STUDENT.STUDENT_ID }, false);
         public static Index ACCOUNT_LINK_STUDENT_USER_ID = createIndex("User_ID", AccountLinkStudent.ACCOUNT_LINK_STUDENT, new OrderField[] { AccountLinkStudent.ACCOUNT_LINK_STUDENT.USER_ID }, false);
+        public static Index ACCOUNT_LINK_TEACHER_ACCOUNT_LINK_TEACHER_IBFK_2 = createIndex("account_link_teacher_ibfk_2", AccountLinkTeacher.ACCOUNT_LINK_TEACHER, new OrderField[] { AccountLinkTeacher.ACCOUNT_LINK_TEACHER.TEACHER_ID }, false);
+        public static Index ACCOUNT_LINK_TEACHER_ACCOUNT_LINK_USER_IBFK_1 = createIndex("account_link_user_ibfk_1", AccountLinkTeacher.ACCOUNT_LINK_TEACHER, new OrderField[] { AccountLinkTeacher.ACCOUNT_LINK_TEACHER.USER_ID }, false);
         public static Index ACCOUNT_LINK_TEACHER_PRIMARY = createIndex("PRIMARY", AccountLinkTeacher.ACCOUNT_LINK_TEACHER, new OrderField[] { AccountLinkTeacher.ACCOUNT_LINK_TEACHER.ID }, true);
-        public static Index ACCOUNT_LINK_TEACHER_TEACHER_ID = createIndex("Teacher_ID", AccountLinkTeacher.ACCOUNT_LINK_TEACHER, new OrderField[] { AccountLinkTeacher.ACCOUNT_LINK_TEACHER.TEACHER_ID }, false);
-        public static Index ACCOUNT_LINK_TEACHER_USER_ID = createIndex("User_ID", AccountLinkTeacher.ACCOUNT_LINK_TEACHER, new OrderField[] { AccountLinkTeacher.ACCOUNT_LINK_TEACHER.USER_ID }, false);
         public static Index ASSIGNMENT_COURSE_ID = createIndex("Course_ID", Assignment.ASSIGNMENT, new OrderField[] { Assignment.ASSIGNMENT.COURSE_ID }, false);
         public static Index ASSIGNMENT_PRIMARY = createIndex("PRIMARY", Assignment.ASSIGNMENT, new OrderField[] { Assignment.ASSIGNMENT.ID }, true);
         public static Index COURSE_COURSE_IBFK_1 = createIndex("course_ibfk_1", Course.COURSE, new OrderField[] { Course.COURSE.TEACHER_ID }, false);
