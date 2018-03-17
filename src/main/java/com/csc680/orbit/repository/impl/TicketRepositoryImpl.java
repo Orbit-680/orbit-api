@@ -72,7 +72,8 @@ public class TicketRepositoryImpl implements TicketRepository {
     	tickets = this.dslContext.select(	TICKETS.NAME,
 							    			TICKETS.DESCRIPTION,
 							    			TICKETS.ID,
-							    			TICKETS.PRIORITY)
+							    			TICKETS.PRIORITY,
+							    			TICKETS.USER_ID)
                              .from(TICKETS)
                              .fetch()
                              .map(new TicketRecordMapper());
