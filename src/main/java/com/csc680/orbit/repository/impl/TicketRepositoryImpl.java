@@ -2,14 +2,21 @@ package com.csc680.orbit.repository.impl;
 
 import static com.csc680.orbit.database.Tables.TICKETS;
 
+import com.csc680.orbit.model.pojo.Student;
 import com.csc680.orbit.model.pojo.Ticket;
 import com.csc680.orbit.model.pojo.User;
+import com.csc680.orbit.recordmapper.StudentRecordMapper;
 import com.csc680.orbit.recordmapper.TicketRecordMapper;
 import com.csc680.orbit.repository.TicketRepository;
 import com.csc680.orbit.service.DBConnection;
+
 import javassist.bytecode.stackmap.TypeData;
+
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Repository("ticketRepository")
@@ -61,7 +68,15 @@ public class TicketRepositoryImpl implements TicketRepository {
 
     @Override
     public Iterable<Ticket> findAll() {
-        return null;
+    	List<Ticket> tickets = new ArrayList<Ticket>();
+    	tickets = this.dslContext.select(	TICKETS.NAME,
+							    			TICKETS.DESCRIPTION,
+							    			TICKETS.ID,
+							    			TICKETS.PRIORITY)
+                             .from(TICKETS)
+                             .fetch()
+                             .map(new TicketRecordMapper());
+        return tickets;
     }
 
     @Override

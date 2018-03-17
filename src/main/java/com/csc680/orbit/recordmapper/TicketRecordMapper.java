@@ -22,6 +22,7 @@ public class TicketRecordMapper implements RecordMapper<Record, Ticket> {
                 r.getValue(TICKETS.ID),
                 r.getValue(TICKETS.NAME),
                 r.getValue(TICKETS.DESCRIPTION),
+                r.getValue(TICKETS.PRIORITY),
                 user
         );
     }

@@ -21,10 +21,11 @@ public class Ticket {
 
     }
 
-    public Ticket(int ticketID, String name, String description, User user) {
+    public Ticket(int ticketID, String name, String description, String priority, User user) {
         this.ticketID = ticketID;
         this.name = name;
         this.description = description;
+        this.priority = priority;
         this.user = user;
     }
 
