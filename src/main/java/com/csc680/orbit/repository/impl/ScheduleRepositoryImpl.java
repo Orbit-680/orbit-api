@@ -11,6 +11,7 @@ import static com.csc680.orbit.database.Tables.STUDENT;
 import static com.csc680.orbit.database.tables.Schedule.SCHEDULE;
 
 import com.csc680.orbit.model.dto.EnrollStudentInClassDTO;
+import com.csc680.orbit.model.pojo.EnrollRecord;
 import com.csc680.orbit.model.pojo.Schedule;
 import com.csc680.orbit.recordmapper.AccountLinkRecordMapper;
 import com.csc680.orbit.recordmapper.ScheduleRecordMapper;
@@ -124,36 +125,41 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	private boolean isDuplicateEnrollmentRecord(EnrollRecord record)
+	{
+		boolean scheduleExists = false;
+		int scheduleCount = this.dslContext
+				.selectCount()
+				.from(SCHEDULE)
+				.where(SCHEDULE.STUDENT_ID.eq(record.getStudentID()))
+				.and(SCHEDULE.COURSE_ID.eq(record.getCourseID()))
+				.and(SCHEDULE.YEAR.eq("1718"))
+				.fetchOne(0, int.class);
+		
+		if (scheduleCount != 0) {
+			scheduleExists = true;
+		}
+		return scheduleExists;
+	}
 
 	@Override
 	public String enrollStudentsInCourse(EnrollStudentInClassDTO enrollList) {
 		
-		for(int i = 0; i < enrollList.getEnrollRecords().size(); i++)
-		{
-			//try
-			//{
+		enrollList.getEnrollRecords().forEach(record -> {
+			if(!isDuplicateEnrollmentRecord(record)) {
 				this.dslContext.insertInto(SCHEDULE, 
 						SCHEDULE.YEAR,
 						SCHEDULE.STUDENT_ID,
 						SCHEDULE.COURSE_ID)
 		        		.values("1718",
-		        				enrollList.getEnrollRecords().get(i).getStudentID(),
-		        				enrollList.getEnrollRecords().get(i).getCourseID())
+		        				record.getStudentID(),
+		        				record.getCourseID())
 		                .returning(SCHEDULE.ID)
 		                .fetchOne();
-		                //.map(new ScheduleRecordMapper());
-		
-				//if(schedule != null)
-				//{
-					LOGGER.info("Successfully enrolled student: " + enrollList.getEnrollRecords().get(i).getStudentID() + " to course: " + enrollList.getEnrollRecords().get(i).getCourseID());
-				//}
-			/*}
-			catch(Exception e) {
-				LOGGER.info("Error mapping student: " + enrollList.getEnrollRecords().get(i).getStudentID() + " to course:" + enrollList.getEnrollRecords().get(i).getCourseID());
-				LOGGER.info(e.getMessage() + e.getStackTrace().toString());
-			}*/
-		}
-		
+				LOGGER.info("Successfully enrolled student: " + record.getStudentID() + " to course: " + record.getCourseID());
+			}
+		});
 		
 		return Constants.SUCCESS_STATUS;
 	}
