@@ -51,6 +51,7 @@ public class AssignmentServiceImpl implements AssignmentService{
 		assignment.setCourse(new Course(createAssignmentDTO.getCourseID()));
 		assignment.setName(createAssignmentDTO.getName());
 		assignment.setMaxPoints(createAssignmentDTO.getMaxPoints());
+		assignment.setDescription(createAssignmentDTO.getDescription());
 		Assignment assignmentSaved = (Assignment) assignmentRepository.save(assignment);
 		return assignment;
 	}

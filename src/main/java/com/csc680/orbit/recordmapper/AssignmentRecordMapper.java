@@ -26,7 +26,8 @@ public class AssignmentRecordMapper implements RecordMapper<Record, Assignment>{
 				r.getValue(ASSIGNMENT.NAME),
 				r.getValue(ASSIGNMENT.TYPE),
 				r.getValue(ASSIGNMENT.MAX_POINTS),
-				course);
+				course,
+				r.getValue(ASSIGNMENT.DESCRIPTION));
 	}
 
 }

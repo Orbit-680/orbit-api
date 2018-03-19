@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tickets extends TableImpl<TicketsRecord> {
 
-    private static final long serialVersionUID = -716762189;
+    private static final long serialVersionUID = 992231256;
 
     /**
      * The reference instance of <code>orbit.tickets</code>
@@ -68,7 +68,7 @@ public class Tickets extends TableImpl<TicketsRecord> {
     /**
      * The column <code>orbit.tickets.Description</code>.
      */
-    public final TableField<TicketsRecord, String> DESCRIPTION = createField("Description", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
+    public final TableField<TicketsRecord, String> DESCRIPTION = createField("Description", org.jooq.impl.SQLDataType.CLOB.nullable(false), this, "");
 
     /**
      * The column <code>orbit.tickets.Priority</code>.

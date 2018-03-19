@@ -43,6 +43,7 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
 		String maxPoints = entity.getMaxPoints();
 		String year = "1718";
 		String type = "Homework";
+		String description = entity.getDescription();
 		int courseID = entity.getCourse().getCourseId();
 		
 		Assignment iAssignment = this.dslContext.insertInto(ASSIGNMENT, 
@@ -50,12 +51,14 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
 							ASSIGNMENT.NAME,
 							ASSIGNMENT.TYPE,
 							ASSIGNMENT.MAX_POINTS,
-							ASSIGNMENT.COURSE_ID)
+							ASSIGNMENT.COURSE_ID,
+							ASSIGNMENT.DESCRIPTION)
 			        .values(year, 
 			        		assignmentName,
 			        		type, 
 			        		maxPoints,
-			        		courseID)
+			        		courseID,
+							description)
 			        .returning(ASSIGNMENT.ID, ASSIGNMENT.COURSE_ID)
 			        .fetchOne()
 			        .map(new AssignmentRecordMapper());
@@ -86,7 +89,8 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
 				ASSIGNMENT.NAME, 
 				ASSIGNMENT.TYPE,
 				ASSIGNMENT.MAX_POINTS,
-				ASSIGNMENT.COURSE_ID)
+				ASSIGNMENT.COURSE_ID,
+				ASSIGNMENT.DESCRIPTION)
 				.from(ASSIGNMENT)
 				.where(ASSIGNMENT.ID.eq(assignmentID))
 				.fetch()
@@ -121,7 +125,8 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
 				ASSIGNMENT.NAME, 
 				ASSIGNMENT.TYPE,
 				ASSIGNMENT.MAX_POINTS,
-				ASSIGNMENT.COURSE_ID)
+				ASSIGNMENT.COURSE_ID,
+				ASSIGNMENT.DESCRIPTION)
 				.from(ASSIGNMENT)
 				.fetch()
 				.map(new AssignmentRecordMapper());
@@ -137,7 +142,8 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
 				ASSIGNMENT.NAME, 
 				ASSIGNMENT.TYPE,
 				ASSIGNMENT.MAX_POINTS,
-				ASSIGNMENT.COURSE_ID)
+				ASSIGNMENT.COURSE_ID,
+				ASSIGNMENT.DESCRIPTION)
 				.from(ASSIGNMENT)
 				.where(ASSIGNMENT.COURSE_ID.eq(courseID))
 				.fetch()
