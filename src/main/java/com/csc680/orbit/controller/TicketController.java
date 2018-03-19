@@ -17,11 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.logging.Logger;
 
-@CrossOrigin(origins = { 	"http://localhost:4200", 
-							"https://orbit-ui-integration.brocktubre.com",
-							"https://orbit-ui-test.brocktubre.com",
-							"https://orbit-ui.brocktubre.com"
-							})
 @RestController
 public class TicketController {
     private static final Logger LOGGER = Logger.getLogger(TypeData.ClassName.class.getName());
