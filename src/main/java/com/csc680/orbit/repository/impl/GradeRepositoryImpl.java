@@ -209,7 +209,8 @@ public class GradeRepositoryImpl implements GradeRepository {
 				GRADE.STUDENT_ID,
 				GRADE.COURSE_ID,
 				GRADE.ASSIGNMENT_ID,
-				ASSIGNMENT.NAME)
+				ASSIGNMENT.NAME,
+				ASSIGNMENT.DESCRIPTION)
 				.from(GRADE)
 				.join(ASSIGNMENT).on(GRADE.ASSIGNMENT_ID.eq(ASSIGNMENT.ID))
 				.where(GRADE.STUDENT_ID.eq(studentID)).and(GRADE.COURSE_ID.eq(courseID))
