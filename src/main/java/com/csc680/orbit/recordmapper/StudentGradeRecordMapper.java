@@ -24,6 +24,7 @@ public class StudentGradeRecordMapper implements RecordMapper<Record, Grade> {
 			course = new Course(r.getValue(GRADE.COURSE_ID));
 			assignment = new Assignment(r.getValue(GRADE.ASSIGNMENT_ID), course);
 			assignment.setName(r.getValue(ASSIGNMENT.NAME));
+			assignment.setDescription(r.getValue(ASSIGNMENT.DESCRIPTION));
 		}catch (NullPointerException e){
 	
 		}
