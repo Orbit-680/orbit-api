@@ -47,7 +47,7 @@ public class RoleController {
 		LOGGER.info("Checking to see if user has teacher role.");
 		Role role = roleService.getUsersRoleByUid(uid);
 		CheckRoleDTO checkRole = new CheckRoleDTO(role.getName());
-		if(role.getName().equalsIgnoreCase(Constants.ROLE_TEACHER)){
+		if(role.getName() != null && role.getName().equalsIgnoreCase(Constants.ROLE_TEACHER)){
 			checkRole.setHasRole(true);
 		}
 		return checkRole;
@@ -58,7 +58,7 @@ public class RoleController {
 		LOGGER.info("Checking to see if user has student role.");
 		Role role = roleService.getUsersRoleByUid(uid);
 		CheckRoleDTO checkRole = new CheckRoleDTO(role.getName());
-		if(role.getName().equalsIgnoreCase(Constants.ROLE_STUDENT)){
+		if(role.getName() != null && role.getName().equalsIgnoreCase(Constants.ROLE_STUDENT)){
 			checkRole.setHasRole(true);
 		}
 		return checkRole;
@@ -69,7 +69,7 @@ public class RoleController {
 		LOGGER.info("Checking to see if user has admin role.");
 		Role role = roleService.getUsersRoleByUid(uid);
 		CheckRoleDTO checkRole = new CheckRoleDTO(role.getName());
-		if(role.getName().equalsIgnoreCase(Constants.ROLE_ADMIN)){
+		if(role.getName() != null && role.getName().equalsIgnoreCase(Constants.ROLE_ADMIN)){
 			checkRole.setHasRole(true);
 		}
 		return checkRole;
@@ -80,7 +80,7 @@ public class RoleController {
 		LOGGER.info("Checking to see if user has parent role.");
 		Role role = roleService.getUsersRoleByUid(uid);
 		CheckRoleDTO checkRole = new CheckRoleDTO(role.getName());
-		if(role.getName().equalsIgnoreCase(Constants.ROLE_PARENT)){
+		if(role.getName() != null && role.getName().equalsIgnoreCase(Constants.ROLE_PARENT)){
 			checkRole.setHasRole(true);
 		}
 		return checkRole;
