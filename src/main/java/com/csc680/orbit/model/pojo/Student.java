@@ -77,6 +77,11 @@ public @Data class Student
         
     }
     
+    public Student(int studentID)
+    {
+    	this.studentID = studentID;
+    }
+    
     public int getStudentId() {  return studentID;   } 
     public void setStudentId(int studentID) {  this.studentID = studentID;   }
     

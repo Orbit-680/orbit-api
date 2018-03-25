@@ -41,7 +41,10 @@ public class RoleServiceImpl implements RoleService{
 	@Override
 	public Role getUsersRoleByUid(String uid) {
 		User currentUser = userService.getUserByUID(uid);
-		Role role = currentUser.getRole();
+		Role role = new Role();
+		if(currentUser != null){
+			return role = currentUser.getRole();
+		}
 		return role;
 	}
 	

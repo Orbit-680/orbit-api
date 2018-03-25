@@ -33,6 +33,8 @@ public class UserRepositoryImpl implements UserRepository {
 		int invalidAttempts = user.getInvalidAttempts();
 		String active = user.getActive();
 		Role role = user.getRole();
+		String firstName = user.getFirstName();
+		String lastName = user.getLastName();
 		
 		User inUser = this.dslContext.insertInto(USER,
 						USER.EMAIL,
@@ -40,9 +42,11 @@ public class UserRepositoryImpl implements UserRepository {
 						USER.LAST_LOGIN,
 						USER.INVALID_ATTEMPTS,
 						USER.ACTIVE,
-						USER.ROLE_ID)
-						.values(username, uid, lastLogin, invalidAttempts, active, role.getRoleID())
-						.returning(USER.ID, USER.EMAIL, USER.UID, USER.LAST_LOGIN, USER.INVALID_ATTEMPTS, USER.ACTIVE, USER.ROLE_ID)
+						USER.ROLE_ID,
+						USER.FIRSTNAME,
+						USER.LASTNAME)
+						.values(username, uid, lastLogin, invalidAttempts, active, role.getRoleID(), firstName, lastName)
+						.returning(USER.ID, USER.EMAIL, USER.UID, USER.LAST_LOGIN, USER.INVALID_ATTEMPTS, USER.ACTIVE, USER.ROLE_ID, USER.FIRSTNAME, USER.LASTNAME)
 						.fetchOne()
 						.map(new UserRecordMapper());
 		
@@ -71,7 +75,9 @@ public class UserRepositoryImpl implements UserRepository {
 						USER.INVALID_ATTEMPTS,
 						USER.ACTIVE,
 						USER.ROLE_ID,
-						ROLE.NAME)
+						ROLE.NAME,
+						USER.FIRSTNAME,
+						USER.LASTNAME)
 					.from(USER)
 					.join(ROLE).on(USER.ROLE_ID.eq(ROLE.ID))
 					.where(USER.UID.eq(id))
@@ -98,7 +104,9 @@ public class UserRepositoryImpl implements UserRepository {
 						USER.LAST_LOGIN,
 						USER.INVALID_ATTEMPTS,
 						USER.ACTIVE,
-						USER.ROLE_ID)
+						USER.ROLE_ID,
+						USER.FIRSTNAME,
+						USER.LASTNAME)
                              .from(USER)
                              .fetch()
                              .map(new UserRecordMapper());

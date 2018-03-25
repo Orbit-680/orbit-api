@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Assignment extends TableImpl<AssignmentRecord> {
 
-    private static final long serialVersionUID = -29861171;
+    private static final long serialVersionUID = 582836705;
 
     /**
      * The reference instance of <code>orbit.assignment</code>
@@ -84,6 +84,11 @@ public class Assignment extends TableImpl<AssignmentRecord> {
      * The column <code>orbit.assignment.Course_ID</code>.
      */
     public final TableField<AssignmentRecord, Integer> COURSE_ID = createField("Course_ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>orbit.assignment.Description</code>.
+     */
+    public final TableField<AssignmentRecord, String> DESCRIPTION = createField("Description", org.jooq.impl.SQLDataType.CLOB.nullable(false), this, "");
 
     /**
      * Create a <code>orbit.assignment</code> table reference

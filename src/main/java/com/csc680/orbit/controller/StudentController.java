@@ -79,25 +79,13 @@ public class StudentController
         return accountLink;
     }
     
-    @RequestMapping(value = "/link-student/{userID}/{studentID}", method = RequestMethod.GET)
-    public AccountLinkStudent linkStudent(@PathVariable("userID") int user_id, @PathVariable("studentID") int student_id)
-    {	
-    	LOGGER.info("Hit the link-student end point.");
-        
-    	//StudentDTO studentDto = new StudentDTO();
-    	AccountLinkStudentDTO accountLinkDto = new AccountLinkStudentDTO("dCNdrck1TDgh6J281p6no3H1ryH3", student_id);
-    	AccountLinkStudent accountLink = studentService.linkStudent(accountLinkDto);
-        //LOGGER.info("Here is the student we found: " + foundStudent);
-        return accountLink;
-    }
-    
     @RequestMapping(value = "/find-linked/{uid}", method = RequestMethod.GET)
-    public List<Student> findLinked(@PathVariable("uid") String UID)
+    public List<Student> findLinked(@PathVariable("uid") int userID)
     {	
     	LOGGER.info("Hit the get-student end point.");
-    	LOGGER.info("user - " + UID);
+    	LOGGER.info("user - " + userID);
     	User user = new User();
-    	user.setUid(UID);
+    	user.setUserID(userID);
     	List<Student> students = studentService.findLinkedStudents(user);
         //LOGGER.info("Here is the student we found: " + students);
         return students;

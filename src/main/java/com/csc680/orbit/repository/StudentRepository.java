@@ -15,5 +15,5 @@ public interface StudentRepository extends CrudRepository<Student, String>
 
 	Student findStudent(StudentDTO studentDto);
 	AccountLinkStudent linkStudent(AccountLinkStudentDTO accountLinkDto);
-	List<Student> findLinkedStudents(String UID);
+	List<Student> findLinkedStudents(int userID);
 }

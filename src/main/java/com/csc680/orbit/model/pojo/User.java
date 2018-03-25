@@ -18,6 +18,9 @@ public class User {
 	private Date lastLogin;
 	private int invalidAttempts;
 	private String active;
+	private String firstName;
+	private String lastName;
+	
 	@ManyToOne
 	@JoinColumn(name = "Role_ID")
 	private Role role;
@@ -26,7 +29,7 @@ public class User {
 
 	}
 
-	public User(int userID, String email, String uid, Date lastLogin, int invalidAttempts, String active, Role role) {
+	public User(int userID, String email, String uid, Date lastLogin, int invalidAttempts, String active, Role role, String firstName, String lastName) {
 		this.userID = userID;
 		this.email = email;
 		this.uid = uid;
@@ -34,6 +37,12 @@ public class User {
 		this.invalidAttempts = invalidAttempts;
 		this.active = active;
 		this.role = role;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	public User(int userID){
+		this.userID = userID;
 	}
 
 	public int getUserID() {
@@ -92,10 +101,28 @@ public class User {
 		this.role = role;
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	@Override
 	public String toString() {
-		return "User [userID=" + userID + ", email=" + email + ", uid=" + uid + ", lastLogin=" + lastLogin
-				+ ", invalidAttempts=" + invalidAttempts + ", active=" + active + ", role=" + role + "]";
+		return "User [userID=" + userID + ", email=" + email + ", uid=" + uid
+				+ ", lastLogin=" + lastLogin + ", invalidAttempts="
+				+ invalidAttempts + ", active=" + active + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", role=" + role + "]";
 	}
 
 }

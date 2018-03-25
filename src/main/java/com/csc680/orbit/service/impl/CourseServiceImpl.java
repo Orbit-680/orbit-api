@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.csc680.orbit.model.dto.CreateCourseDTO;
 import com.csc680.orbit.model.pojo.Course;
 import com.csc680.orbit.repository.CourseRepository;
 import com.csc680.orbit.service.CourseService;
@@ -41,6 +42,10 @@ public class CourseServiceImpl implements CourseService {
 	
 	public String assignCoursesToTeacher(List<Course> courseList, String teacherId){
 		return courseRepository.assignCoursesToTeacher(courseList, teacherId);
+	}
+	
+	public Course createCourse(CreateCourseDTO createCourseDTO){
+		return courseRepository.createCourse(createCourseDTO);
 	}
 
 }

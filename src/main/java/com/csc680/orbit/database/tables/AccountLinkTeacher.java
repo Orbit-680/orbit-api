@@ -41,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class AccountLinkTeacher extends TableImpl<AccountLinkTeacherRecord> {
 
-    private static final long serialVersionUID = 473248101;
+    private static final long serialVersionUID = 1973584421;
 
     /**
      * The reference instance of <code>orbit.account_link_teacher</code>
@@ -123,7 +123,7 @@ public class AccountLinkTeacher extends TableImpl<AccountLinkTeacherRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.ACCOUNT_LINK_TEACHER_PRIMARY, Indexes.ACCOUNT_LINK_TEACHER_TEACHER_ID, Indexes.ACCOUNT_LINK_TEACHER_USER_ID);
+        return Arrays.<Index>asList(Indexes.ACCOUNT_LINK_TEACHER_ACCOUNT_LINK_TEACHER_IBFK_2, Indexes.ACCOUNT_LINK_TEACHER_ACCOUNT_LINK_USER_IBFK_1, Indexes.ACCOUNT_LINK_TEACHER_PRIMARY);
     }
 
     /**
@@ -155,7 +155,7 @@ public class AccountLinkTeacher extends TableImpl<AccountLinkTeacherRecord> {
      */
     @Override
     public List<ForeignKey<AccountLinkTeacherRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<AccountLinkTeacherRecord, ?>>asList(Keys.ACCOUNT_LINK_TEACHER_IBFK_1, Keys.ACCOUNT_LINK_TEACHER_IBFK_2);
+        return Arrays.<ForeignKey<AccountLinkTeacherRecord, ?>>asList(Keys.ACCOUNT_LINK_USER_IBFK_1, Keys.ACCOUNT_LINK_TEACHER_IBFK_2);
     }
 
     /**

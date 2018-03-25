@@ -2,16 +2,15 @@ package com.csc680.orbit.model.dto;
 
 public class StudentDTO 
 {
-    private String firstName, lastName, dateOfBirth, studentSSN;
+    private String firstName, lastName, dateOfBirth;
         
     public StudentDTO(){}
     public StudentDTO(String firstName, String lastName, 
-                           String dateOfBirth, String studentSSN)
+                           String dateOfBirth)
     {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
-        this.studentSSN = studentSSN;
     }
     
     public String getFirstName() {  return firstName;    }
@@ -26,9 +25,4 @@ public class StudentDTO
 
     public void setDateOfBirth(String dateOfBirth) 
         {this.dateOfBirth = dateOfBirth;}
-
-    public String getStudentSSN() {return studentSSN; }
-
-    public void setStudentSSN(String studentSSN) 
-        {this.studentSSN = studentSSN; }
 }

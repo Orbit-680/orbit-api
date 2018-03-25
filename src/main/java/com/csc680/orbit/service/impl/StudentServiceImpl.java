@@ -48,13 +48,25 @@ public class StudentServiceImpl implements StudentService
     }
     
     public Student getStudent(StudentDTO studentDto)
-    
     {
         Student student  = studentRepository.findStudent(studentDto);
         if(student == null){
         	throw new NotFoundException("Could not find the student with those search parameters.");
         }
         return student;
+    }
+    
+    public Student getStudent(Student student)
+    {	
+    	StudentDTO s = new StudentDTO();
+    	s.setFirstName(student.getStudentFirstName());
+    	s.setLastName(student.getStudentLastName());
+    	s.setDateOfBirth(student.getStudentDateOfBirth());
+        Student rs  = studentRepository.findStudent(s);
+        if(rs  == null){
+        	throw new NotFoundException("Could not find the student with those search parameters.");
+        }
+        return rs ;
     }
     
     public AccountLinkStudent linkStudent(AccountLinkStudentDTO accountLinkDto)
@@ -68,7 +80,7 @@ public class StudentServiceImpl implements StudentService
     
     public List <Student> findLinkedStudents(User user)
     {
-    	List<Student> students = (List<Student>) studentRepository.findLinkedStudents(user.getUid());
+    	List<Student> students = (List<Student>) studentRepository.findLinkedStudents(user.getUserID());
     	return students;
     }
 }

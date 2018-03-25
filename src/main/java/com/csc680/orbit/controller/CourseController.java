@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.csc680.orbit.exceptions.BadRequestException;
 import com.csc680.orbit.model.dto.AssignCourseToTeacherDTO;
+import com.csc680.orbit.model.dto.CreateAssignmentDTO;
+import com.csc680.orbit.model.dto.CreateCourseDTO;
 import com.csc680.orbit.model.dto.ResponseStatusDTO;
+import com.csc680.orbit.model.pojo.Assignment;
 import com.csc680.orbit.model.pojo.Course;
 import com.csc680.orbit.service.CourseService;
 import com.csc680.orbit.utils.Constants;
@@ -64,5 +67,13 @@ public class CourseController {
 		}
 		throw new BadRequestException("Something went wrong trying to assign teacher to a course.");
 	}
+	
+	@RequestMapping(value = "/create-course", method = RequestMethod.POST)
+    public Course createCourse(@RequestBody CreateCourseDTO createCourseDto)
+    {	
+    	LOGGER.info("Hit the create-course end point.");
+    	Course course = courseService.createCourse(createCourseDto);
+        return course;
+    }
 	
 }
