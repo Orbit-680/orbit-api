@@ -1,34 +1,17 @@
 package com.csc680.orbit.repository.impl;
 
 import static com.csc680.orbit.database.Tables.ASSIGNMENT;
-import static com.csc680.orbit.database.Tables.COURSE;
-import static com.csc680.orbit.database.Tables.STUDENT;
-import static com.csc680.orbit.database.tables.Schedule.SCHEDULE;
-
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.jooq.DSLContext;
 
-import com.csc680.orbit.model.dto.AccountDetailsDTO;
-import com.csc680.orbit.model.dto.EnrollStudentInClassDTO;
 import com.csc680.orbit.model.pojo.Assignment;
 import com.csc680.orbit.model.pojo.Course;
-import com.csc680.orbit.model.pojo.Schedule;
-import com.csc680.orbit.model.pojo.Student;
-import com.csc680.orbit.model.pojo.User;
 import com.csc680.orbit.recordmapper.AssignmentRecordMapper;
-import com.csc680.orbit.recordmapper.CourseRecordMapper;
-import com.csc680.orbit.recordmapper.ScheduleRecordMapper;
-import com.csc680.orbit.recordmapper.StudentRecordMapper;
-import com.csc680.orbit.recordmapper.UserRecordMapper;
 import com.csc680.orbit.repository.AssignmentRepository;
-import com.csc680.orbit.repository.UserRepository;
 import com.csc680.orbit.service.DBConnection;
-import com.csc680.orbit.utils.Constants;
-
 import javassist.bytecode.stackmap.TypeData.ClassName;
 
 public class AssignmentRepositoryImpl implements AssignmentRepository {
