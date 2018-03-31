@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <configuration xmlns="http://www.jooq.org/xsd/jooq-codegen-3.10.0.xsd">
-
+	<!-- Configure the database connection here -->
+	  <jdbc>
+	    <driver>com.mysql.jdbc.Driver</driver>
+	    <url>jdbc:mysql://orbit-integration.brocktubre.com:3306/orbit</url>
+	    <user>APIacc</user>
+	    <password>KU5K3vxAAC</password>
+	  </jdbc>
+  
   <generator>
     <!-- The default code generator. You can override this one, to generate your own code style.
          Supported generators:

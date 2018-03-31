@@ -6,13 +6,16 @@ import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
+import com.csc680.orbit.utils.DBConfig;
+
 
 
 public class DBConnection 
 {
-    private static final String USERNAME = "APIacc";
-    private static final String PASSWORD = "KU5K3vxAAC";
-    private static final String URL = "jdbc:mysql://18.220.78.140:3306/orbit";
+    private static final String USERNAME = DBConfig.USERNAME;
+    private static final String PASSWORD = DBConfig.PASSWORD;
+    private static final String URL = DBConfig.URL;
+    
     static Connection conn = null;
     static DSLContext dslContext = null;
     public static DSLContext getConnection()
