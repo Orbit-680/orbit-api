@@ -18,6 +18,8 @@ public class StudentGradeRecordMapper implements RecordMapper<Record, Grade> {
 		Student student = new Student();
 		Course course = new Course();
 		Assignment assignment = new Assignment();
+		String maxPoints = "";
+		double grade = 0;
 		
 		try{
 			student = new Student(r.getValue(GRADE.STUDENT_ID));
@@ -25,13 +27,16 @@ public class StudentGradeRecordMapper implements RecordMapper<Record, Grade> {
 			assignment = new Assignment(r.getValue(GRADE.ASSIGNMENT_ID), course);
 			assignment.setName(r.getValue(ASSIGNMENT.NAME));
 			assignment.setDescription(r.getValue(ASSIGNMENT.DESCRIPTION));
+			maxPoints = r.getValue(ASSIGNMENT.MAX_POINTS);
+			if(maxPoints != null)
+				grade = (Integer.parseInt(r.getValue(GRADE.GRADE_)) * 1.0 / Integer.parseInt(maxPoints)) * 100;
 		}catch (NullPointerException e){
 	
 		}
 		
 		return new Grade(
 				r.getValue(GRADE.ID),
-				r.getValue(GRADE.GRADE_),
+				String.valueOf(grade),
 				r.getValue(COURSE.YEAR),
 				student,
 				course,

@@ -187,10 +187,11 @@ public class GradeRepositoryImpl implements GradeRepository {
 				COURSE.ID,
 				COURSE.NAME,
 				GRADE.GRADE_.sum(),
-				GRADE.GRADE_.count())
+				ASSIGNMENT.MAX_POINTS.sum())
 				.from(SCHEDULE)
 				.join(COURSE).on(SCHEDULE.COURSE_ID.eq(COURSE.ID))
 				.leftJoin(GRADE).on(SCHEDULE.STUDENT_ID.eq(GRADE.STUDENT_ID)).and(SCHEDULE.COURSE_ID.eq(GRADE.COURSE_ID))
+				.leftJoin(ASSIGNMENT).on(GRADE.ASSIGNMENT_ID.eq(ASSIGNMENT.ID))
 				.where(SCHEDULE.STUDENT_ID.eq(studentID))
 				.groupBy(SCHEDULE.STUDENT_ID, COURSE.ID, COURSE.NAME)
 				.fetch()
@@ -210,7 +211,8 @@ public class GradeRepositoryImpl implements GradeRepository {
 				GRADE.COURSE_ID,
 				GRADE.ASSIGNMENT_ID,
 				ASSIGNMENT.NAME,
-				ASSIGNMENT.DESCRIPTION)
+				ASSIGNMENT.DESCRIPTION,
+				ASSIGNMENT.MAX_POINTS)
 				.from(GRADE)
 				.join(ASSIGNMENT).on(GRADE.ASSIGNMENT_ID.eq(ASSIGNMENT.ID))
 				.where(GRADE.STUDENT_ID.eq(studentID)).and(GRADE.COURSE_ID.eq(courseID))
