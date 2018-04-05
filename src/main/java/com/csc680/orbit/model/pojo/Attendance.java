@@ -17,14 +17,15 @@ public class Attendance
     @ManyToOne
 	@JoinColumn(name = "Course_ID")
     private Course course;
+    private String year;
     private String status;
     private String comment;
-    private String year;
     private LocalDate date;
+    char updateType;
     
     public Attendance(){}
     
-    public Attendance(int attendanceId, Student student, Course course, String status, String comment, String year, LocalDate date)
+    public Attendance(int attendanceId, Student student, Course course, String status, String comment, String year, LocalDate date, char updateType)
     {
         this.attendanceId = attendanceId;
         this.student = student;
@@ -33,6 +34,7 @@ public class Attendance
         this.comment = comment;
         this.year = year;
         this.date = date;
+        this.updateType = updateType;
     }
     public void setAttendanceId(int attendanceId) {
         this.attendanceId = attendanceId;
@@ -61,7 +63,10 @@ public class Attendance
     public void setDate(LocalDate date) {
         this.date = date;
     }
-
+    
+    public void setUpdateType(char updateType) {
+        this.updateType = updateType;
+    }
     public int getAttendanceId() {
         return attendanceId;
     }
@@ -89,12 +94,17 @@ public class Attendance
     public LocalDate getDate() {
         return date;
     }
+    
+    public char getUpdateType(){
+        return updateType;
+    }
+    
     @Override
     public String toString()
     {
         return "AttendanceID = " +this.attendanceId + "Student = "+ this.student +
                 "Course = " + this.course + "Status = " + this.status +
                 "Comment = " + this.comment + "Year = " + this.year + 
-                "Date = " + this.date;
+                "Date = " + this.date + "UpdateType = " + this.updateType;
     }
 }

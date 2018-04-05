@@ -8,5 +8,6 @@ import com.csc680.orbit.model.pojo.Attendance;
 public interface AttendanceRepository extends CrudRepository<Attendance, String>
 {
     List<Attendance> findAllAttendancesForStudent(int studentId);   
-    List<Attendance> findAllAttendancesForCourse(int courseId);
+    List<Attendance> findAllAttendancesForStudentInCourse(int studentId, int courseId);
+    boolean saveAttendance(Attendance attendance);
 }

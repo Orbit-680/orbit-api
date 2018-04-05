@@ -7,7 +7,6 @@ import java.util.List;
 public interface AttendanceService {
     List<Attendance> getAllAttendances();
     List<Attendance> getAllAttendancesForStudent(int studentId);
-    List<Attendance> getAllAttendancesForCourse(int courseId);
     List<Attendance> getAllAttendancesForStudentinCourse(int studentId, int courseId);
     List<Attendance> saveCourseAttendance(SaveAttendanceDTO saveAttendances);
 
