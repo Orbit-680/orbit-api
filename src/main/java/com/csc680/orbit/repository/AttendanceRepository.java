@@ -5,7 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.csc680.orbit.model.pojo.Attendance;
 
-public interface AttendanceRepository {
+public interface AttendanceRepository extends CrudRepository<Attendance, String>
+{
     List<Attendance> findAllAttendancesForStudent(int studentId);   
     List<Attendance> findAllAttendancesForCourse(int courseId);
 }

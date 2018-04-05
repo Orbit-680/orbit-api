@@ -26,5 +26,4 @@ public class SaveAttendanceDTO
     public void setAttendanceList(List<Attendance> attendanceList) {
         this.attendanceList = attendanceList;
     }
-    
 }
