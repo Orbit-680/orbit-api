@@ -71,7 +71,7 @@ public class TicketServiceImpl implements TicketService{
         	PublishRequest publishRequest = new PublishRequest(topicArn, msg);
         	PublishResult publishResult = snsClient.publish(publishRequest);
         	//print MessageId of message published to SNS topic
-        	System.out.println("MessageId - " + publishResult.getMessageId());
+        	LOGGER.info("Sent SNS message - " + publishResult.getMessageId());
         }
         return newTicket;
     }
