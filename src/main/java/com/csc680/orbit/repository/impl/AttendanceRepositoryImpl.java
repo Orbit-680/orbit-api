@@ -27,14 +27,18 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
         List<Attendance> attendances = new ArrayList<>();
 	attendances = this.dslContext.select(
                             ATTENDANCE.ID,
-                            ATTENDANCE.STUDENT_ID,
-                            ATTENDANCE.COURSE_ID, 
+                            STUDENT.ID,                            
+                            SCHEDULE.COURSE_ID, 
                             ATTENDANCE.STATUS,
                             ATTENDANCE.COMMENT,
                             ATTENDANCE.YEAR,
-                            ATTENDANCE.DATE)
-			.from(ATTENDANCE)
-                        .where(ATTENDANCE.STUDENT_ID.eq(studentId))
+                            ATTENDANCE.DATE,
+                            STUDENT.LAST_NAME,
+                            STUDENT.FIRST_NAME)
+			.from(STUDENT)
+                        .join(SCHEDULE).on(SCHEDULE.STUDENT_ID.eq(STUDENT.ID))
+                        .leftJoin(ATTENDANCE).on(ATTENDANCE.STUDENT_ID.eq(STUDENT.ID))
+                        .where(SCHEDULE.STUDENT_ID.eq(studentId))
 			.fetch()
 			.map(new AttendanceRecordMapper());
         return attendances;
@@ -45,20 +49,22 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
         List<Attendance> attendances = new ArrayList<>();
 	attendances = this.dslContext.select(
                             ATTENDANCE.ID,
-                            ATTENDANCE.STUDENT_ID,
-                            ATTENDANCE.COURSE_ID, 
+                            STUDENT.ID,                            
+                            SCHEDULE.COURSE_ID, 
                             ATTENDANCE.STATUS,
                             ATTENDANCE.COMMENT,
                             ATTENDANCE.YEAR,
-                            ATTENDANCE.DATE)
-			.from(SCHEDULE)
-			.join(STUDENT).on(STUDENT.ID.eq(SCHEDULE.STUDENT_ID))
+                            ATTENDANCE.DATE,
+                            STUDENT.LAST_NAME,
+                            STUDENT.FIRST_NAME)
+			.from(STUDENT)
+                        .join(SCHEDULE).on(SCHEDULE.STUDENT_ID.eq(STUDENT.ID))
+                        .leftJoin(ATTENDANCE).on(ATTENDANCE.STUDENT_ID.eq(STUDENT.ID))
                         .where(SCHEDULE.STUDENT_ID.eq(studentId).and(SCHEDULE.COURSE_ID.eq(courseId)))
 			.fetch()
 			.map(new AttendanceRecordMapper());
         return attendances;
     }
-
     public void updateAttendance(Attendance entity) {
 		// TODO Auto-generated method stub
 		String status = entity.getStatus();
@@ -218,20 +224,24 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
     public void deleteAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public List<Attendance> findAllAttendanceForCourse(int courseId) {
         List<Attendance> attendances = new ArrayList<>();
 	attendances = this.dslContext.select(
                             ATTENDANCE.ID,
-                            ATTENDANCE.STUDENT_ID,
-                            ATTENDANCE.COURSE_ID, 
+                            STUDENT.ID,                            
+                            SCHEDULE.COURSE_ID, 
                             ATTENDANCE.STATUS,
                             ATTENDANCE.COMMENT,
                             ATTENDANCE.YEAR,
-                            ATTENDANCE.DATE)
-			.from(ATTENDANCE)
-                        .where(ATTENDANCE.COURSE_ID.eq(courseId))
+                            ATTENDANCE.DATE,
+                            STUDENT.LAST_NAME,
+                            STUDENT.FIRST_NAME)
+			.from(STUDENT)
+                        .join(SCHEDULE).on(SCHEDULE.STUDENT_ID.eq(STUDENT.ID))
+                        .leftJoin(ATTENDANCE).on(ATTENDANCE.STUDENT_ID.eq(STUDENT.ID))
+                        .where(SCHEDULE.COURSE_ID.eq(courseId))
 			.fetch()
 			.map(new AttendanceRecordMapper());
         return attendances;

@@ -63,7 +63,7 @@ public class AttendanceServiceImpl implements AttendanceService{
     @Override
     public List<Attendance> getAllAttendanceForCourse(int courseId) {
          LOGGER.log(Level.INFO, "getAllAttendanceForCourse service hit");
-	List<Attendance> attendances = (List<Attendance>) attendanceRepository.findAllAttendancesForStudent(courseId);
+	List<Attendance> attendances = (List<Attendance>) attendanceRepository.findAllAttendanceForCourse(courseId);
 	return attendances;
     }
     

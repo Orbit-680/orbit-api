@@ -30,7 +30,7 @@ public class AttendanceRecordMapper implements RecordMapper<Record, Attendance>{
 	String year = "";
         String status = "";
         String comment = "";
-        Date date = new Date(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
+        Date date = null;// = new Date(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
 
 		
 	try
