@@ -47,7 +47,7 @@ public class TicketServiceImpl implements TicketService{
         	
         	String awsSecret;
         	String awsAccount;
-        	String topicArn = awsAccount = enviornment.getProperty("aws.sns.ticket.topic.arn");
+        	String topicArn = enviornment.getProperty("aws.sns.ticket.topic.arn");
         	Region region = Region.getRegion(Regions.US_EAST_2);
         	AmazonSNS snsClient;
 
