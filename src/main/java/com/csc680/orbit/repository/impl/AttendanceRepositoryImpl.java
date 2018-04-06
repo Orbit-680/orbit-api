@@ -10,7 +10,6 @@ import com.csc680.orbit.repository.AttendanceRepository;
 import com.csc680.orbit.service.DBConnection;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -96,8 +95,7 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
         String status = s.getStatus();
 	String year = "1718";
         String comment = s.getComment();
-        //LocalDate date = s.getDate();
-        Date sqlDate = java.sql.Date.valueOf(s.getDate());
+        Date date = s.getDate();
 	int studentID = s.getStudent().getStudentId();
 	int courseID = s.getCourse().getCourseId();
 	
@@ -113,7 +111,7 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
                                     studentID,
                                     courseID,
                                     comment,
-                                    sqlDate)
+                                    date)
 			        .returning(ATTENDANCE.ID)
 			        .execute();
 

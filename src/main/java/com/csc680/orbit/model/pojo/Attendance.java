@@ -1,5 +1,5 @@
 package com.csc680.orbit.model.pojo;
-import java.time.LocalDate;
+import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -20,12 +20,12 @@ public class Attendance
     private String year;
     private String status;
     private String comment;
-    private LocalDate date;
+    private Date date;
     char updateType;
     
     public Attendance(){}
     
-    public Attendance(int attendanceId, Student student, Course course, String status, String comment, String year, LocalDate date, char updateType)
+    public Attendance(int attendanceId, Student student, Course course, String status, String comment, String year, Date date, char updateType)
     {
         this.attendanceId = attendanceId;
         this.student = student;
@@ -60,7 +60,7 @@ public class Attendance
         this.year = year;
     }
     
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
     
@@ -91,7 +91,7 @@ public class Attendance
         return year;
     }
     
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
     
@@ -102,9 +102,9 @@ public class Attendance
     @Override
     public String toString()
     {
-        return "AttendanceID = " +this.attendanceId + "Student = "+ this.student +
+        return "Attendance [AttendanceID = " +this.attendanceId + "Student = "+ this.student +
                 "Course = " + this.course + "Status = " + this.status +
                 "Comment = " + this.comment + "Year = " + this.year + 
-                "Date = " + this.date + "UpdateType = " + this.updateType;
+                "Date = " + this.date.toString() + "UpdateType = " + this.updateType + "]";
     }
 }

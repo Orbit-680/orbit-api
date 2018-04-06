@@ -15,7 +15,8 @@ import com.csc680.orbit.model.pojo.Attendance;
 import javassist.bytecode.stackmap.TypeData.ClassName;
 
 import com.csc680.orbit.model.pojo.Student;
-import java.time.LocalDate;
+import java.sql.Date;
+import java.util.Calendar;
 
 public class AttendanceRecordMapper implements RecordMapper<Record, Attendance>{
 
@@ -29,7 +30,7 @@ public class AttendanceRecordMapper implements RecordMapper<Record, Attendance>{
 	String year = "";
         String status = "";
         String comment = "";
-        LocalDate date = LocalDate.now();
+        Date date = new Date(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
 
 		
 	try
@@ -48,7 +49,7 @@ public class AttendanceRecordMapper implements RecordMapper<Record, Attendance>{
             if(ATTENDANCE.COMMENT != null)
                 comment = r.getValue(ATTENDANCE.COMMENT);
             if(ATTENDANCE.DATE != null)
-                date = (r.getValue(ATTENDANCE.DATE).toLocalDate());
+                date = (r.getValue(ATTENDANCE.DATE));
                 
             if(ATTENDANCE.STATUS == null)
                 updateType = 'I';
