@@ -218,5 +218,23 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
     public void deleteAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Attendance> findAllAttendanceForCourse(int courseId) {
+        List<Attendance> attendances = new ArrayList<>();
+	attendances = this.dslContext.select(
+                            ATTENDANCE.ID,
+                            ATTENDANCE.STUDENT_ID,
+                            ATTENDANCE.COURSE_ID, 
+                            ATTENDANCE.STATUS,
+                            ATTENDANCE.COMMENT,
+                            ATTENDANCE.YEAR,
+                            ATTENDANCE.DATE)
+			.from(ATTENDANCE)
+                        .where(ATTENDANCE.COURSE_ID.eq(courseId))
+			.fetch()
+			.map(new AttendanceRecordMapper());
+        return attendances;
+    }
     
 }

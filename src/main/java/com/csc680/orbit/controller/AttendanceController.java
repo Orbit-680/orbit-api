@@ -50,11 +50,19 @@ public class AttendanceController {
         return studentAttendance;
     }
     
-    @RequestMapping(value = "/student-attendace/{studentID}/{courseID}", method = RequestMethod.GET)
+    @RequestMapping(value = "/student-attendance/{studentID}/{courseID}", method = RequestMethod.GET)
     public List<Attendance> studentAttendance(@PathVariable("studentID") int studentID, @PathVariable("courseID") int courseID)
     {
         LOGGER.info("course endpoint hit");
         List<Attendance> studentAttendanceForCourse = attendanceService.getAllAttendancesForStudentinCourse(studentID, courseID);
+        return studentAttendanceForCourse;
+    }
+    
+    @RequestMapping(value = "/course-attendance/{courseID}", method = RequestMethod.GET)
+    public List<Attendance> courseAttendance(@PathVariable("courseID") int courseID)
+    {
+        LOGGER.info("course endpoint hit");
+        List<Attendance> studentAttendanceForCourse = attendanceService.getAllAttendanceForCourse(courseID);
         return studentAttendanceForCourse;
     }
 }

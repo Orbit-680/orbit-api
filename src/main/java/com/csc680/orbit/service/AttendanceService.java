@@ -8,6 +8,7 @@ public interface AttendanceService {
     List<Attendance> getAllAttendances();
     List<Attendance> getAllAttendancesForStudent(int studentId);
     List<Attendance> getAllAttendancesForStudentinCourse(int studentId, int courseId);
+    List<Attendance> getAllAttendanceForCourse(int courseId);
     List<Attendance> saveCourseAttendance(SaveAttendanceDTO saveAttendances);
 
     

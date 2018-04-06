@@ -9,5 +9,6 @@ public interface AttendanceRepository extends CrudRepository<Attendance, String>
 {
     List<Attendance> findAllAttendancesForStudent(int studentId);   
     List<Attendance> findAllAttendancesForStudentInCourse(int studentId, int courseId);
+    List<Attendance> findAllAttendanceForCourse(int courseId);
     boolean saveAttendance(Attendance attendance);
 }
