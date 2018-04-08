@@ -68,20 +68,20 @@ public class ConductController {
     	SaveConductResultsDTO conductSaveResult = conductService.saveConduct(saveConductDto);
         return conductSaveResult;
     }
-    
-    /*@RequestMapping(value = "/course-grades/{studentID}", method = RequestMethod.GET)
-    public List<CourseGrade> courseGrades(@PathVariable("studentID") int studentID)
+
+    @RequestMapping(value = "/student-conduct/{studentID}", method = RequestMethod.GET)
+    public List<Conduct> studentConduct(@PathVariable("studentID") int studentID)
     {
-        LOGGER.info("course endpoint hit");
-        List<CourseGrade> grades = gradeService.getCourseGrades(studentID);
-        return grades;
+        LOGGER.info("studentConduct endpoint hit");
+        List<Conduct> conducts = conductService.getStudentConduct(studentID);
+        return conducts;
     }
     
-    @RequestMapping(value = "/student-grades/{studentID}/{courseID}", method = RequestMethod.GET)
-    public List<Grade> studentGrades(@PathVariable("studentID") int studentID, @PathVariable("courseID") int courseID)
+    @RequestMapping(value = "/student-daily-conduct/{studentID}/{courseID}", method = RequestMethod.GET)
+    public List<Conduct> studentDailyConduct(@PathVariable("studentID") int studentID, @PathVariable("courseID") int courseID)
     {
-        LOGGER.info("course endpoint hit");
-        List<Grade> grades = gradeService.getStudentGrades(studentID, courseID);
-        return grades;
-    }*/
+        LOGGER.info("studentDailyConduct endpoint hit");
+        List<Conduct> conducts = conductService.getDailyStudentConduct(studentID, courseID);
+        return conducts;
+    }
 }

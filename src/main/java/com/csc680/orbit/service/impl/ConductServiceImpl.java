@@ -56,26 +56,19 @@ public class ConductServiceImpl implements ConductService {
 		return conductSaveResults;
 	}
 	
-	
-
-	/*@Override
-	public Course getCourseByID(String id) {
-		Course course = courseRepository.findOne(id);
-		return course;
+	@Override
+	public List<Conduct> getStudentConduct(int studentID) {
+		LOGGER.info("getStudentConduct service hit");
+		List<Conduct> conducts = (List<Conduct>) conductRepository.getStudentConduct(studentID);
+		return conducts;
 	}
 	
 	@Override
-	public List<Course> getCoursesByTeacherId(String teacherId) {
-		List<Course> courses = courseRepository.findAllAssociatedWithTeacher(teacherId);
-		return courses;
+	public List<Conduct> getDailyStudentConduct(int studentID, int courseID) {
+		LOGGER.info("getDailyStudentConduct service hit");
+		List<Conduct> conducts = (List<Conduct>) conductRepository.getDailyStudentConduct(studentID, courseID);
+		return conducts;
 	}
 	
-	public String assignCoursesToTeacher(List<Course> courseList, String teacherId){
-		return courseRepository.assignCoursesToTeacher(courseList, teacherId);
-	}
-	
-	public Course createCourse(CreateCourseDTO createCourseDTO){
-		return courseRepository.createCourse(createCourseDTO);
-	}*/
 
 }

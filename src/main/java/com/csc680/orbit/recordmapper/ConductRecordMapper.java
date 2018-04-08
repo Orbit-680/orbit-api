@@ -22,6 +22,7 @@ public class ConductRecordMapper implements RecordMapper<Record, Conduct> {
 
 	public Conduct map(Record r) {
 		Course course = new Course();
+		String courseName = "";
 		Student student = new Student();
 		String updateType = "I";
 		int conductID = 0;
@@ -55,6 +56,10 @@ public class ConductRecordMapper implements RecordMapper<Record, Conduct> {
 			score = r.getValue(CONDUCT.SCORE);
 		if(CONDUCT.COMMENT != null)
 			comment = r.getValue(CONDUCT.COMMENT);
+		if(COURSE.NAME != null) {
+			courseName = r.getValue(COURSE.NAME);
+			course.setName(courseName);
+		}
 		
 		return new Conduct(
 				conductID,
@@ -65,7 +70,6 @@ public class ConductRecordMapper implements RecordMapper<Record, Conduct> {
 				course, 
 				student,
 				updateType
-				//(r.get(2) == null) ? "0" : r.get(2).toString(),
 				);
 	}
 }

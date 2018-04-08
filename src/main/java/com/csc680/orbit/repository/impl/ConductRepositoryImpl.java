@@ -1,5 +1,6 @@
 package com.csc680.orbit.repository.impl;
 
+import static com.csc680.orbit.database.Tables.ASSIGNMENT;
 import static com.csc680.orbit.database.Tables.CONDUCT;
 import static com.csc680.orbit.database.Tables.COURSE;
 import static com.csc680.orbit.database.Tables.GRADE;
@@ -7,6 +8,7 @@ import static com.csc680.orbit.database.Tables.STUDENT;
 import static com.csc680.orbit.database.Tables.TEACHER;
 import static com.csc680.orbit.database.tables.Schedule.SCHEDULE;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -24,6 +26,7 @@ import com.csc680.orbit.recordmapper.AssignmentRecordMapper;
 import com.csc680.orbit.recordmapper.ConductRecordMapper;
 import com.csc680.orbit.recordmapper.CourseRecordMapper;
 import com.csc680.orbit.recordmapper.GradeRecordMapper;
+import com.csc680.orbit.recordmapper.StudentGradeRecordMapper;
 import com.csc680.orbit.repository.ConductRepository;
 import com.csc680.orbit.repository.CourseRepository;
 import com.csc680.orbit.service.DBConnection;
@@ -44,7 +47,36 @@ public class ConductRepositoryImpl implements ConductRepository {
 	@Override
 	public <S extends Conduct> S save(S entity) {
 		// TODO Auto-generated method stub
-		return null;
+		int score = entity.getScore();
+		String year = "1718";
+		//Date date = entity.getDate();
+		java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		String comment = entity.getComment();
+		int courseID = entity.getCourse().getCourseId();
+		int studentID = entity.getStudent().getStudentId();
+				
+		this.dslContext.insertInto(CONDUCT, 
+								CONDUCT.SCORE,
+								CONDUCT.YEAR,
+								CONDUCT.DATE,
+								CONDUCT.COMMENT,
+								CONDUCT.COURSE_ID,
+								CONDUCT.STUDENT_ID)
+					   .values(score, 
+							   year,
+							   date,
+							   comment,
+							   courseID,
+							   studentID)
+					   .returning(CONDUCT.ID)
+					   .execute();
+
+		Conduct newConduct = (Conduct)entity;
+				
+		if(newConduct != null){
+		LOGGER.info("Successfully added Conduct to DB: " + newConduct.toString());
+		}
+		return (S)newConduct;
 	}
 
 	@Override
@@ -164,11 +196,14 @@ public class ConductRepositoryImpl implements ConductRepository {
 				SCHEDULE.COURSE_ID,
 				STUDENT.ID,
 				STUDENT.FIRST_NAME,
-				STUDENT.LAST_NAME)
+				STUDENT.LAST_NAME,
+				COURSE.NAME)
 				.from(SCHEDULE)
 				.join(STUDENT).on(STUDENT.ID.eq(SCHEDULE.STUDENT_ID))
 				.leftJoin(CONDUCT).on(CONDUCT.STUDENT_ID.eq(SCHEDULE.STUDENT_ID)).and(CONDUCT.COURSE_ID.eq(SCHEDULE.COURSE_ID)).and(CONDUCT.DATE.eq(currentDate))
+				.leftJoin(COURSE).on(COURSE.ID.eq(SCHEDULE.COURSE_ID))
 				.where(SCHEDULE.COURSE_ID.eq(courseID))
+				.orderBy(STUDENT.LAST_NAME, STUDENT.FIRST_NAME)
 				.fetch()
 				.map(new ConductRecordMapper());
 		return conducts;
@@ -180,7 +215,7 @@ public class ConductRepositoryImpl implements ConductRepository {
 		if(conduct.getScore() == 0)
 			return true;
 		
-		if(conduct.getUpdateType() == "U")
+		if(conduct.getUpdateType().equals("U"))
 			this.updateConduct(conduct);
 		else
 			this.save(conduct);
@@ -209,61 +244,58 @@ public class ConductRepositoryImpl implements ConductRepository {
 		
 	}
 	
-	/*public List<Course> findAllAssociatedWithTeacher(String teacherId) {
-		List<Course> courses = new ArrayList<Course>();
-		int tId = Integer.parseInt(teacherId);
-		courses = this.dslContext.select(
-				COURSE.ID,
-				COURSE.NAME,
-				COURSE.YEAR,
-				COURSE.TEACHER_ID)
-				.from(COURSE)
-				.where(COURSE.TEACHER_ID.eq(tId))
+	@Override
+	public List <Conduct> getStudentConduct(int studentID) {
+		java.sql.Date currentDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		
+		LOGGER.info("CURRENT DATE: " + currentDate.toString());
+		
+		List<Conduct> conducts = new ArrayList<Conduct>();
+		conducts = this.dslContext.select(
+				CONDUCT.ID,
+				CONDUCT.YEAR,
+				CONDUCT.DATE,
+				CONDUCT.SCORE, 
+				CONDUCT.COMMENT,
+				SCHEDULE.COURSE_ID,
+				STUDENT.ID,
+				STUDENT.FIRST_NAME,
+				STUDENT.LAST_NAME,
+				COURSE.NAME)
+				.from(SCHEDULE)
+				.join(STUDENT).on(STUDENT.ID.eq(SCHEDULE.STUDENT_ID))
+				.leftJoin(CONDUCT).on(CONDUCT.STUDENT_ID.eq(SCHEDULE.STUDENT_ID)).and(CONDUCT.COURSE_ID.eq(SCHEDULE.COURSE_ID)).and(CONDUCT.DATE.eq(currentDate))
+				.leftJoin(COURSE).on(COURSE.ID.eq(SCHEDULE.COURSE_ID))
+				.where(SCHEDULE.STUDENT_ID.eq(studentID))
+				.orderBy(COURSE.NAME)
 				.fetch()
-				.map(new CourseRecordMapper());
-		return courses;
+				.map(new ConductRecordMapper());
+		return conducts;
 	}
 	
-	public String assignCoursesToTeacher(List<Course> courseList, String teacherId){
-		int tId = Integer.parseInt(teacherId);
-		for(Course c : courseList){
-			this.dslContext.update(COURSE)
-				.set(COURSE.TEACHER_ID, tId)
-			    .where(COURSE.ID.eq(c.getCourseId()))
-			    .execute();
-		}
-		return Constants.SUCCESS_STATUS;
+	@Override
+	public List <Conduct> getDailyStudentConduct(int studentID, int courseID) {
 		
+		List<Conduct> conducts = new ArrayList<Conduct>();
+		conducts = this.dslContext.select(
+				CONDUCT.ID,
+				CONDUCT.YEAR,
+				CONDUCT.DATE,
+				CONDUCT.SCORE, 
+				CONDUCT.COMMENT,
+				SCHEDULE.COURSE_ID,
+				STUDENT.ID,
+				STUDENT.FIRST_NAME,
+				STUDENT.LAST_NAME,
+				COURSE.NAME)
+				.from(SCHEDULE)
+				.join(STUDENT).on(STUDENT.ID.eq(SCHEDULE.STUDENT_ID))
+				.leftJoin(CONDUCT).on(CONDUCT.STUDENT_ID.eq(SCHEDULE.STUDENT_ID)).and(CONDUCT.COURSE_ID.eq(SCHEDULE.COURSE_ID))
+				.leftJoin(COURSE).on(COURSE.ID.eq(SCHEDULE.COURSE_ID))
+				.where(SCHEDULE.STUDENT_ID.eq(studentID)).and(CONDUCT.COURSE_ID.eq(courseID))
+				.orderBy(CONDUCT.DATE.desc())
+				.fetch()
+				.map(new ConductRecordMapper());
+		return conducts;
 	}
-	
-	public Course createCourse(CreateCourseDTO createCourseDTO) {
-		
-		//look up teacher ID by UID
-		//TeacherServiceImpl teacherServiceImpl = new TeacherServiceImpl();
-		//Teacher teacher = teacherServiceImpl.getTeacherByUid(createCourseDTO.getUID());
-		String courseName = createCourseDTO.getName();
-		int teacherID = createCourseDTO.getTeacherID();
-		String year = "1718";
-		
-		Course iCourse = this.dslContext.insertInto(COURSE, 
-							COURSE.YEAR,
-							COURSE.NAME,
-							COURSE.TEACHER_ID)
-			        .values(year, 
-			        		courseName,
-			        		teacherID)
-			        .returning(COURSE.ID, COURSE.NAME)
-			        .fetchOne()
-			        .map(new CourseRecordMapper());
-
-		Course newCourse = (Course)iCourse;
-		newCourse.setCourseId(iCourse.getCourseId());
-		newCourse.setName(iCourse.getName());
-		newCourse.setTeacher(iCourse.getTeacher());
-		
-		if(newCourse != null){
-			LOGGER.info("Successfully added Course to DB: " + newCourse.toString());
-		}
-		return newCourse;
-	}*/
 }

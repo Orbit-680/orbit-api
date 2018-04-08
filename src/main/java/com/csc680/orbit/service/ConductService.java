@@ -12,4 +12,6 @@ public interface ConductService {
 	List<Conduct> getAllConduct();
 	List<Conduct> findAllConductForCourse(int courseID);
 	SaveConductResultsDTO saveConduct(SaveConductDTO saveConductDTO);
+	List<Conduct> getStudentConduct(int studentID);
+	List<Conduct> getDailyStudentConduct(int studentID, int courseID);
 }

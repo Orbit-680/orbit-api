@@ -12,5 +12,7 @@ import com.csc680.orbit.model.pojo.Grade;
 public interface ConductRepository extends CrudRepository<Conduct, String> {
 	List<Conduct> findAllConductForCourse(int courseID);
 	boolean saveConduct(Conduct conduct);
+	List<Conduct> getStudentConduct(int studentID);
+	List<Conduct> getDailyStudentConduct(int studentID, int courseID);
 }
 

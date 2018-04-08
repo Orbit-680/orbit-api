@@ -1,6 +1,7 @@
 package com.csc680.orbit.model.pojo;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
