@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.csc680.orbit.model.pojo.Course;
 import com.csc680.orbit.repository.AttendanceRepository;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
@@ -60,6 +61,12 @@ public class AttendanceServiceImpl implements AttendanceService{
         return attendances;
     }
 
+    @Override
+    public List<Attendance> getAllAttendanceForCourse(int courseId, Date date) {
+         LOGGER.log(Level.INFO, "getAllAttendanceForCourseDate service hit");
+	List<Attendance> attendances = (List<Attendance>) attendanceRepository.findAllAttendanceForCourse(courseId, date);
+	return attendances;
+    }
     @Override
     public List<Attendance> getAllAttendanceForCourse(int courseId) {
          LOGGER.log(Level.INFO, "getAllAttendanceForCourse service hit");

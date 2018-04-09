@@ -3,6 +3,7 @@ package com.csc680.orbit.controller;
 import com.csc680.orbit.model.dto.SaveAttendanceDTO;
 import com.csc680.orbit.model.pojo.Attendance;
 import com.csc680.orbit.service.AttendanceService;
+import java.sql.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -55,6 +56,14 @@ public class AttendanceController {
     {
         LOGGER.info("course endpoint hit");
         List<Attendance> studentAttendanceForCourse = attendanceService.getAllAttendancesForStudentinCourse(studentID, courseID);
+        return studentAttendanceForCourse;
+    }
+    
+    @RequestMapping(value = "/course-attendance/{courseID}/{date}", method = RequestMethod.GET)
+    public List<Attendance> courseAttendance(@PathVariable("courseID") int courseID, @PathVariable("date") Date date)
+    {
+        LOGGER.info("course endpoint hit");
+        List<Attendance> studentAttendanceForCourse = attendanceService.getAllAttendanceForCourse(courseID, date);
         return studentAttendanceForCourse;
     }
     

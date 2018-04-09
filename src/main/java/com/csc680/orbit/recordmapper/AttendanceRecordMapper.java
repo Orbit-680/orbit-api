@@ -16,7 +16,6 @@ import javassist.bytecode.stackmap.TypeData.ClassName;
 
 import com.csc680.orbit.model.pojo.Student;
 import java.sql.Date;
-import java.util.Calendar;
 
 public class AttendanceRecordMapper implements RecordMapper<Record, Attendance>{
 
@@ -30,8 +29,7 @@ public class AttendanceRecordMapper implements RecordMapper<Record, Attendance>{
 	String year = "";
         String status = "";
         String comment = "";
-        Date date = null;// = new Date(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
-
+        Date date = null;
 		
 	try
         {
@@ -40,18 +38,13 @@ public class AttendanceRecordMapper implements RecordMapper<Record, Attendance>{
             student.setStudentLastName(r.getValue(STUDENT.LAST_NAME));
             course = new Course(r.getValue(SCHEDULE.COURSE_ID));
 			
-            if(ATTENDANCE.ID != null)
                 attendanceID = r.getValue(ATTENDANCE.ID);
-            if(ATTENDANCE.STATUS != null)
                 status = r.getValue(ATTENDANCE.STATUS);
-            if(ATTENDANCE.YEAR != null)
                 year = r.getValue(ATTENDANCE.YEAR);
-            if(ATTENDANCE.COMMENT != null)
                 comment = r.getValue(ATTENDANCE.COMMENT);
-            if(ATTENDANCE.DATE != null)
                 date = (r.getValue(ATTENDANCE.DATE));
                 
-            if(ATTENDANCE.STATUS == null)
+            if(ATTENDANCE.STATUS == null && ATTENDANCE.DATE == null)
                 updateType = 'I';
             else
                 updateType = 'U';

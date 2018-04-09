@@ -1,7 +1,6 @@
 package com.csc680.orbit.repository.impl;
 
 import static com.csc680.orbit.database.Tables.ATTENDANCE;
-import static com.csc680.orbit.database.Tables.COURSE;
 import static com.csc680.orbit.database.Tables.STUDENT;
 import static com.csc680.orbit.database.tables.Schedule.SCHEDULE;
 import com.csc680.orbit.model.pojo.Attendance;
@@ -226,6 +225,28 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
     }
     
     @Override
+    public List<Attendance> findAllAttendanceForCourse(int courseId, Date date) {
+        List<Attendance> attendances = new ArrayList<>();
+	attendances = this.dslContext.select(
+                            ATTENDANCE.ID,
+                            STUDENT.ID,                            
+                            SCHEDULE.COURSE_ID, 
+                            ATTENDANCE.STATUS,
+                            ATTENDANCE.COMMENT,
+                            ATTENDANCE.YEAR,
+                            ATTENDANCE.DATE,
+                            STUDENT.LAST_NAME,
+                            STUDENT.FIRST_NAME)
+			.from(STUDENT)
+                        .join(SCHEDULE).on(SCHEDULE.STUDENT_ID.eq(STUDENT.ID))
+                        .leftJoin(ATTENDANCE).on(ATTENDANCE.STUDENT_ID.eq(STUDENT.ID)).and(ATTENDANCE.COURSE_ID.eq(SCHEDULE.COURSE_ID)).and(ATTENDANCE.DATE.eq(date))
+                        .where(SCHEDULE.COURSE_ID.eq(courseId)).and(ATTENDANCE.DATE.eq(date).or(ATTENDANCE.DATE.isNull()))
+			.fetch()
+			.map(new AttendanceRecordMapper());
+        return attendances;
+    }
+    
+    @Override
     public List<Attendance> findAllAttendanceForCourse(int courseId) {
         List<Attendance> attendances = new ArrayList<>();
 	attendances = this.dslContext.select(
@@ -240,7 +261,7 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
                             STUDENT.FIRST_NAME)
 			.from(STUDENT)
                         .join(SCHEDULE).on(SCHEDULE.STUDENT_ID.eq(STUDENT.ID))
-                        .leftJoin(ATTENDANCE).on(ATTENDANCE.STUDENT_ID.eq(STUDENT.ID))
+                        .leftJoin(ATTENDANCE).on(ATTENDANCE.STUDENT_ID.eq(STUDENT.ID)).and(ATTENDANCE.COURSE_ID.eq(SCHEDULE.COURSE_ID))
                         .where(SCHEDULE.COURSE_ID.eq(courseId))
 			.fetch()
 			.map(new AttendanceRecordMapper());
