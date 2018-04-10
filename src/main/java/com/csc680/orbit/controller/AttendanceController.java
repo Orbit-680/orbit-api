@@ -35,7 +35,7 @@ public class AttendanceController {
     }
     
     @RequestMapping(value = "/save-attendance", method = RequestMethod.POST)
-    public List<Attendance> saveGrades(@RequestBody SaveAttendanceDTO saveAttendanceDto)
+    public List<Attendance> saveAttendance(@RequestBody SaveAttendanceDTO saveAttendanceDto)
     {	
     	LOGGER.info("Hit the save-attendance end point.");
         

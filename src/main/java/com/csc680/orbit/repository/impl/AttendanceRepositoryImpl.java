@@ -10,6 +10,7 @@ import com.csc680.orbit.service.DBConnection;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
 import javassist.bytecode.stackmap.TypeData;
@@ -100,7 +101,7 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
         String status = s.getStatus();
 	String year = "1718";
         String comment = s.getComment();
-        Date date = s.getDate();
+        Date date = new Date(Calendar.getInstance().getTimeInMillis());
 	int studentID = s.getStudent().getStudentId();
 	int courseID = s.getCourse().getCourseId();
 	
@@ -121,8 +122,6 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
 			        .execute();
 
 		Attendance newAttendance = (Attendance)s;
-		//newAssignment.setAssignmentId(iAssignment.getAssignmentId());
-		//newAssignment.setCourse(new Course(courseID));
 		
 		if(newAttendance != null){
 		LOGGER.info("Successfully added Attendance to DB: " + newAttendance.toString());
