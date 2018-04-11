@@ -2,6 +2,7 @@
 package com.csc680.orbit.recordmapper;
 
 import static com.csc680.orbit.database.tables.Attendance.ATTENDANCE;
+import static com.csc680.orbit.database.tables.Course.COURSE;
 import static com.csc680.orbit.database.tables.Student.STUDENT;
 import static com.csc680.orbit.database.tables.Schedule.SCHEDULE;
 
@@ -37,12 +38,14 @@ public class AttendanceRecordMapper implements RecordMapper<Record, Attendance>{
             student.setStudentFirstName(r.getValue(STUDENT.FIRST_NAME));
             student.setStudentLastName(r.getValue(STUDENT.LAST_NAME));
             course = new Course(r.getValue(SCHEDULE.COURSE_ID));
+            if(COURSE.NAME != null)
+                course.setName(r.getValue(COURSE.NAME));
 			
-                attendanceID = r.getValue(ATTENDANCE.ID);
-                status = r.getValue(ATTENDANCE.STATUS);
-                year = r.getValue(ATTENDANCE.YEAR);
-                comment = r.getValue(ATTENDANCE.COMMENT);
-                date = (r.getValue(ATTENDANCE.DATE));
+            attendanceID = r.getValue(ATTENDANCE.ID);
+            status = r.getValue(ATTENDANCE.STATUS);
+            year = r.getValue(ATTENDANCE.YEAR);
+            comment = r.getValue(ATTENDANCE.COMMENT);
+            date = (r.getValue(ATTENDANCE.DATE));
                 
             if(ATTENDANCE.STATUS == null && ATTENDANCE.DATE == null)
                 updateType = 'I';

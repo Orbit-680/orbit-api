@@ -12,6 +12,7 @@ public interface AttendanceService {
     List<Attendance> getAllAttendanceForCourse(int courseId, Date date);
     List<Attendance> getAllAttendanceForCourse(int courseId);
     List<Attendance> saveCourseAttendance(SaveAttendanceDTO saveAttendances);
+    
 
     
     

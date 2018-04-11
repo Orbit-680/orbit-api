@@ -1,6 +1,7 @@
 package com.csc680.orbit.repository.impl;
 
 import static com.csc680.orbit.database.Tables.ATTENDANCE;
+import static com.csc680.orbit.database.Tables.COURSE;
 import static com.csc680.orbit.database.Tables.STUDENT;
 import static com.csc680.orbit.database.tables.Schedule.SCHEDULE;
 import com.csc680.orbit.model.pojo.Attendance;
@@ -24,6 +25,7 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
     
     @Override
     public List<Attendance> findAllAttendancesForStudent(int studentId) {
+        Date today = new Date(Calendar.getInstance().getTimeInMillis());
         List<Attendance> attendances = new ArrayList<>();
 	attendances = this.dslContext.select(
                             ATTENDANCE.ID,
@@ -34,12 +36,15 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
                             ATTENDANCE.YEAR,
                             ATTENDANCE.DATE,
                             STUDENT.LAST_NAME,
-                            STUDENT.FIRST_NAME)
-			.from(STUDENT)
-                        .join(SCHEDULE).on(SCHEDULE.STUDENT_ID.eq(STUDENT.ID))
-                        .leftJoin(ATTENDANCE).on(ATTENDANCE.STUDENT_ID.eq(STUDENT.ID))
+                            STUDENT.FIRST_NAME,
+                            COURSE.NAME)
+			.from(SCHEDULE)
+                        .join(STUDENT).on(STUDENT.ID.eq(SCHEDULE.STUDENT_ID))
+                        .leftJoin(ATTENDANCE).on(ATTENDANCE.STUDENT_ID.eq(STUDENT.ID)).and(ATTENDANCE.COURSE_ID.eq(SCHEDULE.COURSE_ID).and(ATTENDANCE.DATE.eq(today)))
+                        .leftJoin(COURSE).on(COURSE.ID.eq(SCHEDULE.COURSE_ID))
                         .where(SCHEDULE.STUDENT_ID.eq(studentId))
-			.fetch()
+                        .orderBy(COURSE.NAME)
+                        .fetch()
 			.map(new AttendanceRecordMapper());
         return attendances;
     }
@@ -56,11 +61,14 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
                             ATTENDANCE.YEAR,
                             ATTENDANCE.DATE,
                             STUDENT.LAST_NAME,
-                            STUDENT.FIRST_NAME)
-			.from(STUDENT)
-                        .join(SCHEDULE).on(SCHEDULE.STUDENT_ID.eq(STUDENT.ID))
-                        .leftJoin(ATTENDANCE).on(ATTENDANCE.STUDENT_ID.eq(STUDENT.ID))
-                        .where(SCHEDULE.STUDENT_ID.eq(studentId).and(SCHEDULE.COURSE_ID.eq(courseId)))
+                            STUDENT.FIRST_NAME,
+                            COURSE.NAME)
+			.from(SCHEDULE)
+			.join(STUDENT).on(STUDENT.ID.eq(SCHEDULE.STUDENT_ID))
+			.leftJoin(ATTENDANCE).on(ATTENDANCE.STUDENT_ID.eq(SCHEDULE.STUDENT_ID)).and(ATTENDANCE.COURSE_ID.eq(SCHEDULE.COURSE_ID))
+			.leftJoin(COURSE).on(COURSE.ID.eq(SCHEDULE.COURSE_ID))
+			.where(SCHEDULE.STUDENT_ID.eq(studentId)).and(ATTENDANCE.COURSE_ID.eq(courseId))
+                        .orderBy(ATTENDANCE.DATE.desc())
 			.fetch()
 			.map(new AttendanceRecordMapper());
         return attendances;
@@ -183,6 +191,7 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
                             ATTENDANCE.YEAR,
                             ATTENDANCE.DATE)
 			.from(ATTENDANCE)
+                        .orderBy(STUDENT.LAST_NAME)
 			.fetch()
 			.map(new AttendanceRecordMapper());
 		return attendances;
@@ -235,11 +244,14 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
                             ATTENDANCE.YEAR,
                             ATTENDANCE.DATE,
                             STUDENT.LAST_NAME,
-                            STUDENT.FIRST_NAME)
+                            STUDENT.FIRST_NAME,
+                            COURSE.NAME)
 			.from(STUDENT)
                         .join(SCHEDULE).on(SCHEDULE.STUDENT_ID.eq(STUDENT.ID))
                         .leftJoin(ATTENDANCE).on(ATTENDANCE.STUDENT_ID.eq(STUDENT.ID)).and(ATTENDANCE.COURSE_ID.eq(SCHEDULE.COURSE_ID)).and(ATTENDANCE.DATE.eq(date))
+                        .leftJoin(COURSE).on(COURSE.ID.eq(SCHEDULE.COURSE_ID))
                         .where(SCHEDULE.COURSE_ID.eq(courseId)).and(ATTENDANCE.DATE.eq(date).or(ATTENDANCE.DATE.isNull()))
+                        .orderBy(STUDENT.LAST_NAME)
 			.fetch()
 			.map(new AttendanceRecordMapper());
         return attendances;
@@ -257,11 +269,14 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
                             ATTENDANCE.YEAR,
                             ATTENDANCE.DATE,
                             STUDENT.LAST_NAME,
-                            STUDENT.FIRST_NAME)
-			.from(STUDENT)
-                        .join(SCHEDULE).on(SCHEDULE.STUDENT_ID.eq(STUDENT.ID))
-                        .leftJoin(ATTENDANCE).on(ATTENDANCE.STUDENT_ID.eq(STUDENT.ID)).and(ATTENDANCE.COURSE_ID.eq(SCHEDULE.COURSE_ID))
+                            STUDENT.FIRST_NAME,
+                            COURSE.NAME)
+			.from(SCHEDULE)
+                        .join(STUDENT).on(STUDENT.ID.eq(SCHEDULE.STUDENT_ID))
+                        .leftJoin(ATTENDANCE).on(ATTENDANCE.STUDENT_ID.eq(SCHEDULE.ID)).and(ATTENDANCE.COURSE_ID.eq(SCHEDULE.COURSE_ID))
+                        .leftJoin(COURSE).on(COURSE.ID.eq(SCHEDULE.COURSE_ID))
                         .where(SCHEDULE.COURSE_ID.eq(courseId))
+                        .orderBy(STUDENT.LAST_NAME, STUDENT.FIRST_NAME)
 			.fetch()
 			.map(new AttendanceRecordMapper());
         return attendances;
