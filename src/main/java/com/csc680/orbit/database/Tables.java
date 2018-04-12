@@ -7,6 +7,8 @@ package com.csc680.orbit.database;
 import com.csc680.orbit.database.tables.AccountLinkStudent;
 import com.csc680.orbit.database.tables.AccountLinkTeacher;
 import com.csc680.orbit.database.tables.Assignment;
+import com.csc680.orbit.database.tables.Attendance;
+import com.csc680.orbit.database.tables.Conduct;
 import com.csc680.orbit.database.tables.Course;
 import com.csc680.orbit.database.tables.Grade;
 import com.csc680.orbit.database.tables.Message;
@@ -50,6 +52,16 @@ public class Tables {
      * The table <code>orbit.assignment</code>.
      */
     public static final Assignment ASSIGNMENT = com.csc680.orbit.database.tables.Assignment.ASSIGNMENT;
+
+    /**
+     * The table <code>orbit.attendance</code>.
+     */
+    public static final Attendance ATTENDANCE = com.csc680.orbit.database.tables.Attendance.ATTENDANCE;
+
+    /**
+     * The table <code>orbit.conduct</code>.
+     */
+    public static final Conduct CONDUCT = com.csc680.orbit.database.tables.Conduct.CONDUCT;
 
     /**
      * The table <code>orbit.course</code>.
