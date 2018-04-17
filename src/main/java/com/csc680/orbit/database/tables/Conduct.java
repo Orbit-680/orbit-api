@@ -41,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Conduct extends TableImpl<ConductRecord> {
 
-    private static final long serialVersionUID = 369367162;
+    private static final long serialVersionUID = 508347611;
 
     /**
      * The reference instance of <code>orbit.conduct</code>
@@ -79,7 +79,7 @@ public class Conduct extends TableImpl<ConductRecord> {
     /**
      * The column <code>orbit.conduct.Comment</code>.
      */
-    public final TableField<ConductRecord, String> COMMENT = createField("Comment", org.jooq.impl.SQLDataType.CLOB.nullable(false), this, "");
+    public final TableField<ConductRecord, String> COMMENT = createField("Comment", org.jooq.impl.SQLDataType.CLOB, this, "");
 
     /**
      * The column <code>orbit.conduct.Course_ID</code>.
