@@ -82,11 +82,6 @@ public @Data class Student
     	this.studentID = studentID;
     }
     
-    public Student(String firstName, String lastName) {
-    	this.studentFirstName = firstName;
-    	this.studentLastName = lastName;
-    }
-    
     public int getStudentId() {  return studentID;   } 
     public void setStudentId(int studentID) {  this.studentID = studentID;   }
     

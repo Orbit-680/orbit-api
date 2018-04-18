@@ -3,7 +3,7 @@
 	<!-- Configure the database connection here -->
 	  <jdbc>
 	    <driver>com.mysql.jdbc.Driver</driver>
-	    <url>jdbc:mysql://18.220.78.140:3306/orbit</url>
+	    <url>jdbc:mysql://orbit-integration.brocktubre.com:3306/orbit</url>
 	    <user>APIacc</user>
 	    <password>KU5K3vxAAC</password>
 	  </jdbc>

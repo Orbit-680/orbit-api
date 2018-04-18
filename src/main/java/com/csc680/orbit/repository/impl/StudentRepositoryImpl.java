@@ -13,7 +13,6 @@ import javassist.bytecode.stackmap.TypeData.ClassName;
 import static com.csc680.orbit.database.Tables.STUDENT;
 import static com.csc680.orbit.database.Tables.ACCOUNT_LINK_STUDENT;
 import static com.csc680.orbit.database.Tables.USER;
-import static com.csc680.orbit.database.tables.Schedule.SCHEDULE;
 
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
@@ -21,7 +20,6 @@ import org.springframework.stereotype.Repository;
 import com.csc680.orbit.model.dto.AccountLinkStudentDTO;
 import com.csc680.orbit.model.dto.StudentDTO;
 import com.csc680.orbit.model.pojo.AccountLinkStudent;
-import com.csc680.orbit.model.pojo.EnrollRecord;
 import com.csc680.orbit.model.pojo.Student;
 import com.csc680.orbit.model.pojo.User;
 import com.csc680.orbit.recordmapper.AccountLinkRecordMapper;
@@ -188,23 +186,6 @@ public class StudentRepositoryImpl implements StudentRepository
         return students.get(0);
     }
     
-    private boolean isDuplicateStudentRecord(Student student)
-	{
-		boolean studentExists = false;
-		int studentCount = this.dslContext
-				.selectCount()
-				.from(STUDENT)
-				.where(STUDENT.FIRST_NAME.eq(student.getStudentFirstName()))
-				.and(STUDENT.LAST_NAME.eq(student.getStudentLastName()))
-				.and(STUDENT.DATE_OF_BIRTH.eq(student.getStudentDateOfBirth()))
-				.fetchOne(0, int.class);
-		
-		if (studentCount != 0) {
-			studentExists = true;
-		}
-		return studentExists;
-	}
-    
     @SuppressWarnings("unchecked")
     @Override
     public <S extends Student> S save(S arg0) 
@@ -213,13 +194,6 @@ public class StudentRepositoryImpl implements StudentRepository
         String studentFirstName = arg0.getStudentFirstName();
         String studentLastName = arg0.getStudentLastName();
         String studentDateOfBirth = arg0.getStudentDateOfBirth();
-        
-        //check for duplicate student record
-        if(isDuplicateStudentRecord(arg0)) {
-        	Student student = new Student(studentFirstName, studentLastName);
-        	return (S)student;
-        }
-        
 //        String studentSSN = arg0.getStudentSSN();
 //        String studentAddress_1 = arg0.getStudentAddress_1();
 //        String studentAddress_2 = arg0.getStudentAddress_2();

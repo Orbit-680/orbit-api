@@ -46,7 +46,6 @@ public class UserServiceImpl implements UserService{
 		if(u.getUid() != null){
 			accountDetails.setUser(u);
 			
-			LOGGER.info("LOOK HERE FOR THE ROLE" + u.getRole().getName());
 			switch(u.getRole().getName()){
 				case Constants.ROLE_TEACHER: {
 					Teacher teacher = new Teacher();
@@ -55,7 +54,6 @@ public class UserServiceImpl implements UserService{
 					teacher.setDateOfBirth(accountDetails.getDob());
 					Teacher newTeacher = teacherRepository.save(teacher);
 					teacherRepository.linkTeacher(newTeacher, u.getUserID());
-					break;
 				}
 				case Constants.ROLE_STUDENT: {
 					Student student = new Student();
@@ -83,8 +81,6 @@ public class UserServiceImpl implements UserService{
 						accountLinkStudent.setUserID(u.getUserID());
 						studentRepository.linkStudent(accountLinkStudent);
 					}
-					
-					break;
 					
 
 				}
