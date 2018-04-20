@@ -189,8 +189,13 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
                             ATTENDANCE.STATUS,
                             ATTENDANCE.COMMENT,
                             ATTENDANCE.YEAR,
-                            ATTENDANCE.DATE)
+                            ATTENDANCE.DATE,
+                            STUDENT.FIRST_NAME,
+                            STUDENT.LAST_NAME,
+                            COURSE.NAME)
 			.from(ATTENDANCE)
+                        .join(STUDENT).on(STUDENT.ID.eq(ATTENDANCE.STUDENT_ID))
+                        .leftJoin(COURSE).on(COURSE.ID.eq(ATTENDANCE.COURSE_ID))
                         .orderBy(STUDENT.LAST_NAME)
 			.fetch()
 			.map(new AttendanceRecordMapper());

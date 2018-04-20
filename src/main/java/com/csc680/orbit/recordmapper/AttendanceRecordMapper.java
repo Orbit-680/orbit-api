@@ -47,7 +47,7 @@ public class AttendanceRecordMapper implements RecordMapper<Record, Attendance>{
             comment = r.getValue(ATTENDANCE.COMMENT);
             date = (r.getValue(ATTENDANCE.DATE));
                 
-            if(ATTENDANCE.STATUS == null && ATTENDANCE.DATE == null)
+            if(ATTENDANCE.STATUS == null)
                 updateType = 'I';
             else
                 updateType = 'U';
