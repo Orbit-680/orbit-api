@@ -1,14 +1,10 @@
 package com.csc680.orbit.repository.impl;
 
-import static com.csc680.orbit.database.Tables.ASSIGNMENT;
 import static com.csc680.orbit.database.Tables.CONDUCT;
 import static com.csc680.orbit.database.Tables.COURSE;
-import static com.csc680.orbit.database.Tables.GRADE;
 import static com.csc680.orbit.database.Tables.STUDENT;
-import static com.csc680.orbit.database.Tables.TEACHER;
 import static com.csc680.orbit.database.tables.Schedule.SCHEDULE;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -16,25 +12,10 @@ import java.util.List;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
-import com.csc680.orbit.model.dto.CreateCourseDTO;
-import com.csc680.orbit.model.pojo.Assignment;
 import com.csc680.orbit.model.pojo.Conduct;
-import com.csc680.orbit.model.pojo.Course;
-import com.csc680.orbit.model.pojo.Grade;
-import com.csc680.orbit.model.pojo.Student;
-import com.csc680.orbit.model.pojo.Teacher;
-import com.csc680.orbit.recordmapper.AssignmentRecordMapper;
 import com.csc680.orbit.recordmapper.ConductRecordMapper;
-import com.csc680.orbit.recordmapper.CourseRecordMapper;
-import com.csc680.orbit.recordmapper.GradeRecordMapper;
-import com.csc680.orbit.recordmapper.StudentGradeRecordMapper;
 import com.csc680.orbit.repository.ConductRepository;
-import com.csc680.orbit.repository.CourseRepository;
 import com.csc680.orbit.service.DBConnection;
-import com.csc680.orbit.service.TeacherService;
-import com.csc680.orbit.service.impl.TeacherServiceImpl;
-import com.csc680.orbit.utils.Constants;
-
 import java.util.logging.Logger;
 import javassist.bytecode.stackmap.TypeData.ClassName;
 
@@ -210,7 +191,7 @@ public class ConductRepositoryImpl implements ConductRepository {
 		return conducts;
 	}
 	
-	private boolean isDuplicateConducRecord(Conduct conduct)
+	private boolean isDuplicateConductRecord(Conduct conduct)
 	{
 		boolean conductExists = false;
 		java.sql.Date currentDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
@@ -237,7 +218,7 @@ public class ConductRepositoryImpl implements ConductRepository {
 		
 		if(conduct.getUpdateType().equals("U"))
 			this.updateConduct(conduct);
-		else if(!isDuplicateConducRecord(conduct))
+		else if(!isDuplicateConductRecord(conduct))
 			this.save(conduct);
 		
 		return result;
