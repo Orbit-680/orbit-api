@@ -21,6 +21,7 @@ import com.csc680.orbit.model.pojo.Assignment;
 import com.csc680.orbit.model.pojo.Conduct;
 import com.csc680.orbit.model.pojo.Course;
 import com.csc680.orbit.model.pojo.Grade;
+import com.csc680.orbit.model.pojo.Student;
 import com.csc680.orbit.model.pojo.Teacher;
 import com.csc680.orbit.recordmapper.AssignmentRecordMapper;
 import com.csc680.orbit.recordmapper.ConductRecordMapper;
@@ -209,6 +210,25 @@ public class ConductRepositoryImpl implements ConductRepository {
 		return conducts;
 	}
 	
+	private boolean isDuplicateConducRecord(Conduct conduct)
+	{
+		boolean conductExists = false;
+		java.sql.Date currentDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		
+		int conductCount = this.dslContext
+				.selectCount()
+				.from(CONDUCT)
+				.where(CONDUCT.STUDENT_ID.eq(conduct.getStudent().getStudentId()))
+				.and(CONDUCT.COURSE_ID.eq(conduct.getCourse().getCourseId()))
+				.and(CONDUCT.DATE.eq(currentDate))
+				.fetchOne(0, int.class);
+		
+		if (conductCount != 0) {
+			conductExists = true;
+		}
+		return conductExists;
+	}
+	
 	public boolean saveConduct(Conduct conduct) {
 		boolean result = true;
 		
@@ -217,7 +237,7 @@ public class ConductRepositoryImpl implements ConductRepository {
 		
 		if(conduct.getUpdateType().equals("U"))
 			this.updateConduct(conduct);
-		else
+		else if(!isDuplicateConducRecord(conduct))
 			this.save(conduct);
 		
 		return result;
